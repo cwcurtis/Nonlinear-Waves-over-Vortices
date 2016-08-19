@@ -16,6 +16,12 @@ D.L. Marcus and S.A. Berger.
   ascent and a free surface.
 \newblock {\em Phys. Fluids A}, 1:1988--2000, 1989.
 
+\bibitem{telste}
+J.~G. Telste.
+\newblock Potential flow about two counter-rotating vortices approaching a free
+  surface.
+\newblock {\em J. Fluid Mech.}, 201:259--278, 1989.
+
 \bibitem{tryggvason}
 W.W. Willmarth, G.~Tryggvason, A.~Hirsa, and D.~Yu.
 \newblock Vortex pair generation and interaction with a free surface.
@@ -59,11 +65,5 @@ A.~Rouhi and J.~Wright.
 \newblock Hamiltonian formulation for the motion of vortices in the presence of
   a free surface for ideal flow.
 \newblock {\em Phys. Rev. E}, 48:1850--1865, 1993.
-
-\bibitem{fornberg}
-B.~Fornberg and T.A. Driscoll.
-\newblock A fast spectral algorithm for nonlinear wave equations with linear
-  dispersion.
-\newblock {\em J. Comp. Phys.}, 155:456--467, 1999.
 
 \end{thebibliography}
