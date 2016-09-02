@@ -27,25 +27,9 @@ function waves_over_vortices(K,mu,gam,F,tf)
     Xmesh = Xmesh(1:KT)';    
     
     Kmesh = [0:K-1 0 -K+1:-1]';
-    Dx = 1i*pi*Kmesh;
-    
-    % Necessary information for running the four vortex case 
-    
-    Nvorts = 4;
-    c1 = 1;
-    c2 = c1;
-    c3 = -c1;
-    c4 = -c1;
-    gvals = [c1;c2;c3;c4];
-    
-    xpos = [-2*mu*gam-mu*gam/2;-2*mu*gam+mu*gam/2;2*mu*gam-mu*gam/2;2*mu*gam+mu*gam/2];
-    
-    zpos1 = .25;
-    
-    zpos = [zpos1;zpos1;zpos1;zpos1];
     
     % Necessary information for running the two vortex case 
-    %{
+    
     Nvorts = 2;
     c1 = 1;
     c2 = -c1;
@@ -55,7 +39,39 @@ function waves_over_vortices(K,mu,gam,F,tf)
     
     zpos1 = .25;
     zpos = [zpos1;zpos1];
+    
+    % Necessary information for running the four vortex case 
+    %{
+    Nvorts = 4;
+    c1 = 1;
+    c2 = -c1;
+    c3 = c1;
+    c4 = -c1;
+    gvals = [c1;c2;c3;c4];
+    
+    xpos = [-2*mu*gam-mu*gam/2;-2*mu*gam+mu*gam/2;2*mu*gam-mu*gam/2;2*mu*gam+mu*gam/2];
+    
+    zpos1 = .25;
+    
+    zpos = [zpos1;zpos1;zpos1;zpos1];
     %}
+    % Necessary information for running the six vortex case 
+    %{
+    Nvorts = 6;
+    c1 = 1;
+    c2 = c1;
+    c3 = c1;
+    c4 = -c1;
+    c5 = -c1;
+    c6 = -c1;
+    gvals = [c1;c2;c3;c4;c5;c6];
+    
+    xpos = [-mu*gam;-2*mu*gam/3;-mu*gam/3;mu*gam/3;2*mu*gam/3;mu*gam];
+    
+    zpos1 = .25;
+    
+    zpos = [zpos1;zpos1-.05;zpos1;zpos1;zpos1-.05;zpos1];
+    %}      
     disp([xpos zpos])
     
     % Choose time step and find inverse of linear part of semi-implicit
@@ -85,7 +101,6 @@ function waves_over_vortices(K,mu,gam,F,tf)
     eta = zeros(KT,1);
     
     % Build the quiescent initial velocity potential 
-    
     phix = init_cond(Xmesh,gam,xpos,zpos,gvals);
     Q = -F*fft(phix);
     Q(Kc:Kuc) = 0;
@@ -94,30 +109,39 @@ function waves_over_vortices(K,mu,gam,F,tf)
     % Here we put in the cnoidal solution for KdV in the appropriate
     % coordinates.  
     %{
-    modu = .2;    
+    modu = .3;    
     kap = ellipke(modu);
     uvals = kap*Xmesh;
     [~,cn,~] = ellipj(uvals,modu);
+    elipmesh = linspace(0,2*kap,KT+1);
+    [~,cnm,~] = ellipj(elipmesh,modu);
     
     ceff = 1 + 2/3*mu*kap^2*(2*modu^2-1);
     
-    Q = fft(4/3*modu^2*kap^2*cn.^2);
+    %q0 = -modu^2*kap*(2*kap/KT)*sum((cnm(1:KT)).^2);
+    q0 = 0;
+    Q = fft(2*q0/3 + 4/3*modu^2*kap^2*cn.^2);
     
     eta = ceff*Q;
     %}
+    eta0 = log10(fftshift(abs(eta))/KT);
+    
     xtrack = zeros(Nvorts,nmax+1);
     ztrack = zeros(Nvorts,nmax+1);
     
     xtrack(:,1) = xpos;
     ztrack(:,1) = zpos;
     
-    inter = 10; % Number of time steps between frames of movie
-    no_of_plots = round(nmax/inter); % Number of plots in movie
-    movie_plot = zeros(no_of_plots,KT); % Movie storage
-    plot_count = 1;
+    nthrd = round(nmax/3);
     count = 1;
     
-    no_dno_term = 31;
+    inter = 10;
+    plot_count = 1;
+    no_of_evals = round(nmax/inter);
+    energy_plot = zeros(no_of_evals,1); 
+    times = zeros(no_of_evals,1);
+    no_dno_term = 17;
+    
     u = [eta;Q;xpos;zpos];
     
     for jj=1:nmax
@@ -140,7 +164,7 @@ function waves_over_vortices(K,mu,gam,F,tf)
         xpos = u(2*KT+1:2*KT+Nvorts);
         zpos = u(2*KT+Nvorts+1:2*KT+2*Nvorts);
         
-        if(max(zpos) >= .95)
+        if(max(zpos) >= 1)
             break;
         else
                 
@@ -160,12 +184,28 @@ function waves_over_vortices(K,mu,gam,F,tf)
         end
         
         % Add to the movie plot matrix for the purpose of making animations
-        %{
-        if(mod(jj,inter)==0)
-            movie_plot(plot_count,:) = real(ifft(u(1:KT)));
-            plot_count = plot_count + 1;
+        
+        if jj==nthrd
+            fst_plot = real(ifft(u(1:KT)));            
         end
-        %}
+        
+        if jj==2*nthrd
+            scd_plot = real(ifft(u(1:KT)));
+        end
+        
+        if(mod(jj,inter)==0)
+            eta = u(1:KT);
+            Q = u(KT+1:2*KT);
+            eta = real(ifft(eta));
+            G0 = real(ifft(L1.*Q));        
+            q = real(ifft([0;-1i/pi*(1./[1:K -K+1:-1])'.*Q(2:KT)]));
+            Q = real(ifft(Q));
+            dnonl = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh,no_dno_term);
+            energy_plot(plot_count) = 1/KT*sum( q.*(G0+dnonl) + eta.^2 );
+            times(plot_count) = (jj-1)*dt;
+            plot_count = plot_count + 1;
+       end
+        
     end
     
     eta = u(1:KT);
@@ -173,8 +213,8 @@ function waves_over_vortices(K,mu,gam,F,tf)
     Q = u(KT+1:2*KT);
     
     eta = real(ifft(eta));
-    Q = real(ifft(Q));
     G0 = real(ifft(L1.*Q));        
+    Q = real(ifft(Q));
     
     dnofin = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh,no_dno_term);
     dnofinn1 = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh,no_dno_term-1);
@@ -192,46 +232,72 @@ function waves_over_vortices(K,mu,gam,F,tf)
     %}
     % Plot the surface profile
     
+    clf
     figure(1)
-    plot(Xmesh,eta,'k','LineWidth',2)
+    plot(Xmesh,fst_plot,'k-.',Xmesh,scd_plot,'k--',Xmesh,eta,'k','LineWidth',2)
     set(gca,'FontSize',30,'FontName','Helvetica','FontWeight','bold')
     xlabel('x','FontName','Helvetica','FontSize',30,'FontWeight','bold')
     ylabel('\eta(x,t)','FontName','Helvetica','FontSize',30,'FontWeight','bold')
-       
+    
     % Plot the power spectrum
     
     figure(2)
-    plot(-K+1:K,pspec,'k','LineWidth',2)
+    plot(-K+1:K,pspec,'k',-K+1:K,eta0,'LineWidth',2)
     set(gca,'FontSize',30,'FontName','Helvetica','FontWeight','bold')
     xlabel('k','FontName','Helvetica','FontSize',30,'FontWeight','bold')
     ylabel('\eta(k,t)','FontName','Helvetica','FontSize',30,'FontWeight','bold')
     ylim([-20 0])
-    xlim([-256 256])
-    % Plotting the paths in the four vortex case   
-      
-    figure(3)
-    plot((0:count-1)*dt,xtrack(1,1:count),'k--',(0:count-1)*dt,xtrack(2,1:count),'b--',(0:count-1)*dt,xtrack(3,1:count),'k.',(0:count-1)*dt,xtrack(4,1:count),'b.','LineWidth',2)
-    set(gca,'FontSize',30,'FontName','Helvetica','FontWeight','bold')
-    xlabel('t','FontName','Helvetica','FontSize',30,'FontWeight','bold')
-    
-    figure(4)
-    plot((0:count-1)*dt,ztrack(1,1:count),'k--',(0:count-1)*dt,ztrack(2,1:count),'b--',(0:count-1)*dt,ztrack(3,1:count),'k.',(0:count-1)*dt,ztrack(4,1:count),'b.','LineWidth',2)
-    set(gca,'FontSize',30,'FontName','Helvetica','FontWeight','bold')
-    xlabel('t','FontName','Helvetica','FontSize',30,'FontWeight','bold')
+    xlim([-K+1 K])
     
     % Plotting the paths in the two vortex case  
+        
+    figure(3)
+    hold on
+    plot(xtrack(1,1:count),ztrack(1,1:count),'k',xtrack(2,1:count),ztrack(2,1:count),'k','LineWidth',2)
+    plot(xtrack(1,1),ztrack(1,1),'.','MarkerSize',26','color',[0.8 0.8 0.8]);
+    plot(xtrack(2,1),ztrack(2,1),'.','MarkerSize',26','color',[0.8 0.8 0.8]);
+    plot(xtrack(1,end),ztrack(1,end),'.','MarkerSize',26','color',[0.1 0.1 0.1]);
+    plot(xtrack(2,end),ztrack(2,end),'.','MarkerSize',26','color',[0.1 0.1 0.1]);
+    hold off
+    set(gca,'FontSize',30,'FontName','Helvetica','FontWeight','bold')
+    xlabel('x','FontName','Helvetica','FontSize',30,'FontWeight','bold')
+    ylabel('z','FontName','Helvetica','FontSize',30,'FontWeight','bold')
+    
+    % Plotting the paths in the four vortex case   
     %{  
     figure(3)
-    plot((0:count-1)*dt,xtrack(1,1:count),'k--',(0:count-1)*dt,xtrack(2,1:count),'b--','LineWidth',2)
+    hold on
+    plot(xtrack(1,1:count),ztrack(1,1:count),'k',xtrack(2,1:count),ztrack(2,1:count),'k-.',...
+         xtrack(3,1:count),ztrack(3,1:count),'k-.',xtrack(4,1:count),ztrack(4,1:count),'k','LineWidth',2)
+    
+    plot(xtrack(1,1),ztrack(1,1),'.','MarkerSize',26','color',[0.8 0.8 0.8]);
+    plot(xtrack(2,1),ztrack(2,1),'.','MarkerSize',26','color',[0.8 0.8 0.8]);
+    plot(xtrack(3,1),ztrack(3,1),'.','MarkerSize',26','color',[0.8 0.8 0.8]);
+    plot(xtrack(4,1),ztrack(4,1),'.','MarkerSize',26','color',[0.8 0.8 0.8]);
+    
+    plot(xtrack(1,end),ztrack(1,end),'.','MarkerSize',26','color',[0.1 0.1 0.1]);
+    plot(xtrack(2,end),ztrack(2,end),'.','MarkerSize',26','color',[0.1 0.1 0.1]);
+    plot(xtrack(3,end),ztrack(3,end),'.','MarkerSize',26','color',[0.1 0.1 0.1]);
+    plot(xtrack(4,end),ztrack(4,end),'.','MarkerSize',26','color',[0.1 0.1 0.1]);
+    hold off
+    
     set(gca,'FontSize',30,'FontName','Helvetica','FontWeight','bold')
-    xlabel('t','FontName','Helvetica','FontSize',30,'FontWeight','bold')
+    xlabel('x','FontName','Helvetica','FontSize',30,'FontWeight','bold')
+    ylabel('z','FontName','Helvetica','FontSize',30,'FontWeight','bold')
+    %}    
+    % Plotting the paths in the six vortex case
+    %{
+    figure(3)
+    plot(xtrack(1,1:count),ztrack(1,1:count),xtrack(2,1:count),ztrack(2,1:count),xtrack(3,1:count),ztrack(3,1:count),xtrack(4,1:count),ztrack(4,1:count),xtrack(5,1:count),ztrack(5,1:count),xtrack(6,1:count),ztrack(6,1:count),'LineWidth',2)
+    set(gca,'FontSize',30,'FontName','Helvetica','FontWeight','bold')
+    xlabel('x','FontName','Helvetica','FontSize',30,'FontWeight','bold')
+    ylabel('z','FontName','Helvetica','FontSize',30,'FontWeight','bold')
+    %}   
     
     figure(4)
-    plot((0:count-1)*dt,ztrack(1,1:count),'k--',(0:count-1)*dt,ztrack(2,1:count),'b--','LineWidth',2)
+    plot(times,energy_plot,'k','LineWidth',2)
     set(gca,'FontSize',30,'FontName','Helvetica','FontWeight','bold')
     xlabel('t','FontName','Helvetica','FontSize',30,'FontWeight','bold')
-    %}
-    % And if you want to make an animation of the surface uncomment this.  
-      
-    % Movie_Maker_1d(movie_plot,Xmesh,plot_count,'surf_response')
+    ylabel('E(t)','FontName','Helvetica','FontSize',30,'FontWeight','bold')
+   
 end
