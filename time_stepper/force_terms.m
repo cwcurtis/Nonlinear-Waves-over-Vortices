@@ -15,10 +15,11 @@ Q = u(KT+1:2*KT);
 xpos = u(2*KT+1:2*KT+Nvorts);
 zpos = u(2*KT+Nvorts+1:2*KT+2*Nvorts);
 
+etax = real(ifft(Dx.*eta));
+G0 = real(ifft(L1.*Q));        
 eta = real(ifft(eta));
 Q = real(ifft(Q));
-etax = real(ifft(Dx.*fft(eta)));
-G0 = real(ifft(L1.*Q));        
+
 dnonl = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh,no_dno_term);
 dno = G0 + dnonl;
 
@@ -65,8 +66,8 @@ for jj=1:Nvorts
     bp1 = 2*sum(gam*dno.*psix + Q.*psiz)/KT;
     bp2 = 2*sum(gam*dno.*tpsiz - Q.*tpsix)/KT; 
     
-    xdot(jj) = F*xdot(jj) + mu*bp1;
-    zdot(jj) = F*zdot(jj) + mu/gam*bp2;
+    xdot(jj) = F*xdot(jj) - mu*bp1;
+    zdot(jj) = F*zdot(jj) - mu/gam*bp2;
         
 end
 
@@ -107,7 +108,7 @@ term1 = real(ifft(term1));
 
 nl2 = (Ev - mu./(1+(gm*etax).^2).*( .5*Q.^2 - mu*gam*(gam*dno+Pv).*term1 +...
                                      phix.*(Q - gam*gm*etax.*dno) - .5*gam*dno.*(2*Pv + gam*dno) + phiz.*(gm*term1+gam*dno) ));
-                                
+
 nl1 = fft(dnonl) + fft(Pv)/gam;
 nl2 = Dx.*fft(nl2);
 
