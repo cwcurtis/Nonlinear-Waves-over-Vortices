@@ -10,6 +10,11 @@ P.A. Tyvand.
 \newblock Motion of a vortex near a free surface.
 \newblock {\em J. Fluid Mech.}, 225:673--686, 1991.
 
+\bibitem{fish}
+S.~Fish.
+\newblock Vortex dynamics in the presence of free surface waves.
+\newblock {\em Phys. Fluids A}, 3:504--506, 1991.
+
 \bibitem{marcus}
 D.L. Marcus and S.A. Berger.
 \newblock The interaction between a counter-rotating vortex pair in vertical
@@ -32,6 +37,28 @@ E.A. Kuznetsov and V.P. Ruban.
 \newblock Cherenkov interaction of vortices with a free surface.
 \newblock {\em JETP}, 88:492--505, 1999.
 
+\bibitem{afm}
+M.J. Ablowitz, A.S. Fokas, and Z.H. Musslimani.
+\newblock On a new non-local formulation of water waves.
+\newblock {\em J. Fluid Mech.}, 562:313--343, 2006.
+
+\bibitem{craig}
+W.~Craig and C.~Sulem.
+\newblock Numerical simulation of gravity waves.
+\newblock {\em J. Comput. Phys.}, 108:73--83, 1993.
+
+\bibitem{guyenne}
+P.~Guyenne and D.P. Nicholls.
+\newblock A high-order spectral method for nonlinear water waves over moving
+  bottom topography.
+\newblock {\em SIAM J. Sci. Comput.}, 30:81--101, 2007.
+
+\bibitem{rouhi}
+A.~Rouhi and J.~Wright.
+\newblock Hamiltonian formulation for the motion of vortices in the presence of
+  a free surface for ideal flow.
+\newblock {\em Phys. Rev. E}, 48:1850--1865, 1993.
+
 \bibitem{lin}
 C.~Lin, T.C. Ho, S.C. Chang, S.C. Hsieh, and K.A. Chang.
 \newblock Vortex shedding induced by a solitary wave propagating over a
@@ -50,20 +77,25 @@ K.A. Chang, T.J. Hsu, and P.L.F. Liu.
   submerged rectangular obstacle. {P}art {II}: Cnoidal waves.
 \newblock {\em Coast. Eng.}, 52:257--283, 2005.
 
-\bibitem{afm}
-M.J. Ablowitz, A.S. Fokas, and Z.H. Musslimani.
-\newblock On a new non-local formulation of water waves.
-\newblock {\em J. Fluid Mech.}, 562:313--343, 2006.
+\bibitem{kalisch}
+H.~Borluk and H.~Kalisch.
+\newblock Particle dynamics in the {K}d{V} approximation.
+\newblock {\em Wave Motion}, 49:691--709, 2012.
 
-\bibitem{craig}
-W.~Craig and C.~Sulem.
-\newblock Numerical simulation of gravity waves.
-\newblock {\em J. Comput. Phys.}, 108:73--83, 1993.
+\bibitem{nachbin}
+A.~Nachbin and R.~Ribeiro-Junior.
+\newblock A boundary integral formulation for particle trajectories in {S}tokes
+  waves.
+\newblock {\em Discrete Contin. Dyn. Syst. Ser. B}, 34:3135--3153, 2014.
 
-\bibitem{rouhi}
-A.~Rouhi and J.~Wright.
-\newblock Hamiltonian formulation for the motion of vortices in the presence of
-  a free surface for ideal flow.
-\newblock {\em Phys. Rev. E}, 48:1850--1865, 1993.
+\bibitem{baker}
+G.~R. Baker and D.~I.~Meiron anbd S.A.~Orszag.
+\newblock Generalized vortex methods for free-surface flow problems.
+\newblock {\em J. Fluid. Mech.}, 123,:477--501, 1982.
+
+\bibitem{lamb}
+H.~Lamb.
+\newblock {\em Hydrodynamics}.
+\newblock Dover, New York, N.Y., 1945.
 
 \end{thebibliography}
