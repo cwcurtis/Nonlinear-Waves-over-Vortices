@@ -1,0 +1,741 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.5.18)  18 DEC 2016 15:57
+entering extended mode
+**"C:/Users/Chris/Google Drive/waves_over_vortices/writeup_11_07_revisions/Curt
+isKalisch_12_18_16_final_revision.tex"
+
+("C:/Users/Chris/Google Drive/waves_over_vortices/writeup_11_07_revisions/Curti
+sKalisch_12_18_16_final_revision.tex"
+LaTeX2e <2015/10/01> patch level 2
+Babel <3.9n> and hyphenation patterns for 69 languages loaded.
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size11.clo"
+File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsmath.st
+y"
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amstext.st
+y"
+Package: amstext 2000/06/29 v2.01
+
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty
+"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks14
+\ex@=\dimen103
+))
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty
+"
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen104
+)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty
+"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count87
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count88
+\leftroot@=\count89
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count90
+\DOTSCASE@=\count91
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count92
+\c@MaxMatrixCols=\count93
+\dotsspace@=\muskip10
+\c@parentequation=\count94
+\dspbrk@lvl=\count95
+\tag@help=\toks15
+\row@=\count96
+\column@=\count97
+\maxfields@=\count98
+\andhelp@=\toks16
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks17
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks18
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\amssymb.s
+ty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.
+sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
+Package: amsthm 2015/03/04 v2.20.2
+\thm@style=\toks19
+\thm@bodyfont=\toks20
+\thm@headfont=\toks21
+\thm@notefont=\toks22
+\thm@headpunct=\toks23
+\thm@preskip=\skip46
+\thm@postskip=\skip47
+\thm@headsep=\skip48
+\dth@everypar=\toks24
+)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx.
+sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.st
+y"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks25
+)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphics.
+sty"
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\graphics.
+cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.
+def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\infware
+rr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds
+.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count99
+))
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
+)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption.st
+y"
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption3.s
+ty"
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen114
+\captionmargin@=\dimen115
+\captionwidth=\dimen116
+\caption@tempdima=\dimen117
+\caption@indent=\dimen118
+\caption@parindent=\dimen119
+\caption@hangindent=\dimen120
+)
+\c@ContinuedFloat=\count100
+)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\subcaption
+.sty"
+Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
+\c@subfigure=\count101
+\c@subtable=\count102
+)
+\c@thm=\count103
+\c@lem=\count104
+ (CurtisKalisch_12_18_16_final_revision.aux)
+\openout1 = `CurtisKalisch_12_18_16_final_revision.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mk
+ii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count105
+\scratchdimen=\dimen121
+\scratchbox=\box28
+\nofMPsegments=\count106
+\nofMParguments=\count107
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count108
+\MPscratchDim=\dimen122
+\MPnumerator=\count109
+\makeMPintoPDFobject=\count110
+\everyMPtoPDFconversion=\toks27
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for U+msa on input line 78.
+ ("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 78.
+ ("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 78.
+ ("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 78.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 78.
+ [1
+
+{C:/Users/Chris/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+[2] <CurtisKalisch_Vortices.pdf, id=16, 512.91624pt x 372.39125pt>
+File: CurtisKalisch_Vortices.pdf Graphic file (type pdf)
+
+<use CurtisKalisch_Vortices.pdf>
+Package pdftex.def Info: CurtisKalisch_Vortices.pdf used on input line 113.
+(pdftex.def)             Requested size: 234.73523pt x 170.42699pt.
+ [3 <./CurtisKalisch_Vortices.pdf>] [4]
+[5] [6] [7] [8] [9] <conv_plot_tf_12.pdf, id=51, 721.69624pt x 432.61626pt>
+File: conv_plot_tf_12.pdf Graphic file (type pdf)
+
+<use conv_plot_tf_12.pdf>
+Package pdftex.def Info: conv_plot_tf_12.pdf used on input line 396.
+(pdftex.def)             Requested size: 225.34381pt x 135.08002pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<conv_plot_mupt4_tf_12.pdf, id=52, 721.69624pt x 432.61626pt>
+File: conv_plot_mupt4_tf_12.pdf Graphic file (type pdf)
+
+<use conv_plot_mupt4_tf_12.pdf>
+Package pdftex.def Info: conv_plot_mupt4_tf_12.pdf used on input line 405.
+(pdftex.def)             Requested size: 225.34381pt x 135.08002pt.
+
+<conv_plot_mupt4_gampt4_tf_12.pdf, id=53, 721.69624pt x 474.77374pt>
+File: conv_plot_mupt4_gampt4_tf_12.pdf Graphic file (type pdf)
+
+<use conv_plot_mupt4_gampt4_tf_12.pdf>
+Package pdftex.def Info: conv_plot_mupt4_gampt4_tf_12.pdf used on input line 40
+5.
+(pdftex.def)             Requested size: 225.34381pt x 148.24327pt.
+
+Overfull \hbox (5.21716pt too wide) in paragraph at lines 404--407
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[10] [11 <./conv_plot_tf_12.pdf>] [12 <./conv_plot_mupt4_tf_12.pdf> <./conv_plo
+t_mupt4_gampt4_tf_12.pdf>] [13]
+<surf_resp_cnoid_mu_pt2_F_pt02_tf_5NEW.pdf, id=90, 826.08624pt x 353.32pt>
+File: surf_resp_cnoid_mu_pt2_F_pt02_tf_5NEW.pdf Graphic file (type pdf)
+
+<use surf_resp_cnoid_mu_pt2_F_pt02_tf_5NEW.pdf>
+Package pdftex.def Info: surf_resp_cnoid_mu_pt2_F_pt02_tf_5NEW.pdf used on inpu
+t line 513.
+(pdftex.def)             Requested size: 225.34381pt x 96.37888pt.
+
+<surf_resp_cnoid_mu_pt2_F_pt2_tf_5NEW.pdf, id=91, 826.08624pt x 353.32pt>
+File: surf_resp_cnoid_mu_pt2_F_pt2_tf_5NEW.pdf Graphic file (type pdf)
+
+<use surf_resp_cnoid_mu_pt2_F_pt2_tf_5NEW.pdf>
+Package pdftex.def Info: surf_resp_cnoid_mu_pt2_F_pt2_tf_5NEW.pdf used on input
+ line 514.
+(pdftex.def)             Requested size: 225.34381pt x 96.37888pt.
+
+Overfull \hbox (5.21716pt too wide) in paragraph at lines 512--516
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<leftside_cnoid_tracks.pdf, id=92, 826.08624pt x 353.32pt>
+File: leftside_cnoid_tracks.pdf Graphic file (type pdf)
+
+<use leftside_cnoid_tracks.pdf>
+Package pdftex.def Info: leftside_cnoid_tracks.pdf used on input line 523.
+(pdftex.def)             Requested size: 225.34381pt x 96.37888pt.
+
+<rightside_cnoid_tracks.pdf, id=93, 826.08624pt x 353.32pt>
+File: rightside_cnoid_tracks.pdf Graphic file (type pdf)
+
+<use rightside_cnoid_tracks.pdf>
+Package pdftex.def Info: rightside_cnoid_tracks.pdf used on input line 524.
+(pdftex.def)             Requested size: 225.34381pt x 96.37888pt.
+
+Overfull \hbox (5.21716pt too wide) in paragraph at lines 522--526
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14] <froude_lin.pdf, id=97, 721.69624pt x 474.77374pt>
+File: froude_lin.pdf Graphic file (type pdf)
+ <use froude_lin.pdf>
+Package pdftex.def Info: froude_lin.pdf used on input line 562.
+(pdftex.def)             Requested size: 215.95955pt x 142.071pt.
+
+<lin_response_tf_pt5.pdf, id=98, 721.69624pt x 432.61626pt>
+File: lin_response_tf_pt5.pdf Graphic file (type pdf)
+
+<use lin_response_tf_pt5.pdf>
+Package pdftex.def Info: lin_response_tf_pt5.pdf used on input line 562.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+Overfull \hbox (5.22432pt too wide) in paragraph at lines 561--564
+ [][] 
+ []
+
+[15 <./surf_resp_cnoid_mu_pt2_F_pt02_tf_5NEW.pdf> <./surf_resp_cnoid_mu_pt2_F_p
+t2_tf_5NEW.pdf> <./leftside_cnoid_tracks.pdf> <./rightside_cnoid_tracks.pdf>]
+<froude_comp_pm.pdf, id=122, 721.69624pt x 432.61626pt>
+File: froude_comp_pm.pdf Graphic file (type pdf)
+
+<use froude_comp_pm.pdf>
+Package pdftex.def Info: froude_comp_pm.pdf used on input line 576.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+ <zmb_pm.pdf, id=123, 721.69624pt x 432.61626pt>
+File: zmb_pm.pdf Graphic file (type pdf)
+
+<use zmb_pm.pdf>
+Package pdftex.def Info: zmb_pm.pdf used on input line 577.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 575--579
+ [][] 
+ []
+
+[16 <./froude_lin.pdf> <./lin_response_tf_pt5.pdf>]
+<surf_resp_mu_pt2_F_pt2.pdf, id=138, 826.08624pt x 383.4325pt>
+File: surf_resp_mu_pt2_F_pt2.pdf Graphic file (type pdf)
+
+<use surf_resp_mu_pt2_F_pt2.pdf>
+Package pdftex.def Info: surf_resp_mu_pt2_F_pt2.pdf used on input line 588.
+(pdftex.def)             Requested size: 234.73523pt x 108.95175pt.
+
+<tracks_F_pt2_tf_9.pdf, id=139, 826.08624pt x 353.32pt>
+File: tracks_F_pt2_tf_9.pdf Graphic file (type pdf)
+
+<use tracks_F_pt2_tf_9.pdf>
+Package pdftex.def Info: tracks_F_pt2_tf_9.pdf used on input line 589.
+(pdftex.def)             Requested size: 234.73523pt x 100.39532pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 587--591
+ [][] 
+ []
+
+<energy_profile_mu_pt2_F_pt2_tv.pdf, id=140, 721.69624pt x 432.61626pt>
+File: energy_profile_mu_pt2_F_pt2_tv.pdf Graphic file (type pdf)
+
+<use energy_profile_mu_pt2_F_pt2_tv.pdf>
+Package pdftex.def Info: energy_profile_mu_pt2_F_pt2_tv.pdf used on input line 
+597.
+(pdftex.def)             Requested size: 281.68513pt x 168.85168pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[17 <./froude_comp_pm.pdf> <./zmb_pm.pdf> <./surf_resp_mu_pt2_F_pt2.pdf> <./tra
+cks_F_pt2_tf_9.pdf>] <froude_comp_ppmm.pdf, id=164, 721.69624pt x 432.61626pt>
+File: froude_comp_ppmm.pdf Graphic file (type pdf)
+
+<use froude_comp_ppmm.pdf>
+Package pdftex.def Info: froude_comp_ppmm.pdf used on input line 615.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<froude_comp_ppmm_sym.pdf, id=165, 721.69624pt x 432.61626pt>
+File: froude_comp_ppmm_sym.pdf Graphic file (type pdf)
+
+<use froude_comp_ppmm_sym.pdf>
+Package pdftex.def Info: froude_comp_ppmm_sym.pdf used on input line 615.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<zmb_ppmm.pdf, id=166, 721.69624pt x 474.77374pt>
+File: zmb_ppmm.pdf Graphic file (type pdf)
+ <use zmb_ppmm.pdf>
+Package pdftex.def Info: zmb_ppmm.pdf used on input line 616.
+(pdftex.def)             Requested size: 234.73523pt x 154.42279pt.
+
+<zmb_ppmm_sym.pdf, id=167, 721.69624pt x 474.77374pt>
+File: zmb_ppmm_sym.pdf Graphic file (type pdf)
+ <use zmb_ppmm_sym.pdf>
+Package pdftex.def Info: zmb_ppmm_sym.pdf used on input line 616.
+(pdftex.def)             Requested size: 234.73523pt x 154.42279pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 614--618
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<surf_resp_mu_pt2_F_pt2_ppmm.pdf, id=168, 721.69624pt x 432.61626pt>
+File: surf_resp_mu_pt2_F_pt2_ppmm.pdf Graphic file (type pdf)
+
+<use surf_resp_mu_pt2_F_pt2_ppmm.pdf>
+Package pdftex.def Info: surf_resp_mu_pt2_F_pt2_ppmm.pdf used on input line 627
+.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<surf_resp_mu_pt2_F_pt2_ppmm_sym.pdf, id=169, 721.69624pt x 432.61626pt>
+File: surf_resp_mu_pt2_F_pt2_ppmm_sym.pdf Graphic file (type pdf)
+
+<use surf_resp_mu_pt2_F_pt2_ppmm_sym.pdf>
+Package pdftex.def Info: surf_resp_mu_pt2_F_pt2_ppmm_sym.pdf used on input line
+ 628.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 626--630
+ [][] 
+ []
+
+<tracks_F_pt2_tf_6_ppmm.pdf, id=170, 721.69624pt x 432.61626pt>
+File: tracks_F_pt2_tf_6_ppmm.pdf Graphic file (type pdf)
+
+<use tracks_F_pt2_tf_6_ppmm.pdf>
+Package pdftex.def Info: tracks_F_pt2_tf_6_ppmm.pdf used on input line 637.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<tracks_F_pt2_tf_3pt2_ppmm_sym.pdf, id=171, 721.69624pt x 432.61626pt>
+File: tracks_F_pt2_tf_3pt2_ppmm_sym.pdf Graphic file (type pdf)
+
+<use tracks_F_pt2_tf_3pt2_ppmm_sym.pdf>
+Package pdftex.def Info: tracks_F_pt2_tf_3pt2_ppmm_sym.pdf used on input line 6
+38.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 636--640
+ [][] 
+ []
+
+<energy_profile_mu_pt2_F_pt2_ppmm.pdf, id=172, 721.69624pt x 432.61626pt>
+File: energy_profile_mu_pt2_F_pt2_ppmm.pdf Graphic file (type pdf)
+
+<use energy_profile_mu_pt2_F_pt2_ppmm.pdf>
+Package pdftex.def Info: energy_profile_mu_pt2_F_pt2_ppmm.pdf used on input lin
+e 647.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<energy_profile_mu_pt2_F_pt2_ppmm_sym.pdf, id=173, 721.69624pt x 432.61626pt>
+File: energy_profile_mu_pt2_F_pt2_ppmm_sym.pdf Graphic file (type pdf)
+
+<use energy_profile_mu_pt2_F_pt2_ppmm_sym.pdf>
+Package pdftex.def Info: energy_profile_mu_pt2_F_pt2_ppmm_sym.pdf used on input
+ line 648.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 646--650
+ [][] 
+ []
+
+[18 <./energy_profile_mu_pt2_F_pt2_tv.pdf>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[19 <./froude_comp_ppmm.pdf> <./froude_comp_ppmm_sym.pdf> <./zmb_ppmm.pdf> <./z
+mb_ppmm_sym.pdf>] <froude_comp_pmmp.pdf, id=208, 721.69624pt x 432.61626pt>
+File: froude_comp_pmmp.pdf Graphic file (type pdf)
+
+<use froude_comp_pmmp.pdf>
+Package pdftex.def Info: froude_comp_pmmp.pdf used on input line 667.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<froude_comp_pmmp_sym.pdf, id=209, 721.69624pt x 432.61626pt>
+File: froude_comp_pmmp_sym.pdf Graphic file (type pdf)
+
+<use froude_comp_pmmp_sym.pdf>
+Package pdftex.def Info: froude_comp_pmmp_sym.pdf used on input line 667.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<zmb_pmmp.pdf, id=210, 721.69624pt x 432.61626pt>
+File: zmb_pmmp.pdf Graphic file (type pdf)
+ <use zmb_pmmp.pdf>
+Package pdftex.def Info: zmb_pmmp.pdf used on input line 668.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<zmb_pmmp_sym.pdf, id=211, 721.69624pt x 432.61626pt>
+File: zmb_pmmp_sym.pdf Graphic file (type pdf)
+ <use zmb_pmmp_sym.pdf>
+Package pdftex.def Info: zmb_pmmp_sym.pdf used on input line 668.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 666--670
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<surf_resp_mu_pt2_F_pt2_pmmp.pdf, id=212, 721.69624pt x 474.77374pt>
+File: surf_resp_mu_pt2_F_pt2_pmmp.pdf Graphic file (type pdf)
+
+<use surf_resp_mu_pt2_F_pt2_pmmp.pdf>
+Package pdftex.def Info: surf_resp_mu_pt2_F_pt2_pmmp.pdf used on input line 678
+.
+(pdftex.def)             Requested size: 234.73523pt x 154.42279pt.
+
+<surf_resp_mu_pt2_F_pt2_pmmp_sym.pdf, id=213, 721.69624pt x 474.77374pt>
+File: surf_resp_mu_pt2_F_pt2_pmmp_sym.pdf Graphic file (type pdf)
+
+<use surf_resp_mu_pt2_F_pt2_pmmp_sym.pdf>
+Package pdftex.def Info: surf_resp_mu_pt2_F_pt2_pmmp_sym.pdf used on input line
+ 679.
+(pdftex.def)             Requested size: 234.73523pt x 154.42279pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 677--681
+ [][] 
+ []
+
+<tracks_F_pt2_tf_4_pmmp.pdf, id=214, 721.69624pt x 474.77374pt>
+File: tracks_F_pt2_tf_4_pmmp.pdf Graphic file (type pdf)
+
+<use tracks_F_pt2_tf_4_pmmp.pdf>
+Package pdftex.def Info: tracks_F_pt2_tf_4_pmmp.pdf used on input line 688.
+(pdftex.def)             Requested size: 234.73523pt x 154.42279pt.
+
+<tracks_F_pt2_tf_5_pmmp_sym.pdf, id=215, 721.69624pt x 474.77374pt>
+File: tracks_F_pt2_tf_5_pmmp_sym.pdf Graphic file (type pdf)
+
+<use tracks_F_pt2_tf_5_pmmp_sym.pdf>
+Package pdftex.def Info: tracks_F_pt2_tf_5_pmmp_sym.pdf used on input line 689.
+
+(pdftex.def)             Requested size: 234.73523pt x 154.42279pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 687--691
+ [][] 
+ []
+
+[20 <./surf_resp_mu_pt2_F_pt2_ppmm.pdf> <./surf_resp_mu_pt2_F_pt2_ppmm_sym.pdf>
+ <./tracks_F_pt2_tf_6_ppmm.pdf> <./tracks_F_pt2_tf_3pt2_ppmm_sym.pdf>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<energy_profile_mu_pt2_F_pt2_pmmp.pdf, id=239, 721.69624pt x 432.61626pt>
+File: energy_profile_mu_pt2_F_pt2_pmmp.pdf Graphic file (type pdf)
+
+<use energy_profile_mu_pt2_F_pt2_pmmp.pdf>
+Package pdftex.def Info: energy_profile_mu_pt2_F_pt2_pmmp.pdf used on input lin
+e 698.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<energy_profile_mu_pt2_F_pt2_pmmp_sym.pdf, id=240, 721.69624pt x 432.61626pt>
+File: energy_profile_mu_pt2_F_pt2_pmmp_sym.pdf Graphic file (type pdf)
+
+<use energy_profile_mu_pt2_F_pt2_pmmp_sym.pdf>
+Package pdftex.def Info: energy_profile_mu_pt2_F_pt2_pmmp_sym.pdf used on input
+ line 699.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 697--701
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<froude_comp_pmpm.pdf, id=241, 721.69624pt x 432.61626pt>
+File: froude_comp_pmpm.pdf Graphic file (type pdf)
+
+<use froude_comp_pmpm.pdf>
+Package pdftex.def Info: froude_comp_pmpm.pdf used on input line 715.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<froude_comp_pmpm_sym.pdf, id=242, 721.69624pt x 432.61626pt>
+File: froude_comp_pmpm_sym.pdf Graphic file (type pdf)
+
+<use froude_comp_pmpm_sym.pdf>
+Package pdftex.def Info: froude_comp_pmpm_sym.pdf used on input line 715.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<zmb_pmpm.pdf, id=243, 721.69624pt x 432.61626pt>
+File: zmb_pmpm.pdf Graphic file (type pdf)
+ <use zmb_pmpm.pdf>
+Package pdftex.def Info: zmb_pmpm.pdf used on input line 716.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<zmb_pmpm_sym.pdf, id=244, 721.69624pt x 474.77374pt>
+File: zmb_pmpm_sym.pdf Graphic file (type pdf)
+ <use zmb_pmpm_sym.pdf>
+Package pdftex.def Info: zmb_pmpm_sym.pdf used on input line 716.
+(pdftex.def)             Requested size: 234.73523pt x 154.42279pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 714--718
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<surf_resp_mu_pt2_F_pt2_pmpm.pdf, id=245, 721.69624pt x 432.61626pt>
+File: surf_resp_mu_pt2_F_pt2_pmpm.pdf Graphic file (type pdf)
+
+<use surf_resp_mu_pt2_F_pt2_pmpm.pdf>
+Package pdftex.def Info: surf_resp_mu_pt2_F_pt2_pmpm.pdf used on input line 726
+.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<surf_resp_mu_pt2_F_pt2_pmpm_sym.pdf, id=246, 721.69624pt x 432.61626pt>
+File: surf_resp_mu_pt2_F_pt2_pmpm_sym.pdf Graphic file (type pdf)
+
+<use surf_resp_mu_pt2_F_pt2_pmpm_sym.pdf>
+Package pdftex.def Info: surf_resp_mu_pt2_F_pt2_pmpm_sym.pdf used on input line
+ 727.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 725--729
+ [][] 
+ []
+
+<tracks_F_pt2_tf_4_pmpm.pdf, id=247, 721.69624pt x 432.61626pt>
+File: tracks_F_pt2_tf_4_pmpm.pdf Graphic file (type pdf)
+
+<use tracks_F_pt2_tf_4_pmpm.pdf>
+Package pdftex.def Info: tracks_F_pt2_tf_4_pmpm.pdf used on input line 736.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<tracks_F_pt2_tf_9_pmpm_sym.pdf, id=248, 721.69624pt x 432.61626pt>
+File: tracks_F_pt2_tf_9_pmpm_sym.pdf Graphic file (type pdf)
+
+<use tracks_F_pt2_tf_9_pmpm_sym.pdf>
+Package pdftex.def Info: tracks_F_pt2_tf_9_pmpm_sym.pdf used on input line 737.
+
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 735--739
+ [][] 
+ []
+
+[21 <./energy_profile_mu_pt2_F_pt2_ppmm.pdf> <./energy_profile_mu_pt2_F_pt2_ppm
+m_sym.pdf>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<energy_profile_mu_pt2_F_pt2_pmpm.pdf, id=262, 721.69624pt x 432.61626pt>
+File: energy_profile_mu_pt2_F_pt2_pmpm.pdf Graphic file (type pdf)
+
+<use energy_profile_mu_pt2_F_pt2_pmpm.pdf>
+Package pdftex.def Info: energy_profile_mu_pt2_F_pt2_pmpm.pdf used on input lin
+e 746.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+<energy_profile_mu_pt2_F_pt2_pmpm_sym.pdf, id=263, 721.69624pt x 432.61626pt>
+File: energy_profile_mu_pt2_F_pt2_pmpm_sym.pdf Graphic file (type pdf)
+
+<use energy_profile_mu_pt2_F_pt2_pmpm_sym.pdf>
+Package pdftex.def Info: energy_profile_mu_pt2_F_pt2_pmpm_sym.pdf used on input
+ line 747.
+(pdftex.def)             Requested size: 234.73523pt x 140.71083pt.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 745--749
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[22 <./froude_comp_pmmp.pdf> <./froude_comp_pmmp_sym.pdf> <./zmb_pmmp.pdf> <./z
+mb_pmmp_sym.pdf>] [23 <./surf_resp_mu_pt2_F_pt2_pmmp.pdf> <./surf_resp_mu_pt2_F
+_pt2_pmmp_sym.pdf> <./tracks_F_pt2_tf_4_pmmp.pdf> <./tracks_F_pt2_tf_5_pmmp_sym
+.pdf>] [24 <./energy_profile_mu_pt2_F_pt2_pmmp.pdf> <./energy_profile_mu_pt2_F_
+pt2_pmmp_sym.pdf>] [25 <./froude_comp_pmpm.pdf> <./froude_comp_pmpm_sym.pdf> <.
+/zmb_pmpm.pdf> <./zmb_pmpm_sym.pdf>] [26 <./surf_resp_mu_pt2_F_pt2_pmpm.pdf> <.
+/surf_resp_mu_pt2_F_pt2_pmpm_sym.pdf> <./tracks_F_pt2_tf_4_pmpm.pdf> <./tracks_
+F_pt2_tf_9_pmpm_sym.pdf>] [27 <./energy_profile_mu_pt2_F_pt2_pmpm.pdf> <./energ
+y_profile_mu_pt2_F_pt2_pmpm_sym.pdf>]
+(CurtisKalisch_12_18_16_final_revision.bbl [28]) [29]
+(CurtisKalisch_12_18_16_final_revision.aux) ) 
+Here is how much of TeX's memory you used:
+ 3580 strings out of 493634
+ 55474 string characters out of 3135239
+ 118580 words of memory out of 3000000
+ 6896 multiletter control sequences out of 15000+200000
+ 16657 words of font info for 64 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 36i,15n,39p,1590b,350s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/Chris/AppData/Local/Prog
+rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Chris/AppDa
+ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/User
+s/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx8.
+pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmex10.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi10.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Chris/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Chris/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Ch
+ris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb>
+<C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmr10.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr12.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Chris/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Chris/AppData/Local/Pr
+ograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Chris/App
+Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Use
+rs/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8
+.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmti10.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmtt9.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on CurtisKalisch_12_18_16_final_revision.pdf (29 pages, 767607 b
+ytes).
+PDF statistics:
+ 457 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 226 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -1,0 +1,102 @@
+\begin{thebibliography}{10}
+
+\bibitem{afm}
+M.J. Ablowitz, A.S. Fokas, and Z.H. Musslimani.
+\newblock On a new non-local formulation of water waves.
+\newblock {\em J. Fluid Mech.}, 562:313--343, 2006.
+
+\bibitem{tyvand1}
+P.A. Tyvand.
+\newblock On the interaction between a strong vortex pair and a free surface.
+\newblock {\em Phys. Fluids A}, 2:1624--1634, 1990.
+
+\bibitem{tyvand2}
+P.A. Tyvand.
+\newblock Motion of a vortex near a free surface.
+\newblock {\em J. Fluid Mech.}, 225:673--686, 1991.
+
+\bibitem{fish}
+S.~Fish.
+\newblock Vortex dynamics in the presence of free surface waves.
+\newblock {\em Phys. Fluids A}, 3:504--506, 1991.
+
+\bibitem{marcus}
+D.L. Marcus and S.A. Berger.
+\newblock The interaction between a counter-rotating vortex pair in vertical
+  ascent and a free surface.
+\newblock {\em Phys. Fluids A}, 1:1988--2000, 1989.
+
+\bibitem{telste}
+J.~G. Telste.
+\newblock Potential flow about two counter-rotating vortices approaching a free
+  surface.
+\newblock {\em J. Fluid Mech.}, 201:259--278, 1989.
+
+\bibitem{tryggvason}
+W.W. Willmarth, G.~Tryggvason, A.~Hirsa, and D.~Yu.
+\newblock Vortex pair generation and interaction with a free surface.
+\newblock {\em Phys. Fluids A}, 1:170--172, 1989.
+
+\bibitem{ruban}
+E.A. Kuznetsov and V.P. Ruban.
+\newblock Cherenkov interaction of vortices with a free surface.
+\newblock {\em JETP}, 88:492--505, 1999.
+
+\bibitem{craig}
+W.~Craig and C.~Sulem.
+\newblock Numerical simulation of gravity waves.
+\newblock {\em J. Comput. Phys.}, 108:73--83, 1993.
+
+\bibitem{guyenne}
+P.~Guyenne and D.P. Nicholls.
+\newblock A high-order spectral method for nonlinear water waves over moving
+  bottom topography.
+\newblock {\em SIAM J. Sci. Comput.}, 30:81--101, 2007.
+
+\bibitem{rouhi}
+A.~Rouhi and J.~Wright.
+\newblock Hamiltonian formulation for the motion of vortices in the presence of
+  a free surface for ideal flow.
+\newblock {\em Phys. Rev. E}, 48:1850--1865, 1993.
+
+\bibitem{lin}
+C.~Lin, T.C. Ho, S.C. Chang, S.C. Hsieh, and K.A. Chang.
+\newblock Vortex shedding induced by a solitary wave propagating over a
+  submerged vertical plate.
+\newblock {\em Int. J. Heat and Fluid Flow}, 26:894--904, 2005.
+
+\bibitem{liu1}
+K.A. Chang, T.J. Hsu, and P.L.F. Liu.
+\newblock Vortex generation and evolution in water waves propagating over a
+  submerged rectangular obstacle. {P}art {I}: Solitary waves.
+\newblock {\em Coast. Eng.}, 44:13--36, 2001.
+
+\bibitem{liu2}
+K.A. Chang, T.J. Hsu, and P.L.F. Liu.
+\newblock Vortex generation and evolution in water waves propagating over a
+  submerged rectangular obstacle. {P}art {II}: Cnoidal waves.
+\newblock {\em Coast. Eng.}, 52:257--283, 2005.
+
+\bibitem{cottet}
+G.H. Cottet and P.D. Koumoutsakos.
+\newblock {\em Vortex Methods: Theory and Practice}.
+\newblock Cambridge University Press, Cambridge, 2000.
+
+\bibitem{baker}
+G.~R. Baker and D.~I.~Meiron anbd S.A.~Orszag.
+\newblock Generalized vortex methods for free-surface flow problems.
+\newblock {\em J. Fluid. Mech.}, 123,:477--501, 1982.
+
+\bibitem{wilkening}
+J.~Wilkening and V.~Vasan.
+\newblock Comparison of five methods of computing the {D}irichlet--{N}eumann
+  operator for the water wave problem.
+\newblock In {\em Nonlinear Wave Equations: Analytic and Computational
+  Techniques}. AMS, 2015.
+
+\bibitem{lamb}
+H.~Lamb.
+\newblock {\em Hydrodynamics}.
+\newblock Dover, New York, N.Y., 1945.
+
+\end{thebibliography}
