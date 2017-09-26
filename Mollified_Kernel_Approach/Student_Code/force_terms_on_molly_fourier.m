@@ -42,58 +42,21 @@ fpsiz = @(x,z,zj) -.25*( sinh(pi*gam*(z-zj))./( cosh(pi*gam*(z-zj)) - cos(pi*x) 
 ftpsix = @(x,z,zj) -.25*sin(pi*x).*( 1./( cosh(pi*gam*(z-zj)) - cos(pi*x) ) - 1./( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
 ftpsiz = @(x,z,zj) -.25*( sinh(pi*gam*(z-zj))./( cosh(pi*gam*(z-zj)) - cos(pi*x) ) - sinh(pi*gam*(z+zj))./( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
 
-Kxm = zeros(Nvorts);
-Kxp = zeros(Nvorts);
+Kx = zeros(Nvorts);
 Kz = zeros(Nvorts);
 
-%{
-for jj=2:Nvorts
-    xpjj = xpos(jj);
-    zpjj = zpos(jj);
-    for ll=1:jj-1        
-        dx = xpjj - xpos(ll);
-        dzm = zpjj - zpos(ll);
-        dzp = zpjj + zpos(ll);
-        
-        msumxm = kernel_horiz(dx,dzm,gam,ep,Ntrunc);
-        msumzm = kernel_vert(dx,dzm,gam,ep,Ntrunc);
-
-        fac = cosh(gam*pi*dzp) - cos(pi*dx);
-        msumxp = -sinh(gam*pi*dzp)/fac;
-        msumzp = sin(pi*dx)/fac;
-        
-        Kxm(ll,jj) = msumxm;
-        Kxp(ll,jj) = msumxp;
-        Kz(ll,jj) = msumzm-msumzp;
-    end
-end
-
-Kxm = Kxm - Kxm';
-Kz = Kz - Kz';
-Kxp = Kxp + Kxp';
-
-for ll=1:Nvorts
-   Kxp(ll,ll) = -sinh(gam*pi*2*zpos(ll))/(cosh(gam*pi*2*zpos(ll))-1); 
-end
-%}
-
 parfor jj=1:Nvorts
-    xpjj = xpos(jj);
-    zpjj = zpos(jj);
-    for ll=1:Nvorts        
-        dx = xpjj - xpos(ll);
-        dzm = zpjj - zpos(ll);
-        dzp = zpjj + zpos(ll);
+    dx = xpos(jj) - xpos;
+    dzm = zpos(jj) - zpos;
+    dzp = zpos(jj) + zpos;
+    for ll=1:Nvorts                
+        % compute the mollified part of the kernel
+        [msumxm,msumzm] = kernel_mol(dx(ll),dzm(ll),gam,ep,Ntrunc);
+        fac = cosh(gam*pi*dzp(ll)) - cos(pi*dx(ll));
+        msumxp = -sinh(gam*pi*dzp(ll))/fac;
+        msumzp = sin(pi*dx(ll))/fac;
         
-        msumxm = kernel_horiz(dx,dzm,gam,ep,Ntrunc);
-        msumzm = kernel_vert(dx,dzm,gam,ep,Ntrunc);
-
-        fac = cosh(gam*pi*dzp) - cos(pi*dx);
-        msumxp = -sinh(gam*pi*dzp)/fac;
-        msumzp = sin(pi*dx)/fac;
-        
-        Kxm(ll,jj) = msumxm;
-        Kxp(ll,jj) = msumxp;
+        Kx(ll,jj) = msumxm-msumxp;
         Kz(ll,jj) = msumzm-msumzp;
     end
 end
@@ -101,12 +64,9 @@ end
 
 for jj=1:Nvorts
    
-    xdot(jj) = xdot(jj) + sum(gvals.*(Kxm(:,jj)-Kxp(:,jj)));
-    zdot(jj) = zdot(jj) + sum(gvals.*Kz(:,jj));
+    xdot(jj) = mu*F*sum(gvals.*Kx(:,jj));
+    zdot(jj) = mu*F/gam*sum(gvals.*Kz(:,jj));
     
-    xdot(jj) =  mu*F*xdot(jj);
-    zdot(jj) =  mu*F/gam*zdot(jj);    
-   
     psix = fpsix(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
     psiz = fpsiz(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
     

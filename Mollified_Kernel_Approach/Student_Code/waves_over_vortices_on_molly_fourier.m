@@ -262,8 +262,8 @@ function waves_over_vortices_on_molly_fourier(rows,cols,K,mu,gam,ep,F,tf,Ntrunc)
     end
 
     % Plot the power spectrum
-    figure(2)
-    plot_pspec(K,S,pspec,eta0);
+    %figure(2)
+    %plot_pspec(K,S,pspec,eta0);
     
     % Plot the surface energy
     figure(3)

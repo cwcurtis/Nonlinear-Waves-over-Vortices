@@ -66,28 +66,31 @@ for jj=1:nblcks
     
     locinds = bvecs(:,jj)~=0;
     lisinds = ilists(:,jj)~=0;
+    farinds = farfield(:,jj)~=0;
     
     xloc = xpos(locinds);
     xlist = xpos(lisinds);
-    %xfar = xpos(farfield(:,jj));
+    xfar = xpos(farinds);
     
     zloc = zpos(locinds);
     zlist = zpos(lisinds);
-    %zfar = zpos(farfield(:,jj));
+    zfar = zpos(farinds);
     
     gloc = gvals(lisinds);
-    %gfar = gvals(farfield(:,jj));
+    gfar = gvals(farinds);
     
-    %Kfar = far_panel_comp(xloc,zloc,xfar,zfar,gfar,mu,gam,ep);
-    if nparts > mlvl
-        Kvec(locinds,:) = tree_traverser(xlist,zlist,nparts,mlvl,ctgry,xbnds,zbnds,gloc,Ntrunc,gam,ep);        
-    else
-        cominds = (ilists(:,jj)-bvecs(:,jj))~=0;
-        xfar = xpos(cominds);
-        zfar = zpos(cominds);
-        gnear = gvals(locinds);
-        gfar = gvals(cominds);
-        Kloc = near_neighbor_comp(xloc,zloc,xfar,zfar,gnear,gfar,Ntrunc,gam,ep);
-        Kvec(locinds,:) = Kloc;
-    end    
+    if nparts > 0
+        Kfar = far_panel_comp(xloc,zloc,xfar,zfar,gfar,gam);
+        if nparts > mlvl
+            Kvec(locinds,:) = Kfar + tree_traverser(xlist,zlist,nparts,mlvl,ctgry,xbnds,zbnds,gloc,Ntrunc,gam,ep);        
+        else
+            cominds = (ilists(:,jj)-bvecs(:,jj))~=0;
+            xfar = xpos(cominds);
+            zfar = zpos(cominds);
+            gnear = gvals(locinds);
+            gfar = gvals(cominds);
+            Kloc = near_neighbor_comp(xloc,zloc,xfar,zfar,gnear,gfar,Ntrunc,gam,ep);
+            Kvec(locinds,:) = Kfar + Kloc;
+        end
+    end
 end

@@ -14,9 +14,8 @@ for jj=1:nparts
         dzm = zpjj - zfar(ll);
         dzp = zpjj + zfar(ll);
         
-        msumxm = kernel_horiz(dx,dzm,gam,ep,Ntrunc);
-        msumzm = kernel_vert(dx,dzm,gam,ep,Ntrunc);
-
+        [msumxm,msumzm] = kernel_mol(dx,dzm,gam,ep,Ntrunc);
+        
         fac = cosh(gam*pi*dzp) - cos(pi*dx);
         msumxp = -sinh(gam*pi*dzp)/fac;
         msumzp = sin(pi*dx)/fac;
@@ -43,9 +42,8 @@ for jj=2:nparts
         dzm = zpjj - zloc(ll);
         dzp = zpjj + zloc(ll);
         
-        msumxm = kernel_horiz(dx,dzm,gam,ep,Ntrunc);
-        msumzm = kernel_vert(dx,dzm,gam,ep,Ntrunc);
-
+        [msumxm,msumzm] = kernel_mol(dx,dzm,gam,ep,Ntrunc);
+        
         fac = cosh(gam*pi*dzp) - cos(pi*dx);
         msumxp = -sinh(gam*pi*dzp)/fac;
         msumzp = sin(pi*dx)/fac;
@@ -60,11 +58,8 @@ Kxm = Kxm - Kxm';
 Kz = Kz - Kz';
 Kxp = Kxp + Kxp';
 
+   
 for ll=1:nparts
-   Kxp(ll,ll) = -sinh(gam*pi*2*zloc(ll))/(cosh(gam*pi*2*zloc(ll))-1); 
-end
-    
-for ll=1:nparts
-    Kloc(ll,1) = Kloc(ll,1) + sum(gnear.*(Kxm(:,ll)-Kxp(:,ll)));
-    Kloc(ll,2) = Kloc(ll,2) + sum(gnear.*Kz(:,ll));
+    Kloc(ll,1) = 1/tanh(gam*pi*zloc(ll)) + sum(gnear.*(Kxm(:,ll)-Kxp(:,ll)));
+    Kloc(ll,2) = sum(gnear.*Kz(:,ll));
 end

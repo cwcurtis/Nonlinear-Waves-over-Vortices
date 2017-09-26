@@ -1,7 +1,6 @@
 function Kvec = tree_traverser(xpos,zpos,nparts,mlvl,ctgry,xbnds,zbnds,gvals,Ntrunc,gam,ep)
 
 Kvec = zeros(nparts,2);
-inds = (1:nparts)';
 ntot = length(xpos);
 
 xmin = xbnds(1);
@@ -87,36 +86,39 @@ for ll=1:4
     
     locinds = bvecs(:,jj)~=0;
     lisinds = ilists(:,jj)~=0;
+    farinds = farfield(:,jj)~=0;
     
     xloc = xpos(locinds);
     xlist = xpos(lisinds);
-    %xfar = xpos(farfield(:,jj));
+    xfar = xpos(farinds);
     
     zloc = zpos(locinds);
     zlist = zpos(lisinds);
-    %zfar = zpos(farfield(:,jj));
+    zfar = zpos(farinds);
     
     gloc = gvals(lisinds);
-    %gfar = gvals(farfield(:,jj));
+    gfar = gvals(farinds);
     
-    %Kfar = far_panel_comp(xloc,zloc,xfar,zfar,gfar,mu,gam,ep);
-    if npartsloc > mlvl
-        if(ll==1) 
-           Kvec(1:npartsloc,:) = tree_traverser(xlist,zlist,npartsloc,mlvl,ctgry,xbnds,zbnds,gloc,Ntrunc,gam,ep);
+    if npartsloc > 0
+        Kfar = far_panel_comp(xloc,zloc,xfar,zfar,gfar,gam);        
+        if npartsloc > mlvl
+            if(ll==1) 
+                Kvec(1:npartsloc,:) = Kfar + tree_traverser(xlist,zlist,npartsloc,mlvl,ctgry,xbnds,zbnds,gloc,Ntrunc,gam,ep);
+            else
+                Kvec(cvals(ll-1)+1:cvals(ll-1)+npartsloc,:) = Kfar + tree_traverser(xlist,zlist,npartsloc,mlvl,ctgry,xbnds,zbnds,gloc,Ntrunc,gam,ep); 
+            end
         else
-           Kvec(cvals(ll-1)+1:cvals(ll-1)+npartsloc,:) = tree_traverser(xlist,zlist,npartsloc,mlvl,ctgry,xbnds,zbnds,gloc,Ntrunc,gam,ep); 
+            cominds = (ilists(:,jj)-bvecs(:,jj))~=0;
+            xfar = xpos(cominds);
+            zfar = zpos(cominds);
+            gnear = gvals(locinds);
+            gfar = gvals(cominds);
+            Kloc = near_neighbor_comp(xloc,zloc,xfar,zfar,gnear,gfar,Ntrunc,gam,ep);
+            if(ll==1) 
+                Kvec(1:npartsloc,:) = Kfar + Kloc;
+            else
+                Kvec(cvals(ll-1)+1:cvals(ll-1)+npartsloc,:) = Kfar + Kloc; 
+            end
         end
-    else
-        cominds = (ilists(:,jj)-bvecs(:,jj))~=0;
-        xfar = xpos(cominds);
-        zfar = zpos(cominds);
-        gnear = gvals(locinds);
-        gfar = gvals(cominds);
-        Kloc = near_neighbor_comp(xloc,zloc,xfar,zfar,gnear,gfar,Ntrunc,gam,ep);
-        if(ll==1) 
-           Kvec(1:npartsloc,:) = Kloc;
-        else
-           Kvec(cvals(ll-1)+1:cvals(ll-1)+npartsloc,:) = Kloc; 
-        end
-    end        
+    end
 end

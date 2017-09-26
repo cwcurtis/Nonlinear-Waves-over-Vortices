@@ -48,11 +48,8 @@ Kz = Kvec(:,2);
 
 for jj=1:Nvorts
    
-    xdot(jj) = xdot(jj) + Kx(jj);
-    zdot(jj) = zdot(jj) + Kz(jj);
-    
-    xdot(jj) =  mu*F*xdot(jj);
-    zdot(jj) =  mu*F/gam*zdot(jj);    
+    xdot(jj) =  mu*F/4*Kx(jj);
+    zdot(jj) =  mu*F/(2*gam)*Kz(jj);    
    
     psix = fpsix(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
     psiz = fpsiz(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
