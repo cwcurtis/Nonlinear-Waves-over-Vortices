@@ -11,15 +11,15 @@ function [dshift,ushift,lshift,rshift,ctgry] = shift_finder(col,row,rcnt,ccnt)
         if col == 1 
             lshift = 0;
             rshift = 1;
-            ctgry = 'corner';            
+            ctgry = 'tlcorner';            
         elseif col == ccnt
             lshift = 1;
             rshift = 0;
-            ctgry = 'corner';            
+            ctgry = 'trcorner';            
         else
             lshift = 1;
             rshift = 1;
-            ctgry = 'hedge';            
+            ctgry = 'thedge';            
         end        
     elseif row == rcnt    
         dshift = 1;
@@ -27,25 +27,26 @@ function [dshift,ushift,lshift,rshift,ctgry] = shift_finder(col,row,rcnt,ccnt)
         if col == 1
             lshift = 0;
             rshift = 1;
-            ctgry = 'corner';            
+            ctgry = 'blcorner';            
         elseif col == ccnt
             lshift = 1;
             rshift = 0;
-            ctgry = 'corner';
+            ctgry = 'brcorner';
         else
             lshift = 1;
             rshift = 1;
-            ctgry = 'hedge';
+            ctgry = 'bhedge';
         end        
     else
         dshift = 1;
         ushift = 1;
-        ctgry = 'vedge';
         if col == 1
             lshift = 0;
             rshift = 1;
+            ctgry = 'lvedge';        
         elseif col == ccnt
             lshift = 1;
             rshift = 0;
+            ctgry = 'rvedge';        
         end
     end

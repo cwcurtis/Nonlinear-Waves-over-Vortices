@@ -2,6 +2,8 @@ function gvals = set_gvals(rows,cols,rows_in,cols_in,Nvorts,c1,c2,c3,c4,c5,patte
 
 gvals = zeros(Nvorts,1);
 
+
+
 % Automatically assign vortex strengths
 for ii = 1:rows
     for jj = 1:cols

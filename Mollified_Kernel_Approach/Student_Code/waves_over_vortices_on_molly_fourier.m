@@ -6,17 +6,17 @@ function waves_over_vortices_on_molly_fourier(rows,cols,K,mu,gam,ep,F,tf,Ntrunc)
     z_range = 4; % vertical range or diameter of vortex formation
     x_range = 4; % horizontal range of vortex formation (if sqr_grid == 0)
     
-    coords = 'polar';
-%    coords = 'cartesian';
+%    coords = 'polar';
+    coords = 'cartesian';
 %    p_shape = 'rose';
 %    p_shape = 'cardioid';
     p_shape = 'circle';
 %    pattern = 'gradient';
-%    pattern = 'clustered';
+    pattern = 'clustered';
 %    pattern = 'checkerboard';
 %    pattern = 'ver_stripes';
 %    pattern = 'hor_stripes';
-    pattern = 'uniform';
+%    pattern = 'uniform';
     simul_plot = 0; % Plot during computation.       0 - off, 1 - on
     sqr_grid = 1;   % Same grid spacing for x and z. 0 - off, 1 - on
     disk = 0;       % Disk shape for cartesian grid. 0 - off, 1 - on
@@ -262,8 +262,8 @@ function waves_over_vortices_on_molly_fourier(rows,cols,K,mu,gam,ep,F,tf,Ntrunc)
     end
 
     % Plot the power spectrum
-    %figure(2)
-    %plot_pspec(K,S,pspec,eta0);
+    figure(2)
+    plot_pspec(K,S,pspec,eta0);
     
     % Plot the surface energy
     figure(3)

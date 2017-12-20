@@ -42,30 +42,44 @@ fpsiz = @(x,z,zj) -.25*( sinh(pi*gam*(z-zj))./( cosh(pi*gam*(z-zj)) - cos(pi*x) 
 ftpsix = @(x,z,zj) -.25*sin(pi*x).*( 1./( cosh(pi*gam*(z-zj)) - cos(pi*x) ) - 1./( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
 ftpsiz = @(x,z,zj) -.25*( sinh(pi*gam*(z-zj))./( cosh(pi*gam*(z-zj)) - cos(pi*x) ) - sinh(pi*gam*(z+zj))./( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
 
-Kx = zeros(Nvorts);
-Kz = zeros(Nvorts);
+%{
+tKmmx = zeros(Nvorts);
+tKmmz = zeros(Nvorts);
+tKmpx = zeros(Nvorts);
+tKmpz = zeros(Nvorts);
 
-parfor jj=1:Nvorts
+parfor jj = 1:Nvorts    
     dx = xpos(jj) - xpos;
     dzm = zpos(jj) - zpos;
     dzp = zpos(jj) + zpos;
-    for ll=1:Nvorts                
-        % compute the mollified part of the kernel
-        [msumxm,msumzm] = kernel_mol(dx(ll),dzm(ll),gam,ep,Ntrunc);
-        fac = cosh(gam*pi*dzp(ll)) - cos(pi*dx(ll));
-        msumxp = -sinh(gam*pi*dzp(ll))/fac;
-        msumzp = sin(pi*dx(ll))/fac;
-        
-        Kx(ll,jj) = msumxm-msumxp;
-        Kz(ll,jj) = msumzm-msumzp;
-    end
+    
+    spx = sin(pi*dx);
+    cpx = cos(pi*dx);
+    
+    facm = 4*(cosh(gam*pi*dzm) - cpx);
+    facp = 4*(cosh(gam*pi*dzp) - cpx);
+    
+    kerxm = -sinh(gam*pi*dzm)./facm;
+    kerzm = spx./facm;
+    kerxm(jj) = 0;
+    kerzm(jj) = 0;
+    
+    kerxp = -sinh(gam*pi*dzp)./facp;
+    kerzp = spx./facp;
+    
+    [Kmxm,Kmzm] = kernel_mol(dx,dzm,gam,ep,Ntrunc);
+    [Kmxp,Kmzp] = kernel_mol(dx,dzp,gam,ep,Ntrunc);
+    
+    %tKmmx(jj,:) = kerxm+Kmxm;
+    %tKmmz(jj,:) = kerzm+Kmzm;
+    %tKmpx(jj,:) = kerxp+Kmxp;
+    %tKmpz(jj,:) = kerzp+Kmzp;
+    
+    txdot(jj) = sum(gvals.*(kerxm+Kmxm-(kerxp+Kmxp)));
+    tzdot(jj) = sum(gvals.*(kerzm+Kmzm-(kerzp+Kmzp)));     
 end
 
-
-for jj=1:Nvorts
-   
-    xdot(jj) = mu*F*sum(gvals.*Kx(:,jj));
-    zdot(jj) = mu*F/gam*sum(gvals.*Kz(:,jj));
+for jj=1:Nvorts   
     
     psix = fpsix(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
     psiz = fpsiz(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
@@ -76,13 +90,145 @@ for jj=1:Nvorts
     bp1 = 2*sum(gam*dno.*psix + Q.*psiz)/KT;
     bp2 = 2*sum(gam*dno.*tpsiz - Q.*tpsix)/KT; 
     
-    xdot(jj) = real(xdot(jj) - mu*bp1);
-    zdot(jj) = real(zdot(jj) - mu/gam*bp2);
+    xdot(jj) = real(mu*F*xdot(jj) - mu*bp1);
+    zdot(jj) = real(mu*F/gam*zdot(jj) - mu/gam*bp2);        
+end
+%}
+
+Ntrg = Nvorts*(Nvorts-1)/2;
+Nproc = 8;
+Nstep = floor(Ntrg/Nproc);
+Nrem = mod(Ntrg,Nproc);
+
+Kmvlsx = zeros(Nstep,Nproc);
+Kmvlsz = zeros(Nstep,Nproc);
+Kpvlsx = zeros(Nstep,Nproc);
+Kpvlsz = zeros(Nstep,Nproc);
+Kmmx = zeros(Nvorts);
+Kmmz = zeros(Nvorts);
+Kmpx = zeros(Nvorts);
+Kmpz = zeros(Nvorts);
+inds = zeros(Ntrg,2);
+Nprior = 0;
+for jj=1:Nvorts-1
+    jvec = (Nprior + 1):(Nprior + Nvorts-jj); 
+    inds(jvec,1) = 1:Nvorts-jj;
+    inds(jvec,2) = (jj+1):Nvorts;    
+    Nprior = Nprior + Nvorts-jj;
+end
+
+xp1m = reshape(xpos(inds(1:Nstep*Nproc,1)),Nstep,Nproc);
+xp2m = reshape(xpos(inds(1:Nstep*Nproc,2)),Nstep,Nproc);
+zp1m = reshape(zpos(inds(1:Nstep*Nproc,1)),Nstep,Nproc);
+zp2m = reshape(zpos(inds(1:Nstep*Nproc,2)),Nstep,Nproc);
+
+parfor kk = 1:Nproc
+    
+    xp1 = xp1m(:,kk);
+    xp2 = xp2m(:,kk);
+    
+    zp1 = zp1m(:,kk);
+    zp2 = zp2m(:,kk);
         
+    dx = xp1 - xp2;
+    dzm = zp1 - zp2;
+    dzp = zp1 + zp2;
+    
+    spx = sin(pi*dx);
+    cpx = cos(pi*dx);
+    
+    facm = 4*(cosh(gam*pi*dzm) - cpx);
+    facp = 4*(cosh(gam*pi*dzp) - cpx);
+    
+    kerxm = -sinh(gam*pi*dzm)./facm;
+    kerzm = spx./facm;
+    
+    kerxp = -sinh(gam*pi*dzp)./facp;
+    kerzp = spx./facp;
+    
+    [Kmxm,Kmzm] = kernel_mol(dx,dzm,gam,ep,Ntrunc);
+    [Kmxp,Kmzp] = kernel_mol(dx,dzp,gam,ep,Ntrunc);
+    
+    Kmvlsx(:,kk) = kerxm + Kmxm;
+    Kmvlsz(:,kk) = kerzm + Kmzm;
+    Kpvlsx(:,kk) = kerxp + Kmxp;
+    Kpvlsz(:,kk) = kerzp + Kmzp;    
+    
+end
+
+Kmvlsx = Kmvlsx(:);
+Kmvlsz = Kmvlsz(:);
+Kpvlsx = Kpvlsx(:);
+Kpvlsz = Kpvlsz(:);
+
+if Nrem>0   
+    dx = xpos(inds(Nproc*Nstep+1:Ntrg,1)) - xpos(inds(Nproc*Nstep+1:Ntrg,2));
+    dzm = zpos(inds(Nproc*Nstep+1:Ntrg,1)) - zpos(inds(Nproc*Nstep+1:Ntrg,2));
+    dzp = zpos(inds(Nproc*Nstep+1:Ntrg,1)) + zpos(inds(Nproc*Nstep+1:Ntrg,2));
+    
+    spx = sin(pi*dx);
+    cpx = cos(pi*dx);
+    
+    facm = 4*(cosh(gam*pi*dzm) - cpx);
+    facp = 4*(cosh(gam*pi*dzp) - cpx);
+    
+    kerxm = -sinh(gam*pi*dzm)./facm;
+    kerzm = spx./facm;
+    
+    kerxp = -sinh(gam*pi*dzp)./facp;
+    kerzp = spx./facp;
+    
+    [Kmxm,Kmzm] = kernel_mol(dx,dzm,gam,ep,Ntrunc);
+    [Kmxp,Kmzp] = kernel_mol(dx,dzp,gam,ep,Ntrunc);        
+    
+    Kmvlsx = [Kmvlsx;(kerxm+Kmxm)];
+    Kmvlsz = [Kmvlsz;(kerzm+Kmzm)];
+    Kpvlsx = [Kpvlsx;(kerxp+Kmxp)];
+    Kpvlsz = [Kpvlsz;(kerzp+Kmzp)];    
+end
+
+Nprior = 0;
+for ll=1:Nvorts-1
+   svec = (Nprior + 1):(Nprior + Nvorts-ll); 
+   Kmmx = Kmmx + diag(Kmvlsx(svec),ll);
+   Kmmz = Kmmz + diag(Kmvlsz(svec),ll);
+   Kmpx = Kmpx + diag(Kpvlsx(svec),ll);
+   Kmpz = Kmpz + diag(Kpvlsz(svec),ll);
+   Nprior = Nprior + Nvorts-ll;
+end
+    
+Kmmx = Kmmx - Kmmx';
+Kmmz = Kmmz - Kmmz';
+Kmpx = Kmpx + Kmpx';
+Kmpz = Kmpz - Kmpz';
+
+kdiag = -sinh(2*gam*pi*zpos)./(4*(cosh(2*gam*pi*zpos)-1));
+for kk = 1:Nvorts
+    %compute the mollified part of the kernel
+    Kmxp = kernel_mol(0,2*zpos(kk),gam,ep,Ntrunc);
+    kdiag(kk) = kdiag(kk) + Kmxp;    
+end
+Kmpx = Kmpx + diag(kdiag,0);
+
+for jj=1:Nvorts   
+    
+    xdot(jj) = sum(gvals'.*(Kmmx(jj,:)-Kmpx(jj,:)));
+    zdot(jj) = sum(gvals'.*(Kmmz(jj,:)-Kmpz(jj,:)));
+    
+    psix = fpsix(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
+    psiz = fpsiz(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
+    
+    tpsix = ftpsix(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
+    tpsiz = ftpsiz(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
+        
+    bp1 = 2*sum(gam*dno.*psix + Q.*psiz)/KT;
+    bp2 = 2*sum(gam*dno.*tpsiz - Q.*tpsix)/KT; 
+    
+    xdot(jj) = real(mu*F*xdot(jj) - mu*bp1);
+    zdot(jj) = real(mu*F/gam*zdot(jj) - mu/gam*bp2);        
 end
 
 for jj=1:length(Xmesh)
-
     xvec = 1/2*gvals.*( fphix(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
     zvec = 1/2*gvals.*( fphiz(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
     zveca = 1/2*gvals.*( fphiza(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
@@ -92,7 +238,6 @@ for jj=1:length(Xmesh)
     
     Pv(jj) = phiz(jj) - mu*gam*etax(jj).*phix(jj);
     Ev(jj) = F*sum((xdot.*xvec + gam*zdot.*zveca))-mu*(phix(jj)^2 + phiz(jj)^2)/2;
-
 end
 gm = mu*gam;
 
