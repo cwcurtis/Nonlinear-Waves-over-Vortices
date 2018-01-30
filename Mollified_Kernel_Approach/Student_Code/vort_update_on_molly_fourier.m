@@ -17,13 +17,12 @@ u(KTT+1:KTT+2*Nvorts) = u(KTT+1:KTT+2*Nvorts) + ( k1(KTT+1:KTT+2*Nvorts) + 2*(k2
 xpos = u(KTT+1:KTT+Nvorts);
 zpos = u(KTT+Nvorts+1:KTT+2*Nvorts);
 
-% Relocate vortices that have crossed the boundary
-for kk = 1:Nvorts
-    while(xpos(kk) < -1)
-        xpos(kk) = xpos(kk)+2;
-    end
+inds = xpos < -1;
+if length(inds)>1
+    xpos(inds) = xpos(inds) + 2;
+end
 
-    while(xpos(kk) > 1)
-        xpos(kk) = xpos(kk)-2;
-    end
+inds = xpos > 1;
+if length(inds)>1
+    xpos(inds) = xpos(inds) - 2;
 end

@@ -1,10 +1,10 @@
-function gif_my_gif(Xmesh,eta_plot,xtrack,ztrack,gtrack,n_bdry,Vcnt,t,filename,markersize)
+function gif_my_gif(xtrack,ztrack,gtrack,n_bdry,Vcnt,t,filename,markersize)
     shft_ind = 0;
     for ii = 1:t
         
         Nvortl = Vcnt(ii);
         inds = (1+shft_ind):(Nvortl+shft_ind);
-        Bendixson(Xmesh,eta_plot(:,ii),xtrack(inds),ztrack(inds),gtrack(inds),n_bdry,Nvortl,markersize)
+        Bendixson(xtrack(inds),ztrack(inds),gtrack(inds),n_bdry,Nvortl,markersize)
         shft_ind = shft_ind+Nvortl;
         
         frame = getframe(1);

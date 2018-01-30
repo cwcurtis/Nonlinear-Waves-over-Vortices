@@ -1,19 +1,17 @@
-function [xpos,zpos,gvals,Gamma] = initializer(Nx,omega,cfun,Rv,zoff)
+function [xpos,zpos,gvals,Gamma] = initializer(Nx,omega,cfun,gam,Rv,zoff)
 
 xvals = linspace(-1,1,Nx);
-zvals = linspace(0,1,Nx/2);
+zvals = linspace(-1,2,3*Nx/2);
 
-circ = omega*(2/Nx)^2;
 disp('Mesh-size is')
 disp(2/Nx)
 
-disp('Local circulation is')
-disp(circ)
+%disp('Local circulation is')
+%disp(circ)
 
 xpos = [];
 zpos = [];
 gvals = [];
-Gamma = 0;
 
 %% In the off chance I want ghost particles later. 
 %{
@@ -35,19 +33,21 @@ end
 %}
 
 for jj=1:Nx    
-    ainds = cfun(xvals(jj),zvals,Rv,zoff) <= 1;
+    ainds = cfun(xvals(jj),zvals) <= 1;
     flvds = length(zvals(ainds));
     if flvds>=1
-        vinds = cfun(xvals(jj),zvals(ainds),Rv,zoff) <= 1;
+        vinds = cfun(xvals(jj),zvals(ainds)) <= 1;
         rvec = ones(1,flvds);
         xpos = [xpos xvals(jj)*ones(1,flvds)];
         zpos = [zpos zvals(ainds)];
-        gvals = [gvals circ*rvec];
-        Gamma = Gamma + circ;        
+        circ = omega*(Rv^2 - (xvals(jj))^2 - gam^2*(zvals(ainds)-zoff).^2).^3*(2/Nx)^2;
+        gvals = [gvals circ];          
     end    
 end
 
-
+Gamma = pi*omega*Rv^8/(4*gam);
+disp('Total circulation is')
+disp(Gamma)
 xpos = xpos.';
 zpos = zpos.';
 gvals = gvals.';

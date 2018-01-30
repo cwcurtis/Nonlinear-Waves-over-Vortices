@@ -3,11 +3,13 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
-    cfun = @(x,z) 525*(x.^2 + gam^2*(z-.25).^2);
-    F = omega;
-    [xpos,zpos,gvals,Gamma] = initializer(Nx,omega,cfun,ep);
+    cfun = @(x,z,Rv,zoff) 1/Rv^2*(x.^2 + gam^2*(z-zoff).^2);
+    Rvc = 1/25;
+    zoffc = .25;
+    F = pi*omega*Rvc^2/mu;
+    [xpos,zpos,gvals,Gamma] = initializer(Nx,omega,cfun,Rvc,zoffc);
     Nvorts = length(gvals);
-    disp('Number of Vortices is:')
+    disp('Number of Starting Vortices is:')
     disp(Nvorts)
     simul_plot = 0; % Plot during computation.       0 - off, 1 - on
     n_bdry = 0;     % Number of points in cicular boundary.
@@ -25,7 +27,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     
     Kmesh = [0:K-1 0 -K+1:-1]';
        
-    dt = .05;
+    dt = .02;
     nmax = round(tf/dt);
     
     L1 = -1i*tanh(pi.*gam.*Kmesh)./gam;
@@ -45,13 +47,17 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     eta0 = log10(fftshift(abs(eta))/KT);
     eta0p = real(ifft(eta));
     
-    xtrack = zeros(Nvorts,nmax+1);
-    ztrack = zeros(Nvorts,nmax+1);
+    %xtrack = zeros(Nvorts,nmax+1);
+    %ztrack = zeros(Nvorts,nmax+1);
     
-    xtrack(:,1) = xpos;
-    ztrack(:,1) = zpos;
+    %xtrack(:,1) = xpos;
+    %ztrack(:,1) = zpos;
     
-    inter = 10;
+    xtrack = xpos;
+    ztrack = zpos;
+    gtrack = gvals;
+    
+    inter = 5;
     plot_count = 1;
     no_of_evals = round(nmax/inter);
     eta_plot = zeros(KT,no_of_evals+1);
@@ -60,6 +66,8 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     p_energy_plot = zeros(no_of_evals,1);
     times = zeros(no_of_evals,1);
     tm_track = zeros(no_of_evals,1);
+    Vcnt = zeros(no_of_evals+1,1);
+    Vcnt(1) = Nvorts;
     
     no_dno_term = 15;
     
@@ -88,15 +96,13 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     for jj=1:nmax
         % Break if any vortex has a z-value outside of (0,1)
         if(max(zpos) >= 1 || min(zpos) <= 0)
+            disp('Out of Bounds!')
             break;
         end
         
         % Now update the vortex positions                                   KTT must be 2*KT because of periodicity!!
         [u,xpos,zpos] = vort_update_on_molly_fourier(Xmesh,gam,mu,ep,F,u,gvals,L1,no_dno_term,Nvorts,Ntrunc,Ehdt,Edt,xpos,zpos,dt,2*KT);
-        
-        %xtrack(:,jj+1) = xpos;
-        %ztrack(:,jj+1) = zpos;
-        
+       
         if(mod(jj,inter)==0)
             eta = u(1:KT);
             Q = u(KT+1:2*KT);
@@ -117,9 +123,13 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
             
             eta_plot(:,plot_count) = eta;
             
+            xtrack = [xtrack;xpos];
+            ztrack = [ztrack;zpos];
+            gtrack = [gtrack;gvals];
+            Vcnt(plot_count) = Nvorts;            
+            
             if simul_plot
                 Bendixson(Xmesh,eta,xpos,zpos,gvals,n_bdry,Nvorts,markersize);
-
                 frame = getframe(1);
                 im = frame2im(frame);
                 [imind,cm] = rgb2ind(im,256);
@@ -134,14 +144,22 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
                 fvals = pspec(11:floor(Kc));
                 slp = (ntot*sum(kvals.*fvals)-sum(kvals)*sum(fvals))/(ntot*sum(kvals.^2)-(sum(kvals))^2);
                 if (slp > -.1)
+                    disp('Too Bad Your Spectrum is Mad')
                     break;
                 end
-            end
+            end            
+             
+        end
+        %{
+        if(mod(jj,inter)==0)        
             [xpos,zpos,gvals] = recircer(gvals,xpos,zpos,Nx);
             Nvorts = length(xpos);
+            disp('Current number of vortices is')
+            disp(Nvorts)
             u(2*KT+1:2*KT+Nvorts) = xpos;
             u(2*KT+Nvorts+1:2*KT+2*Nvorts) = zpos;
         end
+        %}
     end
     toc
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -157,10 +175,10 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     
     % Animate waves over vortices
-    %if ~simul_plot
-    %    figure(1)
-    %    gif_my_gif(Xmesh,eta_plot,xtrack,ztrack,gvals,n_bdry,Nvorts,inter,plot_count,filename,markersize);
-    %end
+    if ~simul_plot
+        figure(1)
+        gif_my_gif(Xmesh,eta_plot,xtrack,ztrack,gtrack,n_bdry,Vcnt,plot_count,filename,markersize);
+    end
 
     % Plot the power spectrum
     figure(2)

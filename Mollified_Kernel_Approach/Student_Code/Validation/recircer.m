@@ -7,8 +7,8 @@ xr = max(xpos);
 zb = min(zpos);
 zt = max(zpos);
 
-xgl = -1  + floor((xl+1)/dx)*dx;
-zgb = floor(zb/dx)*dx;
+xgl = -1 + floor((xl+1)/dx)*dx;
+zgb = -.5 + floor((zb+.5)/dx)*dx;
 
 hcnt = ceil((xr+1)/dx) - floor((xl+1)/dx);
 vcnt = ceil(zt/dx) - floor(zb/dx);
@@ -16,6 +16,8 @@ vcnt = ceil(zt/dx) - floor(zb/dx);
 xpud = [];
 zpud = [];
 gvud = [];
+disp('Circulation going in')
+disp(sum(gvals))
 
 for jj = 1:hcnt + 1
     for kk = 1:vcnt + 1
@@ -28,7 +30,7 @@ for jj = 1:hcnt + 1
         vindst = zpos <= vpc + 2*dx;
         linds = logical(hindsl.*hindsr.*vindsb.*vindst);
         
-        if length(zpos(linds))> 1
+        if length(zpos(linds))>1
            xpud = [xpud hpc];
            zpud = [zpud vpc];
            glocs = gvals(linds);
@@ -50,25 +52,25 @@ for jj = 1:hcnt + 1
            Rg3 = logical(zgto.*xlto);
            Rg4 = logical(zgto.*xgto);
            
-           if(length(Rg1)>1)
+           if(length(Rg1)>=1)
                gRg1 = glocs(Rg1).*(1 - 5/2*xdif2(Rg1)+3/2*xdif3(Rg1)).*(1 - 5/2*zdif2(Rg1)+3/2*zdif3(Rg1));
            else
                gRg1 = 0;
            end
            
-           if(length(Rg2)>1)
+           if(length(Rg2)>=1)
                gRg2 = glocs(Rg2).*(2-4*xdif(Rg2)+5/2*xdif2(Rg2)-xdif3(Rg2)/2).*(1 - 5/2*zdif2(Rg2)+3/2*zdif3(Rg2));
            else
                gRg2 = 0;
            end
            
-           if(length(Rg3)>1)
+           if(length(Rg3)>=1)
                gRg3 = glocs(Rg3).*(1 - 5/2*xdif2(Rg3)+3/2*xdif3(Rg3)).*(2-4*zdif(Rg3)+5/2*zdif2(Rg3)-zdif3(Rg3)/2);
            else
                gRg3 = 0;
            end
            
-           if(length(Rg4)>1)
+           if(length(Rg4)>=1)
                gRg4 = glocs(Rg4).*(2-4*xdif(Rg4)+5/2*xdif2(Rg4)-xdif3(Rg4)/2).*(2-4*zdif(Rg4)+5/2*zdif2(Rg4)-zdif3(Rg4)/2);
            else
                gRg4 = 0;
@@ -80,6 +82,16 @@ for jj = 1:hcnt + 1
     end
 end
 
+disp('Circulation coming out')
+disp(sum(gvud))
+%{
+clf
+hold on
+plot(1:length(gvals),log10(abs(gvals)))
+plot(1:length(gvud),log10(abs(gvud)))
+hold off
+pause
+%}
 xpud = xpud';
 zpud = zpud';
 gvud = gvud';

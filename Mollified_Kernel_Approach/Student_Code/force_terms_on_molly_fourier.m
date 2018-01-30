@@ -96,7 +96,7 @@ end
 %}
 
 Ntrg = Nvorts*(Nvorts-1)/2;
-Nproc = 8;
+Nproc = 2;
 Nstep = floor(Ntrg/Nproc);
 Nrem = mod(Ntrg,Nproc);
 
@@ -209,6 +209,11 @@ for kk = 1:Nvorts
     kdiag(kk) = kdiag(kk) + Kmxp;    
 end
 Kmpx = Kmpx + diag(kdiag,0);
+
+%disp(size(Kmmx))
+%disp(size(Kmpz))
+%disp(size(Kmpx))
+%disp(size(Kmpz))
 
 for jj=1:Nvorts   
     
