@@ -95,10 +95,10 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     tic
     for jj=1:nmax
         % Break if any vortex has a z-value outside of (0,1)
-        if(max(zpos) >= 1 || min(zpos) <= 0)
-            disp('Out of Bounds!')
-            break;
-        end
+        %if(max(zpos) >= 1 || min(zpos) <= 0)
+        %    disp('Out of Bounds!')
+        %    break;
+        %end
         
         % Now update the vortex positions                                   KTT must be 2*KT because of periodicity!!
         [u,xpos,zpos] = vort_update_on_molly_fourier(Xmesh,gam,mu,ep,F,u,gvals,L1,no_dno_term,Nvorts,Ntrunc,Ehdt,Edt,xpos,zpos,dt,2*KT);
