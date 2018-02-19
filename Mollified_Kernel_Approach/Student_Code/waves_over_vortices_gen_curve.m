@@ -6,7 +6,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     cfun = @(x,z,Rv,zoff) 1/Rv^2*(x.^2 + gam^2*(z-zoff).^2);
     Rvc = 1/25;
     zoffc = .25;
-    F = pi*omega*Rvc^2/mu;
+    F = pi*omega*Rvc^2/gam;
     [xpos,zpos,gvals,Gamma] = initializer(Nx,omega,cfun,Rvc,zoffc);
     Nvorts = length(gvals);
     disp('Number of Starting Vortices is:')

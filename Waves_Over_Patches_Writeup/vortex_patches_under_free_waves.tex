@@ -1,0 +1,76 @@
+ \documentclass[a4paper,11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}
+
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+
+\newcommand{\ds}{\displaystyle}
+
+\newcommand{\bt}{\begin{tabular}}
+\newcommand{\et}{\end{tabular}}
+
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+
+\newcommand{\bd}{\begin{description}}
+\newcommand{\ed}{\end{description}}
+
+\newcommand{\bp}{\begin{pmatrix}}
+\newcommand{\ep}{\end{pmatrix}}
+
+\newcommand{\p}{\partial}
+\newcommand{\sech}{\mbox{sech}}
+
+\newcommand{\cf}{{\it cf.}~}
+
+\newcommand{\ltwo}{L_{2}(\mathbb{R}^{2})}
+\newcommand{\smooth}{C^{\infty}_{0}(\mathbb{R}^{2})}
+
+\newcommand{\br}{{\bf r}}
+\newcommand{\bk}{{\bf k}}
+\newcommand{\bv}{{\bf v}}
+
+\setlength{\textheight}{212mm}
+\setlength{\textwidth}{165mm}
+\topmargin -6mm
+\oddsidemargin -6mm
+
+
+\newcommand{\gnorm}[1]{\left|\left| #1\right|\right|}
+\newcommand{\ipro}[2]{\left<#1,#2 \right>}
+\title{Vortex Patches Under Free Surface Waves}
+\date{}
+\begin{document}
+\maketitle
+\section{Model Setup}
+In an inviscid, incompressible fluid, we can generally represent the fluid velocity ${\bf u}(x,z,t)$ via the integral equation
+\[
+{\bf u}(x,z,t) = \int_{\Omega(t)} {\bf K}(x-\tilde{x},z-\tilde{z})\omega(\tilde{x},\tilde{z},t)d\tilde{x}d\tilde{z} + \nabla \tilde{\phi}, ~ \Delta \tilde{\phi} = 0.
+\]
+where $\omega$ is the vorticity, and ${\bf K}$ is the standard Biot-Savart law style kernel.  
+
+However, the presenence of a freely evolving surface makes the complete description of the fluid in this case difficult.  Thus, in \cite{curtis}, building on the methodology in \cite{afm}, we develop a model which describes the evolution of a free surface $z=\eta(x,t)$ moving over a collection of $N$ 
+\section{Validation}
+
+\section{Numerical Experiments}
+
+\bibliography{waves_over_vortices}
+\end{document}

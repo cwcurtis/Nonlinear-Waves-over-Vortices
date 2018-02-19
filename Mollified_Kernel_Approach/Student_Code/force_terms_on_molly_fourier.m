@@ -158,8 +158,8 @@ for jj=1:Nvorts
     bp1 = 2*sum(gam*dno.*psix + Q.*psiz)/KT;
     bp2 = 2*sum(gam*dno.*tpsiz - Q.*tpsix)/KT; 
     
-    xdot(jj) = real(mu*F*xdot(jj) - mu*bp1);
-    zdot(jj) = real(mu*F/gam*zdot(jj) - mu/gam*bp2);    
+    xdot(jj) = real(mu*xdot(jj) - mu*bp1);
+    zdot(jj) = real(mu/gam*zdot(jj) - mu/gam*bp2);    
     
 end
 
