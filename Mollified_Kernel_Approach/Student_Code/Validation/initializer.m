@@ -1,10 +1,10 @@
-function [xpos,zpos,gvals,Gamma,Nvorts] = initializer(Nx,F,M,gam,cfun,Rv,zoff,axs)
+function [xpos,zpos,gvals,Gamma,Nvorts] = initializer(Nx,F,cfun,av,bv)
 
-xvals = linspace(-M,M,Nx);
-zvals = 0:2*M/Nx:(1-2*M/Nx);
+xvals = linspace(-1,1,Nx);
+zvals = -1/2:2/Nx:(1/2-2/Nx);
 
 disp('Mesh-size is')
-disp(2*M/Nx)
+disp(2/Nx)
 
 xpos = [];
 zpos = [];
@@ -30,10 +30,10 @@ end
 %}
 
 for jj=1:Nx    
-    ainds = cfun(xvals(jj),zvals,axs,gam,Rv,zoff) <= 1;
+    ainds = cfun(xvals(jj),zvals,av,bv) <= 1;
     flvds = length(zvals(ainds));
     if flvds>=1
-        vinds = cfun(xvals(jj),zvals(ainds),axs,gam,Rv,zoff) <= 1;
+        vinds = cfun(xvals(jj),zvals(ainds),av,bv) <= 1;
         rvec = ones(1,flvds);
         xpos = [xpos xvals(jj)*ones(1,flvds)];
         zpos = [zpos zvals(ainds)];

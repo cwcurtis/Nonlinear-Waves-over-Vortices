@@ -1,25 +1,23 @@
-function waves_over_vortices_gen_curve(Nx,M,mu,gam,omega,ep,tf,Ntrunc)
+function waves_over_vortices_gen_curve(Nx,mu,gam,omega,ep,tf)
     close all
     
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
     Rv = 1/25;
-    zoff = .25;
+    zoff = .35;
     axs = 2;
-    cfun = @(x,z,axs,gam,Rv,zoff) 1/Rv^2*(x.^2/axs.^2 + (z-zoff).^2*gam^2);
-    F = pi*omega*axs*Rv^2/gam;
-    pmesh = linspace(0,2*pi,1e2);
+    av = Rv*axs;
+    bv = Rv;
+    
+    cfun = @(x,z,av,bv) (x.^2/av^2 + z.^2/bv^2);
+    F = pi*omega*av*bv/gam;
+    pmesh = linspace(0,2*pi,2*Nx);
+     
     cp = cos(pmesh);
-    sp = sin(pmesh);
-    if axs>1
-        avel = mu/gam*omega*axs/(axs+1)^2;
-    else
-        avel = 0;
-    end
-    disp('Effective Aspect Ratio is')
-    disp(max([axs*gam 1/(axs*gam)]))
-    [xpos,zpos,gvals,Gamma,Nvorts] = initializer(Nx,F,M,gam,cfun,Rv,zoff,axs);
-    simul_plot = 0; % Plot during computation.       0 - off, 1 - on
+    sp = sin(pmesh);    
+    
+    [xpos,zpos,gvals,Gamma,Nvorts] = initializer(Nx,F,cfun,av,bv);
+    simul_plot = 1; % Plot during computation.       0 - off, 1 - on
     n_bdry = 0;     % Number of points in cicular boundary.
     markersize = 10;
     
@@ -27,18 +25,18 @@ function waves_over_vortices_gen_curve(Nx,M,mu,gam,omega,ep,tf,Ntrunc)
     nmax = round(tf/dt);
     
     xtrack = xpos;
-    ztrack = zpos;
+    ztrack = zoff + zpos/gam;
     gtrack = gvals;
     
     inter = 2;
     plot_count = 1;
     no_of_evals = round(nmax/inter);
     times = zeros(no_of_evals,1);
+    errors = zeros(no_of_evals,1);
     Vcnt = zeros(no_of_evals+1,1);
     Vcnt(1) = Nvorts;
     
     u = [xpos;zpos]; %velocity vector field
-    
     % Make folder
     S = make_folder(Nx/2,Nx,mu,gam,F,tf,Gamma);
     filename = strcat(S, '/', '/waves_over_vortices.gif');
@@ -49,11 +47,11 @@ function waves_over_vortices_gen_curve(Nx,M,mu,gam,omega,ep,tf,Ntrunc)
     clf
     if simul_plot
         figure(1)
-        Bendixson(xpos,zpos,gvals,n_bdry,Nvorts,markersize);
-        xellip = axs*Rv*cp;
-        yellip = Rv*sp/gam+zoff;
+        Bendixson(xpos,zoff + zpos/gam,gvals,n_bdry,Nvorts,markersize);
+        xellip = av*cp;
+        yellip = bv*sp/gam+zoff;
         hold on
-        scatter(xellip,yellip,.1)
+            scatter(xellip,yellip,.1)
         axis equal
         hold off
         frame = getframe(1);
@@ -66,52 +64,70 @@ function waves_over_vortices_gen_curve(Nx,M,mu,gam,omega,ep,tf,Ntrunc)
     for jj=1:nmax
       
         % Now update the vortex positions                                   
-        u = vort_update_on_molly_non_periodic(mu,gam,ep,u,gvals,Nvorts,dt);
-        
+        u = vort_update_on_molly_non_periodic(mu,1,ep,u,gvals,Nvorts,dt);
+            
         if(mod(jj,inter)==0)
             times(plot_count) = (jj-1)*dt;
-            plot_count = plot_count + 1;
             xpos = u(1:Nvorts);
-            zpos = u(Nvorts+1:2*Nvorts);
+            zpos = zoff + u(Nvorts+1:2*Nvorts)/gam;
+            
+            tv = mu/gam*omega*av*bv/(av+bv)^2*(jj-1)*dt;
+            ca = cos(tv);
+            sa = sin(tv);
+            xxs = cp*av;
+            yxs = sp*bv;
+            xellip = xxs*ca - yxs*sa;
+            yellip = (xxs*sa + yxs*ca)/gam + zoff;
+            ncirc = gam*F/Nvorts;
+            
+            error = interp_error(Nx,xpos,zpos,ep,gam,omega,ncirc,xellip,yellip);
+            errors(plot_count) = error;
             
             xtrack = [xtrack;xpos];
             ztrack = [ztrack;zpos];
             gtrack = [gtrack;gvals];
+            plot_count = plot_count + 1;
+            
             Vcnt(plot_count) = Nvorts;   
             
             if simul_plot
                 figure(1)
                 Bendixson(xpos,zpos,gvals,n_bdry,Nvorts,markersize);
-                ca = cos(avel*(jj-1)*dt);
-                sa = sin(avel*(jj-1)*dt);
-                xellip = Rv*(ca*axs*cp-sa*sp/gam);
-                yellip = Rv*(ca*sp/gam + sa*axs*cp) + zoff;        
                 hold on
-                scatter(xellip,yellip,.1)
-                axis equal
+                    scatter(xellip,yellip,.1)
+                    axis equal
                 hold off        
                 frame = getframe(1);
                 im = frame2im(frame);
                 [imind,cm] = rgb2ind(im,256);
                 imwrite(imind,cm,filename,'gif','DelayTime',0,'writemode','append');
             end          
-            
-            [xpud,zpud,gvud] = recircer(gvals,xpos,zpos,Nx);
+            %{
+            [xpud,zpud,gvud] = recircer(gvals,xpos,gam*(zpos-zoff),Nx);
+            Nvp = Nvorts;
             Nvorts = length(gvud);
             gvals = gvud;
             u = zeros(2*Nvorts,1);
             u(1:Nvorts) = xpud;
             u(Nvorts+1:2*Nvorts) = zpud;            
+            ep = sqrt(Nvp/Nvorts)*ep;
+            disp('New Kernel Radius is:')
+            disp(ep)
+            %}
         end       
     end
     
     toc
+    
+    figure(2)
+    plot(times,errors,'k-','LineWidth',2)
+    
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     
     % Animate waves over vortices
     if ~simul_plot
         figure(1)
-        gif_my_gif(xtrack,ztrack,gtrack,n_bdry,Vcnt,avel,plot_count,filename,markersize);
+        gif_my_gif(xtrack,ztrack,gtrack,n_bdry,Vcnt,plot_count,filename,markersize);
     end
     
 end

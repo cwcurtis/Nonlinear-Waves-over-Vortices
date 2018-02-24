@@ -1,4 +1,4 @@
-function gif_my_gif(xtrack,ztrack,gtrack,n_bdry,Vcnt,avel,t,filename,markersize)
+function gif_my_gif(xtrack,ztrack,gtrack,n_bdry,Vcnt,t,filename,markersize)
     shft_ind = 0;
     for ii = 1:t
         

@@ -1,19 +1,14 @@
-function [xpos,zpos,gvals,Gamma] = initializer(Nx,omega,cfun,Rv,zoff)
+function [xpos,zpos,gvals,Gamma,Nvorts] = initializer(Nx,F,cfun,gam,av,bv,zoff)
 
 xvals = linspace(-1,1,Nx);
-zvals = linspace(0,1,Nx/2);
+zvals = 0:2/Nx:1-2/Nx;
 
-circ = omega*(2/Nx)^2;
 disp('Mesh-size is')
 disp(2/Nx)
-
-disp('Local circulation is')
-disp(circ)
 
 xpos = [];
 zpos = [];
 gvals = [];
-Gamma = 0;
 
 %% In the off chance I want ghost particles later. 
 %{
@@ -35,19 +30,27 @@ end
 %}
 
 for jj=1:Nx    
-    ainds = cfun(xvals(jj),zvals,Rv,zoff) <= 1;
+    ainds = cfun(xvals(jj),zvals,gam,av,bv,zoff) <= 1;
     flvds = length(zvals(ainds));
     if flvds>=1
-        vinds = cfun(xvals(jj),zvals(ainds),Rv,zoff) <= 1;
+        vinds = cfun(xvals(jj),zvals(ainds),gam,av,bv,zoff) <= 1;
         rvec = ones(1,flvds);
         xpos = [xpos xvals(jj)*ones(1,flvds)];
         zpos = [zpos zvals(ainds)];
-        gvals = [gvals circ*rvec];
-        Gamma = Gamma + circ;        
+        gvals = [gvals rvec];
     end    
 end
 
-
+Nvorts = length(gvals);
+circ = F/Nvorts;
+Gamma = F;
+disp('Local Circulation is')
+disp(circ)
+disp('Number of Starting Vortices is:')
+disp(Nvorts)
+disp('Froude number is')
+disp(F)
+        
 xpos = xpos.';
 zpos = zpos.';
-gvals = gvals.';
+gvals = circ*gvals.';

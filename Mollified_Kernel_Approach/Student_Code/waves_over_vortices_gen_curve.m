@@ -1,16 +1,14 @@
 function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
-    close all
     
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
-    cfun = @(x,z,Rv,zoff) 1/Rv^2*(x.^2 + gam^2*(z-zoff).^2);
-    Rvc = 1/25;
-    zoffc = .25;
-    F = pi*omega*Rvc^2/gam;
-    [xpos,zpos,gvals,Gamma] = initializer(Nx,omega,cfun,Rvc,zoffc);
-    Nvorts = length(gvals);
-    disp('Number of Starting Vortices is:')
-    disp(Nvorts)
+    cfun = @(x,z,gv,av,bv,zoff) (x.^2/av^2 + gv^2*(z-zoff).^2/bv^2);
+    avc = 1/25;
+    bvc = 1/25;
+    zoffc = .35;
+    F = pi*omega*avc*bvc/gam;
+    [xpos,zpos,gvals,Gamma,Nvorts] = initializer(Nx,F,cfun,gam,avc,bvc,zoffc);
+    
     simul_plot = 0; % Plot during computation.       0 - off, 1 - on
     n_bdry = 0;     % Number of points in cicular boundary.
     stop_crit = 1;  % Stopping criterion.            0 - off, 1 - on
@@ -47,17 +45,11 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     eta0 = log10(fftshift(abs(eta))/KT);
     eta0p = real(ifft(eta));
     
-    %xtrack = zeros(Nvorts,nmax+1);
-    %ztrack = zeros(Nvorts,nmax+1);
-    
-    %xtrack(:,1) = xpos;
-    %ztrack(:,1) = zpos;
-    
     xtrack = xpos;
     ztrack = zpos;
     gtrack = gvals;
     
-    inter = 5;
+    inter = 10;
     plot_count = 1;
     no_of_evals = round(nmax/inter);
     eta_plot = zeros(KT,no_of_evals+1);
@@ -95,12 +87,13 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     tic
     for jj=1:nmax
         % Break if any vortex has a z-value outside of (0,1)
-        %if(max(zpos) >= 1 || min(zpos) <= 0)
-        %    disp('Out of Bounds!')
-        %    break;
-        %end
+        if(max(zpos) >= 1 || min(zpos) <= 0)
+            disp('Out of Bounds!')
+            break;
+        end
         
         % Now update the vortex positions                                   KTT must be 2*KT because of periodicity!!
+              
         [u,xpos,zpos] = vort_update_on_molly_fourier(Xmesh,gam,mu,ep,F,u,gvals,L1,no_dno_term,Nvorts,Ntrunc,Ehdt,Edt,xpos,zpos,dt,2*KT);
        
         if(mod(jj,inter)==0)

@@ -18,5 +18,5 @@ function Bendixson(xpos,zpos,gvals,n_bdry,Nvorts,markersize)
     set(gca,'FontSize',30,'FontName','Helvetica','FontWeight','bold')
     xlabel('x','FontName','Helvetica','FontSize',30,'FontWeight','bold')
     xlim([-.25 .25])
-    ylim([0 .7])
+    ylim([-.1 .7])
 end
