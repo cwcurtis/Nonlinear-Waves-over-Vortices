@@ -3,7 +3,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
     cfun = @(x,z,gv,av,bv,zoff) (x.^2/av^2 + gv^2*(z-zoff).^2/bv^2);
-    avc = 1/25;
+    avc = 4/25;
     bvc = 1/25;
     zoffc = .35;
     F = pi*omega*avc*bvc/gam;

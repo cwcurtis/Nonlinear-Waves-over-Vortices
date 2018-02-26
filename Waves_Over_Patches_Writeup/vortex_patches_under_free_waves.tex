@@ -107,14 +107,15 @@ so that by also requiring $\tilde{\phi}_{z}(x,0,t)=0$, we ensure there is zero f
 \]
 where we take $2L$ to be the period of the simulation in unscaled coordinates.  
 \section*{Validation}
-In order to better understand the discretization error associated with the introduction of the mollification kernel, we use the Kirchoff elliptical vortices \cite{mitchell,crosby} as exact solutions to which we compare our numerical simulations.  We note in this section that the free surface $z=\mu\eta(x,t)$ is not included, and thus we ignore the harmonic function $\tilde{\phi}$.  In the shallow water scalings used above, a Kirchoff elliptical vortex is a vortex patch with constant vorticity $\omega$ and support over the ellipse
+In order to better understand the discretization error associated with the introduction of the mollification kernel, we use the Kirchoff elliptical vortices \cite{mitchell,crosby} as exact solutions to which we compare our numerical simulations.  We note in this section that the free surface $z=1+\mu\eta(x,t)$ is not included, and thus we ignore the harmonic function $\tilde{\phi}$.  In the shallow water scalings used above, a Kirchoff elliptical vortex is a vortex patch with constant vorticity $\omega$ and support over the ellipse
 \[
 \left(\frac{x}{a}\right)^{2} + \gamma^{2}\left(\frac{z}{b} \right)^{2} = 1.
 \]
 It is a now classical result, see \cite{mitchell} for details, that the patch simply rotates with $\dot{a}=\dot{b}=0$ and the angle describing the rotation being given in these coordinates by 
 \[
-\dot{\theta} = \frac{\mu}{\gamma} \frac{\tilde{\omega}ab}{(a+b)^{2}}.
+\dot{\theta} = \frac{\mu}{\gamma} \frac{\omega ab}{(a+b)^{2}}.
 \]
+
 \section*{Numerical Experiments}
 
 \bibliography{waves_over_vortices}

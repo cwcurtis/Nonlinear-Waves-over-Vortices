@@ -4,7 +4,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,ep,tf)
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
     Rv = 1/25;
-    zoff = .35;
+    zoff = .25;
     axs = 2;
     av = Rv*axs;
     bv = Rv;
@@ -21,7 +21,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,ep,tf)
     n_bdry = 0;     % Number of points in cicular boundary.
     markersize = 10;
     
-    dt = 5e-2;
+    dt = .1;
     nmax = round(tf/dt);
     
     xtrack = xpos;
@@ -78,11 +78,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,ep,tf)
             yxs = sp*bv;
             xellip = xxs*ca - yxs*sa;
             yellip = (xxs*sa + yxs*ca)/gam + zoff;
-            ncirc = gam*F/Nvorts;
-            
-            error = interp_error(Nx,xpos,zpos,ep,gam,omega,ncirc,xellip,yellip);
-            errors(plot_count) = error;
-            
+                        
             xtrack = [xtrack;xpos];
             ztrack = [ztrack;zpos];
             gtrack = [gtrack;gvals];
@@ -102,18 +98,16 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,ep,tf)
                 [imind,cm] = rgb2ind(im,256);
                 imwrite(imind,cm,filename,'gif','DelayTime',0,'writemode','append');
             end          
-            %{
+            
             [xpud,zpud,gvud] = recircer(gvals,xpos,gam*(zpos-zoff),Nx);
-            Nvp = Nvorts;
             Nvorts = length(gvud);
             gvals = gvud;
             u = zeros(2*Nvorts,1);
             u(1:Nvorts) = xpud;
             u(Nvorts+1:2*Nvorts) = zpud;            
-            ep = sqrt(Nvp/Nvorts)*ep;
-            disp('New Kernel Radius is:')
-            disp(ep)
-            %}
+            error = interp_error(Nx,xpud,zoff + zpud/gam,gvals,ep,gam,omega,xellip,yellip);
+            errors(plot_count-1) = error;
+            
         end       
     end
     
