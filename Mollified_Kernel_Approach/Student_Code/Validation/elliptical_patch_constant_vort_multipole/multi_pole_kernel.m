@@ -1,10 +1,10 @@
-function Kvec = multi_pole_kernel(xpos,zpos,gvals,gam,ep)
+function Kvec = multi_pole_kernel(xpos,zpos,gvals,gam,ep,pval)
 
 % Build kd-tree structure from xpos,zpos
 Nvorts = length(xpos);
-mlvl = floor(log2(Nvorts));
-Kvec = zeros(Nvorts,2);
+mlvl = floor(log(Nvorts)/log(4));
 
+Kvec = zeros(Nvorts,2);
 xmin = min(xpos);
 xmax = max(xpos);
 zmin = min(zpos);
@@ -19,6 +19,9 @@ zmax = zmax*(1 + sign(zmax)*.01);
 ccnt = 4;
 rcnt = 4;
 nblcks = 16;
+
+Kcomp = cell(rcnt,ccnt);
+Cents = cell(rcnt,ccnt);
 
 dx = (xmax-xmin)/ccnt;
 dz = (zmax-zmin)/rcnt;
@@ -61,9 +64,13 @@ for jj=1:nblcks
     col = mod(jj-1,ccnt);
     row = (jj-1-col)/ccnt;
     [dshift,ushift,lshift,rshift,ctgry] = shift_finder(col+1,row+1,rcnt,ccnt);
+    ccl = col-lshift;
+    ccr = col+rshift;
+    rrt = row-dshift;
+    rrb = row+ushift;
     
-    for rnum = row-dshift:row+ushift
-        for cnum = col-lshift:col+rshift
+    for rnum = rrt:rrb
+        for cnum = ccl:ccr
             ilists(:,jj) = ilists(:,jj) + bvecs(:,ccnt*rnum+cnum+1);            
         end
     end
@@ -74,6 +81,11 @@ for jj=1:nblcks
     zb = zmax - (row+ushift+1)*dz;
     xbnds = [xl;xr];
     zbnds = [zb;zt];            
+    
+    % Find complement box coordinates so as to loop over far-field boxes.
+    
+    cmpvals = ones(rcnt+1,ccnt+1);
+    cmpvals(ccl+1:ccr+1,rrt+1:rrb+1)=0;
     
     nparts = sum(bvecs(:,jj));
     
@@ -100,16 +112,55 @@ for jj=1:nblcks
         gcells = gvals(tot_inds);
         gfar = gvals(farinds);    
     
-        %Kfar = far_panel_comp(xloc,zloc,xfar,zfar,gfar,gam,2);        
-        %Kfar_ex = far_panel_exact_comp(xloc,zloc,xfar,zfar,gfar,Ntrunc,gam,ep);        
-        %plot(1:nparts,Kfar(:,1),'--',1:nparts,Kfar_ex(:,1),'-')
-        %pause        
+        % just need to loop over the far-field here
+        Kfar = zeros(length(xloc),2);
+        for mm=1:ccnt
+            for tt=1:rcnt
+                if cmpvals(tt,mm) == 1
+                    rnuml = tt-1;
+                    cnuml = mm-1;      
+                    if isempty(Kcomp{rnuml+1,cnuml+1})   
+                        xll = xmin + dx*cnuml;
+                        xrl = xmin + dx*(cnuml+1);                
+                        ztl = zmax - dz*rnuml;
+                        zbl = zmax - dz*(rnuml+1);                
+                        inds = logical((xfar>=xll).*(xfar<=xrl).*(zfar>=zbl).*(zfar<=ztl));                
+                        xc = (xll+xrl)/2;
+                        zc = (ztl+zbl)/2;                           
+                        xfarl = xfar(inds);
+                        zfarl = zfar(inds);
+                        gfarl = gfar(inds);
+                        Kcomp{rnuml+1,cnuml+1} = far_panel_comp(xfarl,zfarl,gfarl,gam,xc,zc,pval);  
+                        Cents{rnuml+1,cnuml+1} = [xc;zc];
+                    end
+                    vc = Cents{rnuml+1,cnuml+1};
+                    zcn = xloc+1i*gam*zloc - (vc(1)+1i*gam*vc(2));
+                    rloc = 1./zcn;
+                    azcnsq = abs(zcn).^2;
+                    qvalsl = Kcomp{rnuml+1,cnuml+1};
+                    q0 = qvalsl(1);                
+                    qf = qvalsl(2)*rloc;
+                    for kk=3:length(qvalsl)
+                        rloc = rloc./zcn;
+                        qf = qf + qvalsl(kk)*rloc;
+                    end
+                
+                    Kfarn1 = q0*imag(zcn)./azcnsq + imag(qf);
+                    Kfarn2 = -q0*real(zcn)./azcnsq + real(qf);                
+                    Kfar = Kfar + [Kfarn1 Kfarn2];  
+                end
+            end
+        end
+        %Kfart = far_panel_exact_comp(xloc,zloc,xfar,zfar,gfar,gam);
+
+        %plot(xloc,log10(abs(Kfar(:,1))),'k--',xloc,log10(abs(Kfart(:,1))),'b-','LineWidth',2)
+        %pause
+        
         if nparts > mlvl
-            tvec = tree_traverser(xcells,zcells,nparts,mlvl,ctgry,gcells,xbnds,zbnds,gam,ep);            
+            tvec = tree_traverser(xcells,zcells,nparts,mlvl,ctgry,gcells,xbnds,zbnds,gam,ep,pval);            
         else
             tvec = near_neighbor_comp(xloc,zloc,xlist,zlist,gloc,glist,gam,ep);            
         end
-        %Kvec(locinds,:) = Kfar + tvec;
-        Kvec(locinds,:) = tvec;
+        Kvec(locinds,:) = Kfar + tvec;        
     end
 end

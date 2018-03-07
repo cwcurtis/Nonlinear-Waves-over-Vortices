@@ -64,8 +64,8 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     for jj=1:nmax
       
         % Now update the vortex positions                                   
-        u = vort_update_on_molly_non_periodic(mu,1,rval,u,gvals,Nvorts,dt);
-        %u = vort_update_multipole(mu,1,rval,u,gvals,Nvorts,dt);   
+        %u = vort_update_on_molly_non_periodic(mu,1,rval,u,gvals,Nvorts,dt);
+        u = vort_update_multipole(mu,1,rval,u,gvals,Nvorts,dt);   
          
         if(mod(jj,inter)==0)
             times(plot_count) = (jj-1)*dt;
