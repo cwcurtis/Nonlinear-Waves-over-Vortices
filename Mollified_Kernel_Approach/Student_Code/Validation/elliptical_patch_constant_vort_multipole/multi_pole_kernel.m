@@ -20,8 +20,12 @@ ccnt = 4;
 rcnt = 4;
 nblcks = 16;
 
-Kcomp = cell(rcnt,ccnt);
-Cents = cell(rcnt,ccnt);
+rvals = kron(ones(ccnt,1),(1:rcnt)');
+cvals = kron((1:ccnt)',ones(rcnt,1));
+
+Kcomp = cell(mlvl,6,6);
+Cents = cell(mlvl,6,6);
+clvl = 1;
 
 dx = (xmax-xmin)/ccnt;
 dz = (zmax-zmin)/rcnt;
@@ -69,12 +73,15 @@ for jj=1:nblcks
     rrt = row-dshift;
     rrb = row+ushift;
     
-    for rnum = rrt:rrb
-        for cnum = ccl:ccr
-            ilists(:,jj) = ilists(:,jj) + bvecs(:,ccnt*rnum+cnum+1);            
-        end
-    end
+    %for rnum = rrt:rrb
+    %    for cnum = ccl:ccr
+    %        ilists(:,jj) = ilists(:,jj) + bvecs(:,ccnt*rnum+cnum+1);            
+    %    end
+    %end
     
+    crinds = ccnt*(rrt:rrb)'*ones(1,length(ccl:ccr)) + ones(length(rrt:rrb),1)*(ccl:ccr) + ones(length(rrt:rrb),length(ccl:ccr));
+    ilists(:,jj) = sum(bvecs(:,sort(crinds(:))),2);
+        
     xl = xmin + (col-lshift)*dx;
     xr = xmin + (col+rshift+1)*dx;
     zt = zmax - (row-dshift)*dz;
@@ -84,8 +91,13 @@ for jj=1:nblcks
     
     % Find complement box coordinates so as to loop over far-field boxes.
     
-    cmpvals = ones(rcnt+1,ccnt+1);
-    cmpvals(ccl+1:ccr+1,rrt+1:rrb+1)=0;
+    cmpvals = ones(rcnt,ccnt);
+    cmpvals(rrt+1:rrb+1,ccl+1:ccr+1)=0;
+    mask = cmpvals(:);
+    inds = mask == 1;
+    
+    crvals = rvals(inds);
+    ccvals = cvals(inds);
     
     nparts = sum(bvecs(:,jj));
     
@@ -114,41 +126,39 @@ for jj=1:nblcks
     
         % just need to loop over the far-field here
         Kfar = zeros(length(xloc),2);
-        for mm=1:ccnt
-            for tt=1:rcnt
-                if cmpvals(tt,mm) == 1
-                    rnuml = tt-1;
-                    cnuml = mm-1;      
-                    if isempty(Kcomp{rnuml+1,cnuml+1})   
-                        xll = xmin + dx*cnuml;
-                        xrl = xmin + dx*(cnuml+1);                
-                        ztl = zmax - dz*rnuml;
-                        zbl = zmax - dz*(rnuml+1);                
+        if ~isempty(crvals)
+            for mm=1:length(crvals)
+                rnuml = crvals(mm);
+                cnuml = ccvals(mm);      
+                if isempty(Kcomp{clvl,rnuml,cnuml})   
+                        xll = xmin + dx*(cnuml-1);
+                        xrl = xmin + dx*(cnuml);                
+                        ztl = zmax - dz*(rnuml-1);
+                        zbl = zmax - dz*(rnuml);                
                         inds = logical((xfar>=xll).*(xfar<=xrl).*(zfar>=zbl).*(zfar<=ztl));                
                         xc = (xll+xrl)/2;
                         zc = (ztl+zbl)/2;                           
                         xfarl = xfar(inds);
                         zfarl = zfar(inds);
                         gfarl = gfar(inds);
-                        Kcomp{rnuml+1,cnuml+1} = far_panel_comp(xfarl,zfarl,gfarl,gam,xc,zc,pval);  
-                        Cents{rnuml+1,cnuml+1} = [xc;zc];
-                    end
-                    vc = Cents{rnuml+1,cnuml+1};
-                    zcn = xloc+1i*gam*zloc - (vc(1)+1i*gam*vc(2));
-                    rloc = 1./zcn;
-                    azcnsq = abs(zcn).^2;
-                    qvalsl = Kcomp{rnuml+1,cnuml+1};
-                    q0 = qvalsl(1);                
-                    qf = qvalsl(2)*rloc;
-                    for kk=3:length(qvalsl)
-                        rloc = rloc./zcn;
-                        qf = qf + qvalsl(kk)*rloc;
-                    end
-                
-                    Kfarn1 = q0*imag(zcn)./azcnsq + imag(qf);
-                    Kfarn2 = -q0*real(zcn)./azcnsq + real(qf);                
-                    Kfar = Kfar + [Kfarn1 Kfarn2];  
+                        Kcomp{clvl,rnuml,cnuml} = far_panel_comp(xfarl,zfarl,gfarl,gam,xc,zc,pval);  
+                        Cents{clvl,rnuml,cnuml} = [xc;zc];
                 end
+                vc = Cents{clvl,rnuml,cnuml};
+                zcn = xloc+1i*gam*zloc - (vc(1)+1i*gam*vc(2));
+                rloc = 1./zcn;
+                azcnsq = abs(zcn).^2;
+                qvalsl = Kcomp{clvl,rnuml,cnuml};
+                q0 = qvalsl(1);                
+                qf = qvalsl(2)*rloc;
+                for kk=3:length(qvalsl)
+                    rloc = rloc./zcn;
+                    qf = qf + qvalsl(kk)*rloc;
+                end
+                
+                Kfarn1 = q0*imag(zcn)./azcnsq + imag(qf);
+                Kfarn2 = -q0*real(zcn)./azcnsq + real(qf);                
+                Kfar = Kfar + [Kfarn1 Kfarn2];  
             end
         end
         %Kfart = far_panel_exact_comp(xloc,zloc,xfar,zfar,gfar,gam);
@@ -157,7 +167,7 @@ for jj=1:nblcks
         %pause
         
         if nparts > mlvl
-            tvec = tree_traverser(xcells,zcells,nparts,mlvl,ctgry,gcells,xbnds,zbnds,gam,ep,pval);            
+            tvec = tree_traverser(xcells,zcells,nparts,mlvl,clvl+1,Kcomp,Cents,ctgry,gcells,xbnds,zbnds,gam,ep,pval);            
         else
             tvec = near_neighbor_comp(xloc,zloc,xlist,zlist,gloc,glist,gam,ep);            
         end
