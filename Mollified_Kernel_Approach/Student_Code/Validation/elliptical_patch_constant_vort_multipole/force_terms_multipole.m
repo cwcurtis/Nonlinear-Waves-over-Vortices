@@ -1,10 +1,10 @@
-function nl = force_terms_multipole(mu,gam,rval,u,gvals,Nvorts)
+function nl = force_terms_multipole(mu,gam,rval,u,gvals,Nvorts,pval,tree_vals)
 
 xpos = u(1:Nvorts);
 zpos = u(Nvorts+1:2*Nvorts);
-pval = 15;
 
-Kvec = multi_pole_kernel(xpos,zpos,gvals,gam,rval,pval);
+Kvec = multi_pole_kernel_quick(xpos,zpos,gvals,gam,rval,pval,tree_vals);
+
 Kx = Kvec(:,1);
 Kz = Kvec(:,2);
 

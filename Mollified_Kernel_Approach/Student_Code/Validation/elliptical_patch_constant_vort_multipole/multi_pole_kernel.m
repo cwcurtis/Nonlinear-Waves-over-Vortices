@@ -88,7 +88,6 @@ for jj=1:nblcks
     zb = zmax - (row+ushift+1)*dz;
     xbnds = [xl;xr];
     zbnds = [zb;zt];            
-    
     % Find complement box coordinates so as to loop over far-field boxes.
     
     cmpvals = ones(rcnt,ccnt);

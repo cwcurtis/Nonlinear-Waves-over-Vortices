@@ -17,7 +17,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     sp = sin(pmesh);    
     
     [xpos,zpos,gvals,rval,Nvorts] = initializer(Nx,omega,gam,av,bv);
-    simul_plot = 1; % Plot during computation.       0 - off, 1 - on
+    simul_plot = 0; % Plot during computation.       0 - off, 1 - on
     n_bdry = 0;     % Number of points in cicular boundary.
     markersize = 10;
     
@@ -38,13 +38,14 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     
     u = [xpos;zpos]; %velocity vector field
     % Make folder
-    S = make_folder(Nx/2,Nx,mu,gam,F,tf,Gamma);
-    filename = strcat(S, '/', '/waves_over_vortices.gif');
+    %S = make_folder(Nx/2,Nx,mu,gam,F,tf,Gamma);
+    %filename = strcat(S, '/', '/waves_over_vortices.gif');
         
 % % % % % % % % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % % % % % % % % %
-    clf
+    
+    %clf
     if simul_plot
         figure(1)
         Bendixson(xpos,zoff + zpos/gam,gvals,n_bdry,Nvorts,markersize);
@@ -118,15 +119,15 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     
     toc
     
-    figure(2)
-    plot(times,errors,'k-','LineWidth',2)
+    %figure(2)
+    %plot(times,errors,'k-','LineWidth',2)
     
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     
     % Animate waves over vortices
-    if ~simul_plot
-        figure(1)
-        gif_my_gif(xtrack,ztrack,gtrack,n_bdry,Vcnt,plot_count,filename,markersize);
-    end
+    %if ~simul_plot
+    %    figure(1)
+    %    gif_my_gif(xtrack,ztrack,gtrack,n_bdry,Vcnt,plot_count,filename,markersize);
+    %end
     
 end

@@ -29,6 +29,8 @@ for jj=1:nparts
     scv = (1-er).*(1+2*er)./diff;
     kerx = -dzm.*scv;
     kerz = dx.*scv;   
+    kerx(jj) = 0;
+    kerz(jj) = 0;
     
     Kloc(jj,1) = Kloc(jj,1) + sum(gnear.*kerx);
     Kloc(jj,2) = Kloc(jj,2) + sum(gnear.*kerz);     
