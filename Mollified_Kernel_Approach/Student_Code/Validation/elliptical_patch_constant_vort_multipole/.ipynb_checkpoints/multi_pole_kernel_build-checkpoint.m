@@ -50,6 +50,7 @@ for jj=1:nblcks
     zccb = zmax - (row+1)*dz;
     
     indsl = logical((xpos>=xccl).*(xpos<=xccr).*(zpos<=zcct).*(zpos>=zccb));    
+    indsi = logical((xpos>=xl).*(xpos<=xr).*(zpos<=zt).*(zpos>=zb));        
     
     xc = (xccl+xccr)/2;
     zc = (zccb+zcct)/2;
@@ -61,6 +62,7 @@ for jj=1:nblcks
     npts = sum(indsl);
 
     loc_data.loc_list = indsl;
+    loc_data.int_list = indsi;
     loc_data.bnum = jj;
     loc_data.tpts = npts;
     
@@ -73,17 +75,14 @@ for jj=1:nblcks
     loc_data.center = [xc;zc];
     loc_data.kvals = kvals;
    
+    Kmaster{jj,1} = loc_data;
+
     if npts > mlvl   
        nind = 16 + 4*(jj-1);
-       loc_data.no_chldrn = 4;
-       Kmaster{jj,1} = loc_data;
        for ll=1:4
            Kchild = tree_builder(xpos,zpos,mlvl,clvl+1,nind,ctgry,gvals,xbnds,zbnds,gam,ep,pval,jj,ll);           
            Kmaster{jj,ll+1} = Kchild;
        end
-    else
-       loc_data.no_chldrn = 0;
-       Kmaster{jj,1} = loc_data; 
     end
       
 end   

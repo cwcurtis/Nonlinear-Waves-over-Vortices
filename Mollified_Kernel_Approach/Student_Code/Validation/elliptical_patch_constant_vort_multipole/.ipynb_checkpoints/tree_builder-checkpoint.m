@@ -34,6 +34,7 @@ zcct = zmax - row*dz;
 zccb = zmax - (row+1)*dz;
     
 indsl = logical((xpos>=xccl).*(xpos<=xccr).*(zpos<=zcct).*(zpos>=zccb));
+indsi = logical((xpos>=xl).*(xpos<=xr).*(zpos<=zt).*(zpos>=zb));    
 
 xc = (xccl+xccr)/2;
 zc = (zccb+zcct)/2;
@@ -45,9 +46,9 @@ gloc = gvals(indsl);
 npts = sum(indsl);
 
 loc_data.loc_list = indsl;
+loc_data.int_list = indsi;
 loc_data.bnum = nind + ll;
 loc_data.parent = pnum;
-loc_data.tpts = npts;
 
 if npts>0
    kvals = far_panel_comp(xloc,zloc,gloc,gam,xc,zc,pval);
@@ -57,19 +58,16 @@ end
 
 loc_data.center = [xc;zc];
 loc_data.kvals = kvals;
-
-Kloc = cell(5,1);
-
+   
 if npts > mlvl         
    nindn = nind + 16^clvl + 4*(ll-1);   
-   loc_data.no_chldrn = 4;
+   Kloc = cell(5,1);
    Kloc{1} = loc_data;
    for ll=1:4
         Kchild = tree_builder(xpos,zpos,mlvl,clvl+1,nindn,ctgry,gvals,xbnds,zbnds,gam,ep,pval,nind+ll,ll);  
         Kloc{ll+1} = Kchild;
    end
 else
-   loc_data.no_chldrn=0;
-   Kloc{1} = loc_data;
+   Kloc = {loc_data};
 end
         

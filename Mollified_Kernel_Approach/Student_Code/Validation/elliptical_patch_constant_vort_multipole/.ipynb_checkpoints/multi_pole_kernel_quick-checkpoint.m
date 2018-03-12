@@ -3,6 +3,7 @@ function Kvec = multi_pole_kernel_quick(xpos,zpos,gvals,gam,ep,pval,tree_val)
 % Build kd-tree structure from xpos,zpos
 
 Nvorts = length(xpos);
+mlvl = floor(log(Nvorts)/log(4));
 
 Kvec = zeros(Nvorts,2);
 
@@ -18,11 +19,14 @@ nblcks = rcnt*ccnt;
 dx = (xmax-xmin)/ccnt;
 dz = (zmax-zmin)/rcnt;
 
-ctf = sqrt(dx^2+dz^2);
+ctf = 2*sqrt(dx^2+dz^2);
+
+clvl = 1;
 
 for jj=1:nblcks
     lnode = tree_val{jj,1};
     linds = lnode.loc_list;
+    iinds = lnode.int_list;        
     
     xloc = xpos(linds);
     zloc = zpos(linds);
@@ -30,7 +34,6 @@ for jj=1:nblcks
     npts = lnode.tpts;
     cinds = [1:jj-1 jj+1:nblcks];
     Kfar = zeros(npts,2);
-    cmplst = [];
     for ll = 1:nblcks-1        
         cnode = tree_val{cinds(ll),1};        
         xcf = cnode.center;        
@@ -51,33 +54,18 @@ for jj=1:nblcks
                 Kfarn2 = -q0*real(zcn).*azcnsq + real(qf);                
                 Kfar = Kfar + [Kfarn1 Kfarn2];             
             end            
-        else
-            % build nearest-neighbor list
-            cmplst = [cmplst cinds(ll)];
-        end
+        end        
     end
     
-    cmpnum = length(cmplst);   
-        
-    if lnode.no_chldrn > 0
-        cmpnum = length(cmplst);   
-        dscnt_tree = cell(cmpnum+1,1);
-        dscnt_tree{1} = {tree_val{1,2:5}};
-        for mm=1:cmpnum
-           dscnt_tree{mm+1} = {tree_val{cmplst(mm),2:5}}; 
-        end
-        tvec = tree_traverser_quick(xpos,zpos,gvals,dx/2,dz/2,gam,ep,pval,dscnt_tree,npts,cmpnum); 
+    if(npts>mlvl)
+       tvec = tree_traverser_quick(xpos,zpos,mlvl,clvl+1,gvals,gam,ep,pval,tree_val); 
     else
-       nninds = zeros(Nvorts,1);
-       for mm=1:cmpnum
-           nninds = nninds + tree_val{cmplst(mm),1}.loc_list;
-       end
-       nninds = logical(nninds);
+       nninds = logical(iinds-linds);
        xlist = xpos(nninds);
        zlist = zpos(nninds);
        gloc = gvals(linds);
        glist = gpos(nninds);
-       tvec = near_neighbor_comp(xloc,zloc,xlist,zlist,gloc,glist,gam,ep);  
+       tvec = near_neighbor_comp(xloc,zloc,xlist,zlist,gloc,glist,gam,ep); 
     end
     Kvec(linds,:) = Kfar+tvec;
 end
