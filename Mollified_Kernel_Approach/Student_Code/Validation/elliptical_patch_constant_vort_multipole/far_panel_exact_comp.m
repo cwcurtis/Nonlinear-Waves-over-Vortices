@@ -1,18 +1,16 @@
-function Kfar = far_panel_exact_comp(xloc,zloc,xfar,zfar,gfar,gam)
+function Kfar = far_panel_exact_comp(xloc,zloc,xfar,zfar,gfar,rval)
 
 nparts = length(xloc);
 Kfar = zeros(nparts,2);
 
-for jj=1:nparts
-    
-    dx = xloc(jj) - xfar;
-    dzm = gam*(zloc(jj) - zfar);
-    
-    diff = dx.^2 + dzm.^2;
-    kerx = -dzm./diff;
-    kerz = dx./diff;   
-    
-    Kfar(jj,1) = sum(gfar.*kerx);
-    Kfar(jj,2) = sum(gfar.*kerz);   
-    
-end    
+[xf,xl] = meshgrid(xfar,xloc);
+[zf,zl] = meshgrid(zfar,zloc);
+dx = xl-xf;
+dz = zl-zf;
+%dx = bsxfun(@minus,xloc,xfar.');
+%dz = bsxfun(@minus,zloc,zfar.');
+diff = dx.^2 + dz.^2;
+er = exp(-diff/(2*rval^2));
+scv = (1-er).*(1+2*er)./diff;
+Kfar(:,1) = (-dz.*scv)*gfar;
+Kfar(:,2) = (dx.*scv)*gfar;

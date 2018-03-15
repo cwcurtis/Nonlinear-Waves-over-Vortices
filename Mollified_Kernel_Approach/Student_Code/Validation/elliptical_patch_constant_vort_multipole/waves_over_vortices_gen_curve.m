@@ -36,7 +36,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     Vcnt = zeros(no_of_evals+1,1);
     Vcnt(1) = Nvorts;
     
-    u = [xpos;zpos]; %velocity vector field
+    u0 = [xpos;zpos]; %velocity vector field
     % Make folder
     %S = make_folder(Nx/2,Nx,mu,gam,F,tf,Gamma);
     %filename = strcat(S, '/', '/waves_over_vortices.gif');
@@ -61,13 +61,30 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
         imwrite(imind,cm,filename,'gif','DelayTime',0,'loopcount',inf);
     end
    
-    tic
+    %tic
     for jj=1:nmax
       
-        % Now update the vortex positions                                   
-        %u = vort_update_on_molly_non_periodic(mu,1,rval,u,gvals,Nvorts,dt);
-        u = vort_update_multipole(mu,1,rval,u,gvals,Nvorts,dt);   
-         
+        % Now update the vortex positions         
+        tic
+        ut = vort_update_on_molly_non_periodic(mu,1,rval,u0,gvals,Nvorts,dt);
+        toc
+        
+        tic
+        u = vort_update_multipole(mu,1,rval,u0,gvals,Nvorts,dt);   
+        toc
+        disp(norm(u(1:Nvorts)-ut(1:Nvorts))/norm(ut(1:Nvorts)))
+        disp(norm(u(Nvorts+1:2*Nvorts)-ut(Nvorts+1:2*Nvorts))/norm(ut(Nvorts+1:2*Nvorts)))
+        
+        %clf 
+        
+        %figure(1)
+        %scatter(u(1:Nvorts),u(Nvorts+1:2*Nvorts),markersize,'MarkerFaceColor','k')
+        
+        %figure(2)
+        %scatter(ut(1:Nvorts),ut(Nvorts+1:2*Nvorts),markersize,'MarkerFaceColor','r')
+        
+        %pause
+        
         if(mod(jj,inter)==0)
             times(plot_count) = (jj-1)*dt;
             xpos = u(1:Nvorts);
@@ -117,7 +134,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
             
     end
     
-    toc
+    %toc
     
     %figure(2)
     %plot(times,errors,'k-','LineWidth',2)

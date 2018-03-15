@@ -1,38 +1,31 @@
-function Kloc = near_neighbor_comp(xloc,zloc,xfar,zfar,gnear,gfar,gam,rval)
+function Kloc = near_neighbor_comp(xloc,zloc,xfar,zfar,gnear,gfar,rval)
 
-nparts = length(xloc);
-Kloc = zeros(nparts,2);
+% and now the in-cell interactions
+[xf,xl] = meshgrid(xloc,xloc);
+[zf,zl] = meshgrid(zloc,zloc);
+dx = xl-xf;
+dz = zl-zf;
+%dx = bsxfun(@minus,xloc,xloc');
+%dz = bsxfun(@minus,zloc,zloc');
+diff = dx.^2 + dz.^2 + eye(size(dx));
+er = exp(-diff/(2*rval^2));
+scv = (1-er).*(1+2*er)./diff;
+Kloc1 = (-dz.*scv)*gnear;
+Kloc2 = (dx.*scv)*gnear;
 
-for jj=1:nparts
-    
-    dx = xloc(jj) - xfar;
-    dzm = gam*(zloc(jj) - zfar);
-    
-    diff = dx.^2 + dzm.^2;
+if ~isempty(xfar)
+    [xf,xl] = meshgrid(xfar,xloc);
+    [zf,zl] = meshgrid(zfar,zloc);
+    dx = xl-xf;
+    dz = zl-zf;
+    %dx = bsxfun(@minus,xloc,xfar.');
+    %dz = bsxfun(@minus,zloc,zfar.');
+    diff = dx.^2 + dz.^2;
     er = exp(-diff/(2*rval^2));
     scv = (1-er).*(1+2*er)./diff;
-    kerx = -dzm.*scv;
-    kerz = dx.*scv;   
-    
-    Kloc(jj,1) = sum(gfar.*kerx);
-    Kloc(jj,2) = sum(gfar.*kerz);     
-    
-end    
+    Kloc1 = Kloc1 + (-dz.*scv)*gfar;
+    Kloc2 = Kloc2 + (dx.*scv)*gfar;
+end
 
-for jj=1:nparts
-    
-    dx = xloc(jj) - xloc;
-    dzm = gam*(zloc(jj) - zloc);
-    
-    diff = dx.^2 + dzm.^2;
-    er = exp(-diff/(2*rval^2));
-    scv = (1-er).*(1+2*er)./diff;
-    kerx = -dzm.*scv;
-    kerz = dx.*scv;   
-    kerx(jj) = 0;
-    kerz(jj) = 0;
-    
-    Kloc(jj,1) = Kloc(jj,1) + sum(gnear.*kerx);
-    Kloc(jj,2) = Kloc(jj,2) + sum(gnear.*kerz);     
-    
-end    
+
+Kloc = [Kloc1 Kloc2];

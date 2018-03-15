@@ -1,4 +1,7 @@
-function Kmaster = multi_pole_kernel_build(xpos,zpos,gvals,gam,ep,pval)
+function Kmaster = multi_pole_kernel_build(u,gvals,ep,pval,Nvorts)
+
+xpos = u(1:Nvorts);
+zpos = u(Nvorts+1:2*Nvorts);
 
 % Build kd-tree structure from xpos,zpos
 xmin = min(xpos);
@@ -18,7 +21,6 @@ zmax = zmax*(1 + sign(zmax)*.01);
 ccnt = 4;
 rcnt = 4;
 nblcks = ccnt*rcnt;
-clvl = 1;
 
 % 1st entry is struct with all necessary in cell information.  
 % Next four entries are for children. 
@@ -31,41 +33,30 @@ for jj=1:nblcks
     
     col = mod(jj-1,ccnt);
     row = (jj-1-col)/ccnt;
-    [dshift,ushift,lshift,rshift,ctgry] = shift_finder(col+1,row+1,rcnt,ccnt);
     
-    ccl = col-lshift;
-    ccr = col+rshift;
-    rrt = row-dshift;
-    rrb = row+ushift;
-        
-    xl = xmin + ccl*dx;
-    xr = xmin + (ccr+1)*dx;
-    zt = zmax - rrt*dz;
-    zb = zmax - (rrb+1)*dz;
-    xbnds = [xl;xr];
-    zbnds = [zb;zt];   
-    xccl = xmin + col*dx;
-    xccr = xmin + (col+1)*dx;
-    zcct = zmax - row*dz;
-    zccb = zmax - (row+1)*dz;
+    xl = xmin + col*dx;
+    xr = xmin + (col+1)*dx;
+    zt = zmax - row*dz;
+    zb = zmax - (row+1)*dz;
     
-    indsl = logical((xpos>=xccl).*(xpos<=xccr).*(zpos<=zcct).*(zpos>=zccb));    
+    indsl = logical((xpos>=xl).*(xpos<xr).*(zpos<=zt).*(zpos>zb));    
     
-    xc = (xccl+xccr)/2;
-    zc = (zccb+zcct)/2;
+    xc = (xl+xr)/2;
+    zc = (zb+zt)/2;
 
     xloc = xpos(indsl);
     zloc = zpos(indsl);
     gloc = gvals(indsl);
 
     npts = sum(indsl);
-
+    
     loc_data.loc_list = indsl;
-    loc_data.bnum = jj;
     loc_data.tpts = npts;
+    loc_data.dx = dx;
+    loc_data.dz = dz;
     
     if npts>0
-        kvals = far_panel_comp(xloc,zloc,gloc,gam,xc,zc,pval);
+        kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval);
     else
         kvals = [];
     end
@@ -74,16 +65,22 @@ for jj=1:nblcks
     loc_data.kvals = kvals;
    
     if npts > mlvl   
-       nind = 16 + 4*(jj-1);
        loc_data.no_chldrn = 4;
        Kmaster{jj,1} = loc_data;
+       dnx = dx/2;
+       dnz = dz/2;
        for ll=1:4
-           Kchild = tree_builder(xpos,zpos,mlvl,clvl+1,nind,ctgry,gvals,xbnds,zbnds,gam,ep,pval,jj,ll);           
-           Kmaster{jj,ll+1} = Kchild;
-       end
+           ncol = mod(ll-1,2);
+           nrow = (ll-1-ncol)/2;
+           xnl = xl + ncol*dnx;
+           xnr = xl + (ncol+1)*dnx;
+           znt = zt - nrow*dnz;
+           znb = zt - (nrow+1)*dnz;
+           Kchild = tree_builder(xpos,zpos,mlvl,gvals,xnl,xnr,znb,znt,ep,pval);           
+           Kmaster{jj,ll+1} = Kchild;           
+       end              
     else
        loc_data.no_chldrn = 0;
        Kmaster{jj,1} = loc_data; 
-    end
-      
+    end    
 end   

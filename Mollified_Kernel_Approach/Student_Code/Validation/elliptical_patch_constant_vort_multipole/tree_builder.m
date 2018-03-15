@@ -1,56 +1,25 @@
-function Kloc = tree_builder(xpos,zpos,mlvl,clvl,nind,ctgry,gvals,xbnds,zbnds,gam,ep,pval,pnum,ll)
+function Kloc = tree_builder(xpos,zpos,mlvl,gvals,xl,xr,zb,zt,ep,pval)
 
-xmin = xbnds(1);
-xmax = xbnds(2);
-zmin = zbnds(1);
-zmax = zbnds(2);
-[ccnt,rcnt,nblcks,jvals] = top_props(ctgry);
-dx = (xmax-xmin)/ccnt;
-dz = (zmax-zmin)/rcnt;
-       
-jj = jvals(ll);
-        
-loc_data.bnum = nind + ll;
-             
-col = mod(jj-1,ccnt);
-row = (jj-1-col)/ccnt;
-[dshift,ushift,lshift,rshift,ctgry] = shift_finder(col+1,row+1,rcnt,ccnt);
-    
-ccl = col-lshift;
-ccr = col+rshift;
-rrt = row-dshift;
-rrb = row+ushift;
-           
-xl = xmin + ccl*dx;
-xr = xmin + (ccr+1)*dx;
-zt = zmax - rrt*dz;
-zb = zmax - (rrb+1)*dz;
-xbnds = [xl;xr];
-zbnds = [zb;zt];            
-    
-xccl = xmin + col*dx;
-xccr = xmin + (col+1)*dx;
-zcct = zmax - row*dz;
-zccb = zmax - (row+1)*dz;
-    
-indsl = logical((xpos>=xccl).*(xpos<=xccr).*(zpos<=zcct).*(zpos>=zccb));
+dx = xr-xl;
+dz = zt-zb;
 
-xc = (xccl+xccr)/2;
-zc = (zccb+zcct)/2;
+indsl = logical((xpos>=xl).*(xpos<xr).*(zpos<=zt).*(zpos>zb));
+
+xc = (xl+xr)/2;
+zc = (zb+zt)/2;
 
 xloc = xpos(indsl);
 zloc = zpos(indsl);
 gloc = gvals(indsl);
 
 npts = sum(indsl);
-
 loc_data.loc_list = indsl;
-loc_data.bnum = nind + ll;
-loc_data.parent = pnum;
 loc_data.tpts = npts;
+loc_data.dx = dx;
+loc_data.dz = dz;
 
 if npts>0
-   kvals = far_panel_comp(xloc,zloc,gloc,gam,xc,zc,pval);
+   kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval);
 else
    kvals = [];
 end
@@ -61,12 +30,19 @@ loc_data.kvals = kvals;
 Kloc = cell(5,1);
 
 if npts > mlvl         
-   nindn = nind + 16^clvl + 4*(ll-1);   
    loc_data.no_chldrn = 4;
    Kloc{1} = loc_data;
+   dnx = dx/2;
+   dnz = dz/2;
    for ll=1:4
-        Kchild = tree_builder(xpos,zpos,mlvl,clvl+1,nindn,ctgry,gvals,xbnds,zbnds,gam,ep,pval,nind+ll,ll);  
-        Kloc{ll+1} = Kchild;
+       ncol = mod(ll-1,2);
+       nrow = (ll-1-ncol)/2;
+       xnl = xl + ncol*dnx;
+       xnr = xl + (ncol+1)*dnx;
+       znt = zt - nrow*dnz;
+       znb = zt - (nrow+1)*dnz;
+       Kchild = tree_builder(xpos,zpos,mlvl,gvals,xnl,xnr,znb,znt,ep,pval);  
+       Kloc{ll+1} = Kchild;
    end
 else
    loc_data.no_chldrn=0;
