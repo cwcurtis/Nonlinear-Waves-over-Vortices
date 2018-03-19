@@ -16,7 +16,6 @@ ctf = dx^2 + dz^2;
 
 for jj=1:nblcks
     lnode = tree_val{jj,1};
-    %linds = lnode.loc_list;
     linds = lnode.num_list;
     xloc = lnode.xpos;
     zloc = lnode.zpos;
