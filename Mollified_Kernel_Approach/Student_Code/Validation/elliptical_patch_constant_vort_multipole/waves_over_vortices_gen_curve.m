@@ -10,16 +10,12 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     bv = Rv;
     
     F = pi*omega*av*bv/gam;
-    Gamma = F;
     pmesh = linspace(0,2*pi,2*Nx);
      
     cp = cos(pmesh);
     sp = sin(pmesh);    
     
     [xpos,zpos,gvals,rval,Nvorts] = initializer(Nx,omega,gam,av,bv);
-    simul_plot = 0; % Plot during computation.       0 - off, 1 - on
-    n_bdry = 0;     % Number of points in cicular boundary.
-    markersize = 10;
     
     dt = .1;
     nmax = round(tf/dt);
@@ -37,32 +33,12 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     Vcnt(1) = Nvorts;
     
     u0 = [xpos;zpos]; %velocity vector field
-    % Make folder
-    %S = make_folder(Nx/2,Nx,mu,gam,F,tf,Gamma);
-    %filename = strcat(S, '/', '/waves_over_vortices.gif');
         
 % % % % % % % % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % % % % % % % % %
     
-    %clf
-    if simul_plot
-        figure(1)
-        Bendixson(xpos,zoff + zpos/gam,gvals,n_bdry,Nvorts,markersize);
-        xellip = av*cp;
-        yellip = bv*sp/gam+zoff;
-        hold on
-            scatter(xellip,yellip,.1)
-        axis equal
-        hold off
-        frame = getframe(1);
-        im = frame2im(frame);
-        [imind,cm] = rgb2ind(im,256);
-        imwrite(imind,cm,filename,'gif','DelayTime',0,'loopcount',inf);
-    end
-   
-    %tic
-    for jj=1:nmax
+     for jj=1:nmax
       
         % Now update the vortex positions         
         tic
@@ -107,22 +83,9 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
             plot_count = plot_count + 1;
             
             Vcnt(plot_count) = Nvorts;   
-            
-            if simul_plot
-                figure(1)
-                Bendixson(xpos,zpos,gvals,n_bdry,Nvorts,markersize);
-                hold on
-                    scatter(xellip,yellip,.1)
-                    axis equal
-                hold off        
-                frame = getframe(1);
-                im = frame2im(frame);
-                [imind,cm] = rgb2ind(im,256);
-                imwrite(imind,cm,filename,'gif','DelayTime',0,'writemode','append');
-            end          
-            
-        end 
-           
+        
+        end
+        
         if(mod(jj,2*inter)==0)
             [xpud,zpud,gvud] = recircer(gvals,xpos,gam*(zpos-zoff),Nx);
             Nvorts = length(gvud);
@@ -139,12 +102,6 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     %figure(2)
     %plot(times,errors,'k-','LineWidth',2)
     
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-    
-    % Animate waves over vortices
-    %if ~simul_plot
-    %    figure(1)
-    %    gif_my_gif(xtrack,ztrack,gtrack,n_bdry,Vcnt,plot_count,filename,markersize);
-    %end
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %    
     
 end

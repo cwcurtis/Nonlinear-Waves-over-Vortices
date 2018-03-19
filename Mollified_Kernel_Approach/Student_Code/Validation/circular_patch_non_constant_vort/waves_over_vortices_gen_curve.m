@@ -6,8 +6,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     Rv = 1/25;
     zoff = .25;
     
-    cfun = @(x,z,Rvc) (x.^2 + z.^2)/Rvc^2;
-    F = pi*omega*Rv^8/(4*gam);
+    F = pi*omega*Rv^2/(4*gam);
     pmesh = linspace(0,2*pi,2*Nx);
      
     cp = cos(pmesh);
@@ -16,7 +15,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     disp('Froude number is:')
     disp(F)
 
-    [xpos,zpos,gvals,Nvorts,ep] = initializer(Nx,omega,F,gam,cfun,Rv);
+    [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,omega,gam,Rv);
     simul_plot = 1; % Plot during computation.       0 - off, 1 - on
     n_bdry = 0;     % Number of points in cicular boundary.
     markersize = 10;
@@ -65,14 +64,14 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     for jj=1:nmax
       
         % Now update the vortex positions                                   
-        u = vort_update_on_molly_non_periodic(mu,1,ep,F,u,gvals,Nvorts,dt);
+        u = vort_update_on_molly_non_periodic(mu,ep,u,gvals,Nvorts,dt);
             
         if(mod(jj,inter)==0)
             times(plot_count) = (jj-1)*dt;
             xpos = u(1:Nvorts);
             zpos = zoff + u(Nvorts+1:2*Nvorts)/gam;
             
-            error = interp_error(Nx,xpos,zpos,gvals,ep,gam,omega,F,Rv,zoff,xellip,yellip);
+            error = interp_error(Nx,xpos,zpos,gvals,ep,gam,omega,Rv,zoff,xellip,yellip);
             errors(plot_count) = error;
                         
             xtrack = [xtrack;xpos];
@@ -94,8 +93,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
                 [imind,cm] = rgb2ind(im,256);
                 imwrite(imind,cm,filename,'gif','DelayTime',0,'writemode','append');
             end          
-            
-            
+                        
             [xpud,zpud,gvud] = recircer(gvals,xpos,gam*(zpos-zoff),Nx);
             Nvorts = length(gvud);
             gvals = gvud;

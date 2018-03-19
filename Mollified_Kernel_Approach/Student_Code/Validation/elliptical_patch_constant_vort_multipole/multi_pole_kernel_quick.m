@@ -26,9 +26,8 @@ for jj=1:nblcks
     cinds = [1:jj-1 jj+1:nblcks];
     Kfar = zeros(npts,2);
     finds = zeros(Nvorts,1);
-        
+    
     cmplst = [];
-    zmat = zeros(npts,pval+1);
     for ll = 1:nblcks-1        
         cnode = tree_val{cinds(ll),1};        
         xcf = cnode.center;        
@@ -37,27 +36,25 @@ for jj=1:nblcks
             dst = (xcc(1)-xcf(1))^2 + (xcc(2)-xcf(2))^2;
             if dst > ctf        
                 kcur = cnode.kvals;
-                zcn = (xloc-xcf(1))+1i*(zloc-xcf(2));
-                rloc = -1./zcn;
-                               
-                zmat(:,1) = rloc;
-                for kk=2:pval+1
-                    zmat(:,kk) = zmat(:,kk-1).*rloc; 
-                end                
-                qf = zmat*kcur;                
-                
-                Kfar = Kfar - [imag(qf) real(qf)];       
+                rloc = -1./((xloc-xcf(1))+1i*(zloc-xcf(2)));
+                qf = kcur(pval+1);
+                for mm=1:pval
+                    qf = kcur(pval+1-mm) + qf.*rloc;                        
+                end
+                qf = -rloc.*qf;
+                Kfar = Kfar + [imag(qf) real(qf)];       
             elseif nm_chldrn > 0    
                 % build nearest-neighbor list
                 cmplst = [cmplst cinds(ll)];
             else
+                % if we do not compute over something, then we save it for
+                % descent.  
                 finds = finds + cnode.loc_list;                 
             end
         end
     end
     
     cmpnum = 1+length(cmplst);   
-    %cmpinds = zeros(Nvorts,1);
     if lnode.no_chldrn > 0
         dscnt_tree = cell(cmpnum,4);
         dscnt_tree(1,:) = tree_val(jj,2:5);

@@ -1,10 +1,10 @@
-function error = interp_error(Nx,xpos,zpos,gvals,ep,gam,om,F,Rv,zoff,xellip,yellip)
+function error = interp_error(Nx,xpos,zpos,gvals,ep,gam,om,Rv,zoff,xellip,yellip)
 
     xvals = linspace(-1,1,Nx)';
     zvals = linspace(0,1,Nx)';
     
     chi = @(r) 1/(ep^2*pi)*(2.*exp(-(r/ep).^2)-.5*exp(-(r/(ep*sqrt(2))).^2));
-    omfunc = @(xj,yj) om*(Rv^2 - xj.^2 - gam^2*(yj-zoff).^2);
+    omfunc = @(xj,yj) om*(1 - (xj.^2 + gam^2*(yj-zoff).^2)/Rv.^2).^3;
     
     imat = zeros(length(zvals),length(xvals));
     rmat = zeros(length(zvals),length(xvals));
@@ -12,7 +12,7 @@ function error = interp_error(Nx,xpos,zpos,gvals,ep,gam,om,F,Rv,zoff,xellip,yell
     for jj=1:length(xvals)
        for kk=1:length(zvals)
           rval = sqrt((xvals(jj)-xpos).^2 + gam.^2*(zvals(kk)-zpos).^2);
-          imat(kk,jj) = F*gam*sum(gvals.*chi(rval));
+          imat(kk,jj) = gam*sum(gvals.*chi(rval));
        end
     end
     
@@ -49,4 +49,4 @@ function error = interp_error(Nx,xpos,zpos,gvals,ep,gam,om,F,Rv,zoff,xellip,yell
     
     l2r = sqrt(2*(1/Nx).^2*sum(sum(rmat.^2)));
     error = sqrt(2*(1/Nx).^2*sum(sum((rmat-imat).^2)))/l2r;
-    %error = max(max(abs(rmat-imat)))/max(max(abs(rmat)));
+    

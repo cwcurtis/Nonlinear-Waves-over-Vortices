@@ -10,6 +10,7 @@ zmin = min(zpos);
 zmax = max(zpos);
 
 Nvorts = length(xpos);
+glb_inds = (1:Nvorts)';
 mlvl = floor(log(Nvorts)/log(4));
 
 xmin = xmin*(1 - sign(xmin)*.01);
@@ -40,6 +41,7 @@ for jj=1:nblcks
     zb = zmax - (row+1)*dz;
     
     indsl = logical((xpos>=xl).*(xpos<xr).*(zpos<=zt).*(zpos>zb));    
+    numinds = glb_inds(indsl);
     
     xc = (xl+xr)/2;
     zc = (zb+zt)/2;
@@ -51,6 +53,7 @@ for jj=1:nblcks
     npts = sum(indsl);
     
     loc_data.loc_list = indsl;
+    loc_data.num_list = numinds;
     loc_data.xpos = xloc;
     loc_data.zpos = zloc;
     loc_data.gvals = gloc;
@@ -79,7 +82,7 @@ for jj=1:nblcks
            xnr = xl + (ncol+1)*dnx;
            znt = zt - nrow*dnz;
            znb = zt - (nrow+1)*dnz;
-           Kchild = tree_builder(xpos,zpos,mlvl,gvals,xnl,xnr,znb,znt,ep,pval);           
+           Kchild = tree_builder(xpos,zpos,mlvl,gvals,xnl,xnr,znb,znt,ep,pval,numinds,Nvorts);           
            Kmaster{jj,ll+1} = Kchild;           
        end              
     else
