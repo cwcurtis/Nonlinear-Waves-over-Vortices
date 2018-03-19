@@ -52,7 +52,7 @@ for jj=1:nblcks
 
     npts = sum(indsl);
     
-    loc_data.loc_list = indsl;
+    %loc_data.loc_list = indsl;
     loc_data.num_list = numinds;
     loc_data.xpos = xloc;
     loc_data.zpos = zloc;

@@ -18,18 +18,19 @@ numinds = pinds(inds_in_cell);
 
 % 'indsl' is a logical indexing Nvorts long variant of 'numinds' so that we
 % can simply sum positions if we like.  
-indsl = zeros(Nvorts,1);
-indsl(numinds) = 1;
+% indsl = zeros(Nvorts,1);
+% indsl(numinds) = 1;
+% npts = sum(indsl);
+% loc_data.loc_list = indsl;
 
 % positions of points within this node.  
 xloc = xpos(numinds);
 zloc = zpos(numinds);
 gloc = gvals(numinds);
 
-npts = sum(indsl);
+npts = length(xloc);
 
 % header data 
-loc_data.loc_list = indsl;
 loc_data.num_list = pinds(inds_in_cell);
 loc_data.xpos = xloc;
 loc_data.zpos = zloc;

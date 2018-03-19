@@ -34,7 +34,7 @@ function error = interp_error(xpos,zpos,gvals,rval,gam,om,av,bv,tv,zoff)
     
     l2r = sqrt(sum(sum(rmat.^2)));
     error = sqrt(sum(sum((rmat-imat).^2)))/l2r;
-        
+    %{    
     figure(3)
     surf(xvals,zvals,log10(abs(rmat-imat)),'LineStyle','none')
     
@@ -47,5 +47,5 @@ function error = interp_error(xpos,zpos,gvals,rval,gam,om,av,bv,tv,zoff)
     disp(error)
     
     pause
-       
+    %}   
     %error = max(max(abs(rmat-imat)))/max(max(abs(rmat)));

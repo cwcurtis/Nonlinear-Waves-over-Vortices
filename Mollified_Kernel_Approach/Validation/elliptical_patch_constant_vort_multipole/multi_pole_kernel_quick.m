@@ -16,7 +16,8 @@ ctf = dx^2 + dz^2;
 
 for jj=1:nblcks
     lnode = tree_val{jj,1};
-    linds = lnode.loc_list;
+    %linds = lnode.loc_list;
+    linds = lnode.num_list;
     xloc = lnode.xpos;
     zloc = lnode.zpos;
     gloc = lnode.gvals;
@@ -25,8 +26,8 @@ for jj=1:nblcks
     npts = lnode.tpts;
     cinds = [1:jj-1 jj+1:nblcks];
     Kfar = zeros(npts,2);
-    finds = zeros(Nvorts,1);
-    
+    %finds = zeros(Nvorts,1);
+    finds = [];
     cmplst = [];
     for ll = 1:nblcks-1        
         cnode = tree_val{cinds(ll),1};        
@@ -49,7 +50,8 @@ for jj=1:nblcks
             else
                 % if we do not compute over something, then we save it for
                 % descent.  
-                finds = finds + cnode.loc_list;                 
+                %finds = finds + cnode.loc_list;             
+                finds = [finds;cnode.num_list];
             end
         end
     end
@@ -61,11 +63,9 @@ for jj=1:nblcks
         dscnt_tree(2:cmpnum,:) = tree_val(cmplst,2:5);
         tvec = tree_traverser_quick(xpos,zpos,gvals,ep,pval,dscnt_tree,cmpnum,Nvorts,linds,finds);                 
     else
-       nninds = zeros(Nvorts,1);
-       for mm=1:cmpnum
-           nninds = nninds + tree_val{cmplst(mm),1}.loc_list;
-       end
-       nninds = logical(nninds+finds);
+       %nninds = sum(tree_val(cmplst,1).loc_list);
+       %nninds = logical(nninds+finds);
+       nninds = [vertcat(tree_val(cmplst,1).num_list);finds];
        
        xlist = xpos(nninds);
        zlist = zpos(nninds);

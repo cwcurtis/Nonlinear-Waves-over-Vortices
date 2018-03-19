@@ -31,6 +31,7 @@ Kvec = zeros(Nvorts,2);
 fnum = nblcks*4;
 
 centers = zeros(fnum,2);
+%indclls = zeros(Nvorts,fnum);
 indtst = cell(fnum,1);
 chldary = ones(fnum,1);
 kvsary = zeros(pval+1,fnum);
@@ -45,6 +46,7 @@ for kk=2:nblcks
             indtmp = indtmp+1;   
             centers(indtmp,:) = cnode.center;
             kvsary(:,indtmp) = cnode.kvals;
+            %indclls(:,indtmp) = cnode.loc_list;   
             indtst{indtmp} = cnode.num_list;
             if cnode.no_chldrn > 0 % Note, we implicitly are pruning empty cells as we go here.
                cdcells(indtmp,:) = branch{jj}(2:5);                        
@@ -62,20 +64,22 @@ dx = mnodes{1}{1}.dx;
 dz = mnodes{1}{1}.dz; 
 ctf = dx^2+dz^2;
 
+finds = cell(4,1);
+
 if ~isempty(prvinds)
-    finds = {prvinds,prvinds,prvinds,prvinds};
-else
-    finds = cell(4,1);
+    finds(:) = prvinds;
 end
 
 nnlsts = repmat(1:4,4,1);
 nnlsts = nnlsts - diag(diag(nnlsts));
 nncntrs = zeros(4,2);
+%llsts = zeros(Nvorts,4);
 llsts = cell(4,1);
 
 for ll=1:4
     lleaf = mnodes{ll};
     lnode = lleaf{1};
+    %llsts(:,ll) = lnode.loc_list;
     numinds = lnode.num_list;
     llsts{ll} = numinds;
     nncntrs(ll,:) = lnode.center;
@@ -83,13 +87,14 @@ for ll=1:4
     if lnode.no_chldrn == 0 
        nnlsts(:,ll) = 0;
        if ~isempty(numinds)
+       %finds(:,vcmp) = finds(:,vcmp) + repmat(llsts(:,ll),1,3);        
             for jj=1:3
-                finds{vcmp(jj)} = vertcat(finds{vcmp(jj)},numinds);
+                finds{vcmp(jj)} = vertcat(finds{vcmp(jj)})
             end
        end
    end    
 end
-
+%disp(finds)
 % Use very vectorized approach to determine distance of all child cells
 % wiwth all potential interaction cells.  
 
@@ -153,13 +158,17 @@ for ll=1:4
                     dscnt_tree(cfnum+1+mm,:) = mnodes{nninds(mm)}(2:5);
                 end
             end
+            %finds(:,ll) = finds(:,ll) + sum(indclls(:,frlst),2);
             if sum(frlst)>0
-                finds{ll} = vertcat(finds{ll},vertcat(indtst{frlst}));                
+                clength = size(finds,1);
+                finds(:,ll) = [finds(:,ll);vertcat(indtst{frlst})];                
             end
-            tvec = tree_traverser_quick(xpos,zpos,gvals,ep,pval,dscnt_tree,cmpnum,Nvorts,linds,finds{ll});            
+            tvec = tree_traverser_quick(xpos,zpos,gvals,ep,pval,dscnt_tree,cmpnum,Nvorts,linds,finds(:,ll));            
         else
             % Here we finally compute at a terminal node.  
-            nninds =[vertcat(indtst{myclose});vertcat(llsts{nnlst});finds{ll}];
+            %nninds = logical(sum(indclls(:,myclose),2)+sum(llsts(:,nnlst),2)+finds(:,ll));    
+            indsrem = finds(:,ll) ~= 0;
+            nninds =[vertcat(indtst{myclose});vertcat(llsts{nnlst});finds(indsrem,ll)];
             xlist = xpos(nninds);
             zlist = zpos(nninds);
             glist = gvals(nninds);            

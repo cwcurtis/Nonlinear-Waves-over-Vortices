@@ -64,7 +64,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     for jj=1:nmax
       
         % Now update the vortex positions                                   
-        u = vort_update_on_molly_non_periodic(mu,1,rval,u,gvals,Nvorts,dt);
+        u = vort_update_on_molly_non_periodic(mu,rval,u,gvals,Nvorts,dt);
             
         if(mod(jj,inter)==0)
             times(plot_count) = (jj-1)*dt;
@@ -79,8 +79,8 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
             xellip = xxs*ca - yxs*sa;
             yellip = (xxs*sa + yxs*ca)/gam + zoff;
             
-            error = interp_error(xpos,zpos,gvals,rval,gam,omega,av,bv,tv,zoff);
-            errors(plot_count) = error;
+            %error = interp_error(xpos,zpos,gvals,rval,gam,omega,av,bv,tv,zoff);
+            %errors(plot_count) = error;
                         
             xtrack = [xtrack;xpos];
             ztrack = [ztrack;zpos];
@@ -107,6 +107,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
         if(mod(jj,2*inter)==0)
             [xpud,zpud,gvud] = recircer(gvals,xpos,gam*(zpos-zoff),Nx);
             Nvorts = length(gvud);
+            disp(Nvorts)
             gvals = gvud;
             u = zeros(2*Nvorts,1);
             u(1:Nvorts) = xpud;
@@ -117,8 +118,8 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     
     toc
     
-    figure(2)
-    plot(times,errors,'k-','LineWidth',2)
+    %figure(2)
+    %plot(times,errors,'k-','LineWidth',2)
     
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     
