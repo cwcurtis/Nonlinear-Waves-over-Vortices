@@ -17,11 +17,10 @@ ctf = dx^2 + dz^2;
 for jj=1:nblcks
     lnode = tree_val{jj,1};
     linds = lnode.loc_list;
+    xloc = lnode.xpos;
+    zloc = lnode.zpos;
+    gloc = lnode.gvals;
     
-    xloc = xpos(linds);
-    zloc = zpos(linds);
-    gloc = gvals(linds);
-       
     xcc = lnode.center;
     npts = lnode.tpts;
     cinds = [1:jj-1 jj+1:nblcks];
@@ -57,29 +56,19 @@ for jj=1:nblcks
         end
     end
     
-    % compute over anything we do not descend on 
-    if sum(finds)>0
-        finds = logical(finds);
-        Kndscnd = far_panel_exact_comp(xloc,zloc,xpos(finds),zpos(finds),gvals(finds),ep);              
-        Kfar = Kfar + Kndscnd;
-    end
-        
-    cmpnum = length(cmplst);   
-    cmpinds = zeros(Nvorts,1);
+    cmpnum = 1+length(cmplst);   
+    %cmpinds = zeros(Nvorts,1);
     if lnode.no_chldrn > 0
-        dscnt_tree = cell(cmpnum+1,1);
-        dscnt_tree{1} = {tree_val{jj,2:5}};
-        for mm=1:cmpnum
-           dscnt_tree{mm+1} = {tree_val{cmplst(mm),2:5}};            
-           cmpinds = cmpinds + tree_val{cmplst(mm),1}.loc_list;           
-        end
-        tvec = tree_traverser_quick(xpos,zpos,gvals,ep,pval,dscnt_tree,cmpnum,Nvorts,linds);                 
+        dscnt_tree = cell(cmpnum,4);
+        dscnt_tree(1,:) = tree_val(jj,2:5);
+        dscnt_tree(2:cmpnum,:) = tree_val(cmplst,2:5);
+        tvec = tree_traverser_quick(xpos,zpos,gvals,ep,pval,dscnt_tree,cmpnum,Nvorts,linds,finds);                 
     else
        nninds = zeros(Nvorts,1);
        for mm=1:cmpnum
            nninds = nninds + tree_val{cmplst(mm),1}.loc_list;
        end
-       nninds = logical(nninds);
+       nninds = logical(nninds+finds);
        
        xlist = xpos(nninds);
        zlist = zpos(nninds);

@@ -51,6 +51,9 @@ for jj=1:nblcks
     npts = sum(indsl);
     
     loc_data.loc_list = indsl;
+    loc_data.xpos = xloc;
+    loc_data.zpos = zloc;
+    loc_data.gvals = gloc;
     loc_data.tpts = npts;
     loc_data.dx = dx;
     loc_data.dz = dz;
