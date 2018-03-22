@@ -27,15 +27,6 @@ indtmp = 0;
 
 for kk=2:nblcks
     branch = inc_tree(kk,:);
-    flat_branch = [branch{:}];
-    cnodes = cell2mat(flat_branch(1,:));
-    ccells = flat_branch(2:5,:);
-    cinds = [cnodes.tpts] > 0;
-    chldrn = logical([cnodes.no_chldrn]);
-    ccenters = [cnodes.center]';
-    ckvals = [cnodes.kvals];
-    disp(ccells)
-    pause
     for jj=1:4
         cnode = branch{jj}{1};        
         if  cnode.tpts > 0
