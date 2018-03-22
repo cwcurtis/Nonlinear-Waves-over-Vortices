@@ -22,24 +22,31 @@ indtst = cell(fnum,1);
 chldary = ones(fnum,1);
 cdcells = cell(fnum,4);
 kvsary = zeros(pval+1,fnum);
+otf = 1:4;
 indtmp = 0;
 
 for kk=2:nblcks
-    branch = inc_tree(kk,:);
-    for jj=1:4
-        cnode = branch{jj}{1};        
-        if  cnode.tpts > 0
-            indtmp = indtmp+1;   
-            centers(indtmp,:) = cnode.center;
-            indtst{indtmp} = cnode.num_list;
-            kvsary(:,indtmp) = cnode.kvals;            
-            if cnode.no_chldrn > 0 
-               cdcells(indtmp,:) = branch{jj}(2:5);                                       
-            else
-               chldary(indtmp) = 0;            
-            end
-        end        
-    end            
+    branch = inc_tree(kk,:);    
+    disp(branch)
+    flat_branch = [branch{:}].';
+    cnodes = cell2mat(flat_branch(:,1));    
+    cinds = [cnodes.tpts] > 0;
+    nterms = sum(cinds);
+    
+    if nterms > 0
+        ccenters = [cnodes.center]';
+        ckvals = [cnodes.kvals];
+        
+        centers(indtmp+1:indtmp+nterms,:) = ccenters(cinds,:);
+        kvsary(:,indtmp+1:indtmp+nterms)= ckvals(:,cinds);
+        
+        no_chldrn = logical(1-[cnodes.no_chldrn]);
+        no_chld_ind = otf(logical(cinds.*no_chldrn));   
+        chldary(indtmp+no_chld_ind) = 0;
+                
+        cdcells(indtmp+1:indtmp+nterms,:) = flat_branch(cinds,2:5);
+        indtmp = indtmp + nterms;
+    end 
 end
 
 inds_inc = (1:indtmp)';

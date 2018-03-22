@@ -15,17 +15,40 @@ function Kchild = tree_traverser_list_maker(inc_tree,nblcks,pval,Nvorts,prvinds)
 % local child list sees. 
 
 Kstore = cell(5,4);    
-fnum = (nblcks-1)*4;
+fnum = nblcks*4;
 
 centers = zeros(fnum,2);
 indtst = cell(fnum,1);
 chldary = ones(fnum,1);
 cdcells = cell(fnum,4);
 kvsary = zeros(pval+1,fnum);
+otf = 1:4;
 indtmp = 0;
 
 for kk=2:nblcks
     branch = inc_tree(kk,:);
+    flat_branch = [branch{:}];
+    
+    cnodes = cell2mat(flat_branch(1,:));
+    ccells = flat_branch(2:5,:);
+    
+    cinds = [cnodes.tpts] > 0;
+    
+    no_chldrn = logical(1-[cnodes.no_chldrn]);
+    no_chld_ind = otf(logical(cinds.*chldrn));
+    
+    ccenters = [cnodes.center]';
+    ckvals = [cnodes.kvals];
+    
+    nterms = sum(cinds);
+    centers(indtmp+1:indtmp+nterms,:) = ccenters(cinds,:);
+    kvsary(:,indtmp+1:indtmp+nterms)= ckvals(:,cinds);
+    chldary(indtmp+no_chld_ind) = 0;
+    cdcells(indtmp+1:indtmp+nterms,:) = ccells();
+    indtmp = indtmp + nterms;
+    
+    %{
+    pause    
     for jj=1:4
         cnode = branch{jj}{1};        
         if  cnode.tpts > 0
@@ -39,7 +62,8 @@ for kk=2:nblcks
                chldary(indtmp) = 0;            
             end
         end        
-    end            
+    end 
+    %}       
 end
 
 inds_inc = (1:indtmp)';
