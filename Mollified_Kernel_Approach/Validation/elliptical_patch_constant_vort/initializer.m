@@ -12,7 +12,7 @@ zpos = [];
 ovals = [];
 
 cfun = @(x,z) (x/av).^2 + (z/bv).^2;
-ofun = @(x,z) omega*exp(log(eps)*(cfun(x,z)).^18);
+ofun = @(x,z) omega*exp(log(eps)*(cfun(x,z)).^10);
 chi = @(r) 1./pi.*(2.*exp(-(r.^2))-.5*exp(-(r/sqrt(2)).^2));
 
 %% In the off chance I want ghost particles later. 

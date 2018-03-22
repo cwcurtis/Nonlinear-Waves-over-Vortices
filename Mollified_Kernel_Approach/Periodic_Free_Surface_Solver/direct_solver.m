@@ -1,12 +1,9 @@
-function nl = force_terms_on_molly_non_periodic(mu,gam,rval,u,gvals,Nvorts)
-m2p = mu/(2*pi);
-
-xpos = u(1:Nvorts);
-zpos = u(Nvorts+1:2*Nvorts);
+function nl = direct_solver(rval,xpos,zpos,gvals)
+ov2p = 1/(2*pi);
 
 dx = bsxfun(@minus,xpos,xpos');
-dz = gam*bsxfun(@minus,zpos,zpos');
-dzp = gam*bsxfun(@plus,zpos,zpos');
+dz = bsxfun(@minus,zpos,zpos');
+dzp = bsxfun(@plus,zpos,zpos');
 dx2 = dx.^2;
 
 diff = dx2 + dz.^2 + eye(size(dx));
@@ -20,7 +17,7 @@ scvp = (1-erp).*(1+2*erp)./diffp;
 Kx = -dz.*scv + dzp.*scvp;
 Kz = dx.*(scv-scvp);
 
-xdot = m2p*Kx*gvals;
-zdot = m2p/gam*Kz*gvals;
+xdot = ov2p*Kx*gvals;
+zdot = ov2p*Kz*gvals;
 
-nl = [xdot;zdot];
+nl = [xdot zdot];

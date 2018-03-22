@@ -16,8 +16,6 @@ vcnt = ceil(zt/dx) - floor(zb/dx);
 xpud = [];
 zpud = [];
 gvud = [];
-%disp('Circulation going in')
-%disp(sum(gvals))
 
 for jj = 1:hcnt + 1
     for kk = 1:vcnt + 1
@@ -82,16 +80,6 @@ for jj = 1:hcnt + 1
     end
 end
 
-%disp('Circulation coming out')
-%disp(sum(gvud))
-%{
-clf
-hold on
-plot(1:length(gvals),log10(abs(gvals)))
-plot(1:length(gvud),log10(abs(gvud)))
-hold off
-pause
-%}
 xpud = xpud';
 zpud = zpud';
 gvud = gvud';

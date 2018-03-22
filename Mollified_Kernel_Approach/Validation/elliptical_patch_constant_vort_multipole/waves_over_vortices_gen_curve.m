@@ -10,98 +10,51 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     bv = Rv;
     
     F = pi*omega*av*bv/gam;
-    pmesh = linspace(0,2*pi,2*Nx);
      
-    cp = cos(pmesh);
-    sp = sin(pmesh);    
-    
     [xpos,zpos,gvals,rval,Nvorts] = initializer(Nx,omega,gam,av,bv);
     
     dt = .1;
     nmax = round(tf/dt);
     
-    xtrack = xpos;
-    ztrack = zoff + zpos/gam;
-    gtrack = gvals;
+    zpos = zoff + zpos/gam;
     
-    inter = 2;
-    plot_count = 1;
-    no_of_evals = round(nmax/inter);
-    times = zeros(no_of_evals,1);
-    errors = zeros(no_of_evals,1);
-    Vcnt = zeros(no_of_evals+1,1);
-    Vcnt(1) = Nvorts;
+    inter = 10;
+    Nvortst = Nvorts;
+    gvalst = gvals;
+    ut = [xpos;zpos]; %velocity vector field
+    u = [xpos;zpos]; %velocity vector field
     
-    u0 = [xpos;zpos]; %velocity vector field
-        
-% % % % % % % % % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % % % % % % % % %
-    
-     for jj=1:nmax
-      
+     for jj=1:nmax      
         % Now update the vortex positions         
-        tic
-        ut = vort_update_on_molly_non_periodic(mu,1,rval,u0,gvals,Nvorts,dt);
-        toc
         
         tic
-        u = vort_update_multipole(mu,1,rval,u0,gvals,Nvorts,dt);   
+        u = vort_update_multipole(mu,gam,rval,u,gvals,Nvorts,dt);           
         toc
-        disp(norm(u(1:Nvorts)-ut(1:Nvorts))/norm(ut(1:Nvorts)))
-        disp(norm(u(Nvorts+1:2*Nvorts)-ut(Nvorts+1:2*Nvorts))/norm(ut(Nvorts+1:2*Nvorts)))
         
-        %clf 
+        %tic
+        %ut = vort_update_on_molly_non_periodic(mu,gam,rval,ut,gvalst,Nvortst,dt);           
+        %toc
         
-        %figure(1)
-        %scatter(u(1:Nvorts),u(Nvorts+1:2*Nvorts),markersize,'MarkerFaceColor','k')
-        
-        %figure(2)
-        %scatter(ut(1:Nvorts),ut(Nvorts+1:2*Nvorts),markersize,'MarkerFaceColor','r')
-        
-        %pause
+        %disp(norm(ut-u)/norm(ut))
         
         if(mod(jj,inter)==0)
-            times(plot_count) = (jj-1)*dt;
-            xpos = u(1:Nvorts);
-            zpos = zoff + u(Nvorts+1:2*Nvorts)/gam;
-            
-            tv = mu/gam*omega*av*bv/(av+bv)^2*(jj-1)*dt;
-            ca = cos(tv);
-            sa = sin(tv);
-            xxs = cp*av;
-            yxs = sp*bv;
-            xellip = xxs*ca - yxs*sa;
-            yellip = (xxs*sa + yxs*ca)/gam + zoff;
-            
-            error = interp_error(xpos,zpos,gvals,rval,gam,omega,av,bv,tv,zoff);
-            errors(plot_count) = error;
-                        
-            xtrack = [xtrack;xpos];
-            ztrack = [ztrack;zpos];
-            gtrack = [gtrack;gvals];
-            plot_count = plot_count + 1;
-            
-            Vcnt(plot_count) = Nvorts;   
-        
+            [xpost,zpost,gvalst] = recircer(gvalst,ut(1:Nvortst),ut(Nvortst+1:2*Nvortst),Nx);
+            Nvortst = length(gvalst);
+            disp('Number of Vortices is')
+            disp(Nvortst)
+            ut = zeros(2*Nvortst,1);
+            ut(1:Nvortst) = xpost;
+            ut(Nvortst+1:2*Nvortst) = zpost;            
         end
-        
-        if(mod(jj,2*inter)==0)
-            [xpud,zpud,gvud] = recircer(gvals,xpos,gam*(zpos-zoff),Nx);
-            Nvorts = length(gvud);
-            gvals = gvud;
+                
+        if(mod(jj,inter)==0)
+            [xpos,zpos,gvals] = recircer(gvals,u(1:Nvorts),u(Nvorts+1:2*Nvorts),Nx);
+            Nvorts = length(gvals);
+            disp('Number of Vortices is')
+            disp(Nvorts)
             u = zeros(2*Nvorts,1);
-            u(1:Nvorts) = xpud;
-            u(Nvorts+1:2*Nvorts) = zpud;            
+            u(1:Nvorts) = xpos;
+            u(Nvorts+1:2*Nvorts) = zpos;                    
         end
-            
-    end
-    
-    %toc
-    
-    %figure(2)
-    %plot(times,errors,'k-','LineWidth',2)
-    
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %    
-    
+     end     
 end

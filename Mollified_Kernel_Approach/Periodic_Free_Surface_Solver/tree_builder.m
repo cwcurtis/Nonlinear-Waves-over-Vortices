@@ -39,12 +39,7 @@ loc_data.tpts = npts;
 loc_data.dx = dx;
 loc_data.dz = dz;
 loc_data.center = [xc;zc];
-loc_data.farlst = [];
-loc_data.nearlst = [];
-loc_data.nodscndlst = [];
-loc_data.kcursf = [];        
-loc_data.xcfs = [];
-    
+
 if npts>0
    kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval);
 else

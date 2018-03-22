@@ -58,11 +58,6 @@ for jj=1:nblcks
     loc_data.tpts = npts;
     loc_data.dx = dx;
     loc_data.dz = dz;
-    loc_data.farlst = [];
-    loc_data.nearlst = [];
-    loc_data.nodscnlst = [];
-    loc_data.xcfs = [];
-    loc_data.kcursf = [];
     
     if npts>0
         kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval);

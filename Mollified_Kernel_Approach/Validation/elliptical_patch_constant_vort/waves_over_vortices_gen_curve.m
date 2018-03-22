@@ -17,7 +17,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     sp = sin(pmesh);    
     
     [xpos,zpos,gvals,rval,Nvorts] = initializer(Nx,omega,gam,av,bv);
-    simul_plot = 1; % Plot during computation.       0 - off, 1 - on
+    simul_plot = 0; % Plot during computation.       0 - off, 1 - on
     n_bdry = 0;     % Number of points in cicular boundary.
     markersize = 10;
     
@@ -61,23 +61,30 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     end
    
     tic
+    
     for jj=1:nmax
       
         % Now update the vortex positions                                   
+        u = gpuArray(u);
+        gvals = gpuArray(gvals);
+    
         u = vort_update_on_molly_non_periodic(mu,rval,u,gvals,Nvorts,dt);
-            
+        
+        u = gather(u);
+        gvals = gather(gvals);
+        
         if(mod(jj,inter)==0)
             times(plot_count) = (jj-1)*dt;
             xpos = u(1:Nvorts);
             zpos = zoff + u(Nvorts+1:2*Nvorts)/gam;
             
-            tv = mu/gam*omega*av*bv/(av+bv)^2*(jj-1)*dt;
-            ca = cos(tv);
-            sa = sin(tv);
-            xxs = cp*av;
-            yxs = sp*bv;
-            xellip = xxs*ca - yxs*sa;
-            yellip = (xxs*sa + yxs*ca)/gam + zoff;
+            %tv = mu/gam*omega*av*bv/(av+bv)^2*(jj-1)*dt;
+            %ca = cos(tv);
+            %sa = sin(tv);
+            %xxs = cp*av;
+            %yxs = sp*bv;
+            %xellip = xxs*ca - yxs*sa;
+            %yellip = (xxs*sa + yxs*ca)/gam + zoff;
             
             %error = interp_error(xpos,zpos,gvals,rval,gam,omega,av,bv,tv,zoff);
             %errors(plot_count) = error;
@@ -103,7 +110,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
             end          
             
         end 
-           
+                
         if(mod(jj,2*inter)==0)
             [xpud,zpud,gvud] = recircer(gvals,xpos,gam*(zpos-zoff),Nx);
             Nvorts = length(gvud);

@@ -1,13 +1,12 @@
-function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
+function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
-    cfun = @(x,z,gv,av,bv,zoff) (x.^2/av^2 + gv^2*(z-zoff).^2/bv^2);
-    avc = 4/25;
-    bvc = 1/25;
+    av = 2/25;
+    bv = 1/25;
     zoffc = .35;
-    F = pi*omega*avc*bvc/gam;
-    [xpos,zpos,gvals,Gamma,Nvorts] = initializer(Nx,F,cfun,gam,avc,bvc,zoffc);
+    F = pi*omega*av*bv/gam;
+    [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,bv,omega,zoffc);
     
     simul_plot = 0; % Plot during computation.       0 - off, 1 - on
     n_bdry = 0;     % Number of points in cicular boundary.
@@ -25,7 +24,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     
     Kmesh = [0:K-1 0 -K+1:-1]';
        
-    dt = .02;
+    dt = .05;
     nmax = round(tf/dt);
     
     L1 = -1i*tanh(pi.*gam.*Kmesh)./gam;
@@ -66,7 +65,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
     u = [eta;Q;xpos;zpos]; %velocity vector field
     
     % Make folder
-    S = make_folder(Nx/2,Nx,K,mu,gam,F,tf,Gamma);
+    S = make_folder(Nx/2,Nx,K,mu,gam,F,tf,F);
     filename = strcat(S, '/', '/waves_over_vortices.gif');
     clf
     
@@ -94,7 +93,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
         
         % Now update the vortex positions                                   KTT must be 2*KT because of periodicity!!
               
-        [u,xpos,zpos] = vort_update_on_molly_fourier(Xmesh,gam,mu,ep,F,u,gvals,L1,no_dno_term,Nvorts,Ntrunc,Ehdt,Edt,xpos,zpos,dt,2*KT);
+        [u,xpos,zpos] = vort_update_on_molly_fourier(Xmesh,gam,mu,ep,u,gvals,L1,no_dno_term,Nvorts,Ehdt,Edt,xpos,zpos,dt,2*KT);
        
         if(mod(jj,inter)==0)
             eta = u(1:KT);
@@ -143,7 +142,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
             end            
              
         end
-        %{
+        
         if(mod(jj,inter)==0)        
             [xpos,zpos,gvals] = recircer(gvals,xpos,zpos,Nx);
             Nvorts = length(xpos);
@@ -152,7 +151,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,ep,tf,Ntrunc)
             u(2*KT+1:2*KT+Nvorts) = xpos;
             u(2*KT+Nvorts+1:2*KT+2*Nvorts) = zpos;
         end
-        %}
+        
     end
     toc
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
