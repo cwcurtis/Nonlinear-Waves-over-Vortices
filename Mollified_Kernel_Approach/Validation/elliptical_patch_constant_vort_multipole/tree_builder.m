@@ -56,7 +56,7 @@ loc_data.kvals = kvals;
 Kloc = cell(5,1);
 
 if npts > mlvl         
-   loc_data.no_chldrn = 4;
+   loc_data.no_chldrn = 1;
    dnx = dx/2;
    dnz = dz/2;
    for ll=1:4

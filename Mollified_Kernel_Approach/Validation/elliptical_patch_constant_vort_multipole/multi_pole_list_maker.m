@@ -11,15 +11,6 @@ dz = tree_val{1,1}.dz;
 
 ctf = dx^2 + dz^2;
 
-centers = zeros(nblcks,2);
-kvsary = zeros(pval+1,nblcks);
-
-for kk=1:nblcks
-    cnode = tree_val{kk,1};
-    centers(kk,:) = cnode.center;
-    kvsary(:,kk) = cnode.kvals;                
-end
-
 for jj=1:nblcks
     lnode = tree_val{jj,1};
     farlst = [];
