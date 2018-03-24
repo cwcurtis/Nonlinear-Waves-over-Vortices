@@ -17,13 +17,7 @@ for jj=1:nblcks
     nearlst = [];
     nodscndlst = [];
     centers = [];
-    kvsary = [];
-    
-    lnode.farlst = farlst;
-    lnode.nearlst = nearlst;
-    lnode.nodscnlst = nodscndlst;
-    lnode.xcfs = centers;
-    lnode.kcursf = kvsary;
+    kvsary = [];    
     
     if lnode.tpts > 0
         xcc = lnode.center;
@@ -66,6 +60,5 @@ for jj=1:nblcks
             lnode.nodscndlst = nodscndlst;                    
         end
     end    
-    tree_val{jj,1} = lnode;
-            
+    tree_val{jj,1} = lnode;            
 end

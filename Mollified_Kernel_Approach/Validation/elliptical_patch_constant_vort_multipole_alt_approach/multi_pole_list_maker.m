@@ -49,13 +49,10 @@ for jj=1:nblcks
         lnode.kcursf = kvsary;
         lnode.xcfs = centers;
         
-        cmpnum = 1+length(nearlst);   
         if lnode.no_chldrn > 0
-            dscnt_tree = cell(cmpnum,4);
-            dscnt_tree(1,:) = tree_val(jj,2:5);
-            dscnt_tree(2:cmpnum,:) = tree_val(nearlst,2:5);         
-            
-            tree_val(jj,2:5) = tree_traverser_list_maker(dscnt_tree,cmpnum,pval,Nvorts,nodscndlst);                  
+            prnode = tree_val(jj,2:5);
+            dscnt_tree = tree_val(nearlst,2:5);                    
+            tree_val(jj,2:5) = tree_traverser_list_maker(prnode,dscnt_tree,pval,Nvorts,nodscndlst);                  
         else
             lnode.nodscndlst = nodscndlst;                    
         end

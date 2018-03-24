@@ -1,4 +1,4 @@
-function Kchild = tree_traverser_list_maker(inc_tree,nblcks,pval,Nvorts,prvinds)
+function Kchild = tree_traverser_list_maker(inc_prnt,inc_tree,pval,Nvorts,prvinds)
 
 % inc_tree - inc(coming)_tree containing header inc_tree{1,1:4}{1:5}
 % representing sibling children from common parent and
@@ -14,130 +14,97 @@ function Kchild = tree_traverser_list_maker(inc_tree,nblcks,pval,Nvorts,prvinds)
 % Create seperate lists for headers and children that everyone else in the
 % local child list sees. 
 
-Kstore = cell(5,4);    
-fnum = (nblcks-1)*4;
-
-centers = zeros(fnum,2);
-indtst = cell(fnum,1);
-chldary = ones(fnum,1);
-cdcells = cell(fnum,4);
-kvsary = zeros(pval+1,fnum);
-otf = 1:4;
-indtmp = 0;
-
-for kk=2:nblcks
-    branch = inc_tree(kk,:);    
-    disp(branch)
-    flat_branch = [branch{:}].';
-    cnodes = cell2mat(flat_branch(:,1));    
-    cinds = [cnodes.tpts] > 0;
-    nterms = sum(cinds);
-    
-    if nterms > 0
-        ccenters = [cnodes.center]';
-        ckvals = [cnodes.kvals];
-        
-        centers(indtmp+1:indtmp+nterms,:) = ccenters(cinds,:);
-        kvsary(:,indtmp+1:indtmp+nterms)= ckvals(:,cinds);
-        
-        no_chldrn = logical(1-[cnodes.no_chldrn]);
-        no_chld_ind = otf(logical(cinds.*no_chldrn));   
-        chldary(indtmp+no_chld_ind) = 0;
-                
-        cdcells(indtmp+1:indtmp+nterms,:) = flat_branch(cinds,2:5);
-        indtmp = indtmp + nterms;
-    end 
-end
-
-inds_inc = (1:indtmp)';
-
 % Build information and interactions for and between each child.
-
-mnodes = inc_tree(1,:);
-dx = mnodes{1}{1}.dx;
-dz = mnodes{1}{1}.dz; 
-ctf = dx^2+dz^2;
+flat_prnt = [inc_prnt{:}].';
+lnodes = flat_prnt(:,1);
+lheaders = [lnodes{:}];
+lkids = flat_prnt(:,2:5);
+has_kids = [lheaders.no_chldrn]>0;
+nnlsts = zeros(4);
 
 if ~isempty(prvinds)
     nodscndlst = {prvinds,prvinds,prvinds,prvinds};
 else
     nodscndlst = cell(4,1);
 end
-
-nnlsts = repmat(1:4,4,1);
-nnlsts = nnlsts - diag(diag(nnlsts));
-nncntrs = zeros(4,2);
-llsts = cell(4,1);
-nninds = (1:4)';
             
 for ll=1:4
-    lnode = mnodes{ll}{1};
-    numinds = lnode.num_list;
-    llsts{ll} = numinds;
-    nncntrs(ll,:) = lnode.center;
+    lnode = lheaders(ll);
     vcmp = [1:ll-1 ll+1:4];
-    if lnode.no_chldrn == 0 
-       nnlsts(:,ll) = 0;
-       if ~isempty(numinds)
-            for jj=1:3
-                nodscndlst{vcmp(jj)} = vertcat(nodscndlst{vcmp(jj)},numinds);
-            end
+    nnlsts(ll,vcmp) = has_kids(vcmp);
+    numinds = lnode.num_list;
+    if has_kids(ll) == 0 && lnode.tpts>0
+       for jj=1:3
+           nodscndlst{vcmp(jj)} = vertcat(nodscndlst{vcmp(jj)},numinds);       
        end
    end    
 end
 
-% Use very vectorized approach to determine distance of all child cells
-% wiwth all potential interaction cells.  
+Kstore = cell(5,4);    
 
-dxcntrs = repmat(nncntrs(:,1)',indtmp,1)-repmat(centers(1:indtmp,1),1,4);
-dzcntrs = repmat(nncntrs(:,2)',indtmp,1)-repmat(centers(1:indtmp,2),1,4);
-dsts = dxcntrs.^2 + dzcntrs.^2;
+flat_tree = [inc_tree{:,:}].';
+flag = 0;
+if ~isempty(flat_tree)
+    flag = 1;
+    headers = flat_tree(:,1);
+    headers = [headers{:}];
+    cinds = [headers.tpts] > 0;
+    indtmp = sum(cinds);
+    inds_inc = (1:indtmp)';
+    centers = [headers(cinds).center]';
+    kvsary = [headers(cinds).kvals];
+    cdcells = flat_tree(cinds,2:5);
+    chldary = [headers(cinds).no_chldrn]' > 0;
+    indtst = {headers.num_list};    
+end
 
-toofar = dsts > ctf;
-tooclose = logical(1-toofar);
+if flag == 1
+    dx = lheaders(1).dx;
+    dz = lheaders(1).dz; 
+    ctf = dx^2+dz^2;
+    nncntrs = [lheaders.center]';
+    dxcntrs = repmat(nncntrs(:,1)',indtmp,1)-repmat(centers(:,1),1,4);
+    dzcntrs = repmat(nncntrs(:,2)',indtmp,1)-repmat(centers(:,2),1,4);
+    dsts = dxcntrs.^2 + dzcntrs.^2;
+    toofar = dsts > ctf;
+    tooclose = logical(1-toofar);
+end
 
 for ll=1:4
-    lnode = mnodes{ll}{1};    
-    if lnode.tpts>0 
-        
+    lnode = lheaders(ll);    
+    if lheaders(ll).tpts>0 && flag == 1        
         if ~isempty(toofar) 
             myfar = toofar(:,ll);
             lnode.farlst = inds_inc(myfar);
             lnode.kcursf = kvsary(:,myfar);
             lnode.xcfs = centers(myfar,:);
-        end
-        
+        end        
         myclose = tooclose(:,ll);
-        cmplst = logical(myclose.*chldary(1:indtmp));
-        lnode.nearlst = inds_inc(cmplst);
-        
+        cmplst = logical(myclose.*chldary);
+        lnode.nearlst = inds_inc(cmplst);        
         frlst = logical(myclose - cmplst);        
         if sum(frlst)>0
            nodscndlst{ll} = vertcat(nodscndlst{ll},vertcat(indtst{frlst}));                
-        end                
-        
-        if lnode.no_chldrn > 0
-            % Here we descend further down the tree.
-            % look over nearest neighbors.
-            nnlst = nnlsts(ll,:)~=0;                
-            cfnum = sum(cmplst);
-            nnnum = sum(nnlst);
-            cmpnum = 1+cfnum+nnnum;
-            dscnt_tree = cell(cmpnum,4);            
-            dscnt_tree(1,:) = mnodes{ll}(2:5);
-            dscnt_tree(2:cfnum+1,:) = cdcells(cmplst,:);            
-            % Here we tack on nearest-neighbor among children interactions.           
-            if nnnum > 0
-                nnindr = nninds(nnlst);            
-                mnodesrem = mnodes(nnindr);            
-                for mm=1:nnnum
-                    dscnt_tree(cfnum+1+mm,:) = mnodesrem{mm}(2:5);
-                end                
-            end            
-            Kstore(2:5,ll) = tree_traverser_list_maker(dscnt_tree,cmpnum,pval,Nvorts,nodscndlst{ll});                                    
-        else
-            lnode.nodscndlst = nodscndlst{ll};            
-        end               
+        end                        
+    end
+    
+    if lnode.no_chldrn > 0
+       nnnum = sum(nnlsts(ll,:));
+       if flag == 1 && nnnum > 0
+          cfnum = sum(cmplst);         
+          cmpnum = cfnum+nnnum;            
+          dscnt_tree = cell(cmpnum,4);            
+          dscnt_tree(1:cfnum,:) = cdcells(cmplst,:);          
+          dscnt_tree(cfnum+1:cmpnum,:) = lkids(logical(nnlsts(ll,:)),:);          
+       elseif nnnum > 0
+          dscnt_tree = lkids(logical(nnlsts(ll,:)),:);            
+       else
+          dscnt_tree = cell(1,4);
+       end
+       prnode = lkids(ll,:);      
+       Kstore(2:5,ll) = tree_traverser_list_maker(prnode,dscnt_tree,pval,Nvorts,nodscndlst{ll});                                    
+    else
+       lnode.nodscndlst = nodscndlst{ll};            
     end
     Kstore{1,ll} = lnode;             
 end

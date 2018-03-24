@@ -15,13 +15,13 @@ function Kchild = tree_traverser_list_maker(inc_tree,nblcks,pval,Nvorts,prvinds)
 % local child list sees. 
 
 Kstore = cell(5,4);    
-fnum = nblcks*4;
+fnum = (nblcks-1)*4;
 
 centers = zeros(fnum,2);
 indtst = cell(fnum,1);
-kvsary = zeros(pval+1,fnum);
 chldary = ones(fnum,1);
 cdcells = cell(fnum,4);
+kvsary = zeros(pval+1,fnum);
 indtmp = 0;
 
 for kk=2:nblcks
@@ -33,8 +33,8 @@ for kk=2:nblcks
             centers(indtmp,:) = cnode.center;
             indtst{indtmp} = cnode.num_list;
             kvsary(:,indtmp) = cnode.kvals;            
-            if cnode.no_chldrn > 0 % Note, we implicitly are pruning empty cells as we go here.
-               cdcells(indtmp,:) = branch{jj}(2:5);                        
+            if cnode.no_chldrn > 0 
+               cdcells(indtmp,:) = branch{jj}(2:5);                                       
             else
                chldary(indtmp) = 0;            
             end
@@ -60,12 +60,11 @@ end
 nnlsts = repmat(1:4,4,1);
 nnlsts = nnlsts - diag(diag(nnlsts));
 nncntrs = zeros(4,2);
-llsts = cell(4,1);
-
+nninds = (1:4)';
+            
 for ll=1:4
     lnode = mnodes{ll}{1};
     numinds = lnode.num_list;
-    llsts{ll} = numinds;
     nncntrs(ll,:) = lnode.center;
     vcmp = [1:ll-1 ll+1:4];
     if lnode.no_chldrn == 0 
@@ -88,44 +87,30 @@ dsts = dxcntrs.^2 + dzcntrs.^2;
 toofar = dsts > ctf;
 tooclose = logical(1-toofar);
 
-% Iterate over children, compute FMM approximation, and then descend or 
-% finally compute where necessary.
-    
 for ll=1:4
     lnode = mnodes{ll}{1};    
-    lnode.farlst = [];
-    lnode.nearlst = [];
-    lnode.nodscndlst = [];
-    lnode.kcursf = [];        
-    lnode.xcfs = [];
-    if lnode.tpts>0 && ~isempty(toofar) 
-         
-        myfar = toofar(:,ll);
-        myclose = tooclose(:,ll);        
+    if lnode.tpts>0 
         
+        if ~isempty(toofar) 
+            myfar = toofar(:,ll);
+            lnode.farlst = inds_inc(myfar);
+            lnode.kcursf = kvsary(:,myfar);
+            lnode.xcfs = centers(myfar,:);
+        end
+        
+        myclose = tooclose(:,ll);
         cmplst = logical(myclose.*chldary(1:indtmp));
-        frlst = logical(myclose - cmplst);
+        lnode.nearlst = inds_inc(cmplst);
         
-        farlst = inds_inc(myfar);
-        nearlst = inds_inc(cmplst);
-        
-        kcurs = kvsary(:,myfar);
-        xcfs = centers(myfar,:);
-                        
+        frlst = logical(myclose - cmplst);        
         if sum(frlst)>0
            nodscndlst{ll} = vertcat(nodscndlst{ll},vertcat(indtst{frlst}));                
-        end
-                
-        lnode.farlst = farlst;
-        lnode.nearlst = nearlst;
-        lnode.kcursf = kcurs;
-        lnode.xcfs = xcfs;
-        % look over nearest neighbors.
-        nnlst = nnlsts(ll,:)~=0;                
+        end                
         
         if lnode.no_chldrn > 0
             % Here we descend further down the tree.
-            lnode.nodscndlst = [];
+            % look over nearest neighbors.
+            nnlst = nnlsts(ll,:)~=0;                
             cfnum = sum(cmplst);
             nnnum = sum(nnlst);
             cmpnum = 1+cfnum+nnnum;
@@ -134,13 +119,13 @@ for ll=1:4
             dscnt_tree(2:cfnum+1,:) = cdcells(cmplst,:);            
             % Here we tack on nearest-neighbor among children interactions.           
             if nnnum > 0
-                nninds = (1:4)';
-                nninds = nninds(nnlst);            
+                nnindr = nninds(nnlst);            
+                mnodesrem = mnodes(nnindr);            
                 for mm=1:nnnum
-                    dscnt_tree(cfnum+1+mm,:) = mnodes{nninds(mm)}(2:5);
-                end
+                    dscnt_tree(cfnum+1+mm,:) = mnodesrem{mm}(2:5);
+                end                
             end            
-            Kstore(2:5,ll) = tree_traverser_list_maker(dscnt_tree,cmpnum,pval,Nvorts,nodscndlst{ll});                        
+            Kstore(2:5,ll) = tree_traverser_list_maker(dscnt_tree,cmpnum,pval,Nvorts,nodscndlst{ll});                                    
         else
             lnode.nodscndlst = nodscndlst{ll};            
         end               

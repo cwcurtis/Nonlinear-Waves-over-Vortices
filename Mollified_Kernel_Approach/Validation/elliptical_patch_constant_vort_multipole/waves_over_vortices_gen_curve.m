@@ -31,11 +31,11 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
         u = vort_update_multipole(mu,gam,rval,u,gvals,Nvorts,dt);           
         toc
         
-        %tic
-        %ut = vort_update_on_molly_non_periodic(mu,gam,rval,ut,gvalst,Nvortst,dt);           
-        %toc
+        tic
+        ut = vort_update_on_molly_non_periodic(mu,gam,rval,ut,gvalst,Nvortst,dt);           
+        toc
         
-        %disp(norm(ut-u)/norm(ut))
+        disp(norm(ut-u)/norm(ut))
         
         if(mod(jj,inter)==0)
             [xpost,zpost,gvalst] = recircer(gvalst,ut(1:Nvortst),ut(Nvortst+1:2*Nvortst),Nx);

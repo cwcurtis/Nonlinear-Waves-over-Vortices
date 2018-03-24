@@ -39,11 +39,16 @@ loc_data.tpts = npts;
 loc_data.dx = dx;
 loc_data.dz = dz;
 loc_data.center = [xc;zc];
-
+loc_data.farlst = [];
+loc_data.nearlst = [];
+loc_data.nodscndlst = [];
+loc_data.kcursf = [];        
+loc_data.xcfs = [];
+    
 if npts>0
    kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval);
 else
-   kvals = [];
+   kvals = zeros(pval+1,1);
 end
 
 loc_data.kvals = kvals;
@@ -51,7 +56,7 @@ loc_data.kvals = kvals;
 Kloc = cell(5,1);
 
 if npts > mlvl         
-   loc_data.no_chldrn = 4;
+   loc_data.no_chldrn = 1;
    dnx = dx/2;
    dnz = dz/2;
    for ll=1:4

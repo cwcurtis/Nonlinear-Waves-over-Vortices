@@ -60,13 +60,11 @@ end
 nnlsts = repmat(1:4,4,1);
 nnlsts = nnlsts - diag(diag(nnlsts));
 nncntrs = zeros(4,2);
-llsts = cell(4,1);
 nninds = (1:4)';
             
 for ll=1:4
     lnode = mnodes{ll}{1};
     numinds = lnode.num_list;
-    llsts{ll} = numinds;
     nncntrs(ll,:) = lnode.center;
     vcmp = [1:ll-1 ll+1:4];
     if lnode.no_chldrn == 0 
