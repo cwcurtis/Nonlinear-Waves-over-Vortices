@@ -1,4 +1,4 @@
-function S = make_folder(rows,cols,K,mu,gam,F,tf)
+function S = make_folder(rows,cols,mu,gam,F,tf)
 
 kk = 1;
 
@@ -7,7 +7,7 @@ S(regexp(S,'[.]'))=[];
 temp = S;
 
 while isequal(exist(temp,'dir'),7)
-    temp = [S '_(' num2str(kk) ')'];
+    temp = [S ' _(' num2str(kk) ')'];
     kk = kk+1;
 end
 

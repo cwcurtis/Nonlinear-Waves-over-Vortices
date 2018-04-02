@@ -4,8 +4,8 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
     Rv = 1/25;
-    zoff = .25;
-    axs = 2;
+    zoff = .35;
+    axs = 3;
     av = Rv*axs;
     bv = Rv;
     
@@ -19,35 +19,34 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     zpos = zoff + zpos/gam;
     
     inter = 10;
-    Nvortst = Nvorts;
-    gvalst = gvals;
-    ut = [xpos;zpos]; %velocity vector field
+    plot_count = 1;
+    no_of_evals = round(nmax/inter);
+    Vcnt = zeros(no_of_evals+1,1);
+    Vcnt(1) = Nvorts;
+    xtrack = xpos;
+    ztrack = zpos;
+    gtrack = gvals;
+    
     u = [xpos;zpos]; %velocity vector field
     
-     for jj=1:nmax      
+    % Make folder
+    S = make_folder(Nx/2,Nx,mu,gam,F,tf);
+    clf
+    n_bdry = 0;     % Number of points in cicular boundary.
+    markersize = 10;
+        
+    for jj=1:nmax      
         % Now update the vortex positions         
-        
-        tic
         u = vort_update_multipole(mu,gam,rval,u,gvals,Nvorts,dt);           
-        toc
-        
-        tic
-        ut = vort_update_on_molly_non_periodic(mu,gam,rval,ut,gvalst,Nvortst,dt);           
-        toc
-        
-        disp(norm(ut-u)/norm(ut))
-        
+            
         if(mod(jj,inter)==0)
-            [xpost,zpost,gvalst] = recircer(gvalst,ut(1:Nvortst),ut(Nvortst+1:2*Nvortst),Nx);
-            Nvortst = length(gvalst);
-            disp('Number of Vortices is')
-            disp(Nvortst)
-            ut = zeros(2*Nvortst,1);
-            ut(1:Nvortst) = xpost;
-            ut(Nvortst+1:2*Nvortst) = zpost;            
-        end
-                
-        if(mod(jj,inter)==0)
+            plot_count = plot_count + 1;
+            
+            xtrack = [xtrack;xpos];
+            ztrack = [ztrack;zpos];
+            gtrack = [gtrack;gvals];
+            Vcnt(plot_count) = Nvorts;            
+        
             [xpos,zpos,gvals] = recircer(gvals,u(1:Nvorts),u(Nvorts+1:2*Nvorts),Nx);
             Nvorts = length(gvals);
             disp('Number of Vortices is')
@@ -56,5 +55,8 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
             u(1:Nvorts) = xpos;
             u(Nvorts+1:2*Nvorts) = zpos;                    
         end
-     end     
+    end     
+     
+    figure(1)
+    gif_my_gif(xtrack,ztrack,gtrack,n_bdry,Vcnt,plot_count,S,markersize);    
 end

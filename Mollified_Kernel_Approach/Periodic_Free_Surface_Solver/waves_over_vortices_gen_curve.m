@@ -2,7 +2,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
-    av = 2/25;
+    av = 3/25;
     bv = 1/25;
     zoffc = .35;
     F = pi*omega*av*bv/gam;
@@ -24,7 +24,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     
     Kmesh = [0:K-1 0 -K+1:-1]';
        
-    dt = .05;
+    dt = .1;
     nmax = round(tf/dt);
     
     L1 = -1i*tanh(pi.*gam.*Kmesh)./gam;
@@ -48,7 +48,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     ztrack = zpos;
     gtrack = gvals;
     
-    inter = 10;
+    inter = 2;
     plot_count = 1;
     no_of_evals = round(nmax/inter);
     eta_plot = zeros(KT,no_of_evals+1);
@@ -65,8 +65,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     u = [eta;Q;xpos;zpos]; %velocity vector field
     
     % Make folder
-    S = make_folder(Nx/2,Nx,K,mu,gam,F,tf,F);
-    filename = strcat(S, '/', '/waves_over_vortices.gif');
+    S = make_folder(Nx/2,Nx,K,mu,gam,F,tf);
     clf
     
 % % % % % % % % % % % % % % % % % % % % % % % %
@@ -144,7 +143,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
         end
         
         if(mod(jj,inter)==0)        
-            [xpos,zpos,gvals] = recircer(gvals,xpos,zpos,Nx);
+            [xpos,zpos,gvals] = recircer_bndry(gvals,xpos,zpos,Nx);
             Nvorts = length(xpos);
             disp('Current number of vortices is')
             disp(Nvorts)
@@ -169,7 +168,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     % Animate waves over vortices
     if ~simul_plot
         figure(1)
-        gif_my_gif(Xmesh,eta_plot,xtrack,ztrack,gtrack,n_bdry,Vcnt,plot_count,filename,markersize);
+        gif_my_gif(Xmesh,eta_plot,xtrack,ztrack,gtrack,n_bdry,Vcnt,plot_count,S,markersize);
     end
 
     % Plot the power spectrum

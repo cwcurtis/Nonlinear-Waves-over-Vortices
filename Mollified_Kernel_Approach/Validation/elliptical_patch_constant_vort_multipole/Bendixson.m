@@ -1,14 +1,13 @@
-function Bendixson(Xmesh,eta,xpos,zpos,gvals,markersize)
-    plot([Xmesh;1],[eta;eta(1)]+1,'k','LineWidth',2)
+function Bendixson(xpos,zpos,gvals,markersize)
+    clf 
     hold on
     mgv = max(abs(gvals));
     
     pgsinds = gvals > 0;
     gps = gvals(pgsinds)/mgv;
-    
-    xpsig = xpos(pgsinds);
-    zpsig = zpos(pgsinds);       
-    scatter(xpsig,zpsig,markersize,[ones(length(gps),1) 1-gps 1-gps],'filled')
+    xps = xpos(pgsinds);
+    zps = zpos(pgsinds);    
+    scatter(xps,zps,markersize,[ones(length(gps),1) 1-gps 1-gps],'filled')
     
     %{
     ngsinds = gvals < 0;
@@ -19,11 +18,10 @@ function Bendixson(Xmesh,eta,xpos,zpos,gvals,markersize)
     %}
     
     hold off
-    
     h = set(gca,'FontSize',30);
     set(h,'Interpreter','LaTeX')
     xlabel('x','Interpreter','LaTeX','FontSize',30)
     ylabel('z','Interpreter','LaTeX','FontSize',30)
     xlim([-1 1])
-    ylim([0 1.25])
+    ylim([0 1])
 end
