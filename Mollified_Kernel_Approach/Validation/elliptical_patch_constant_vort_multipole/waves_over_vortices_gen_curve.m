@@ -5,7 +5,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     % time stepping scheme.
     Rv = 1/25;
     zoff = .35;
-    axs = 3;
+    axs = 2;
     av = Rv*axs;
     bv = Rv;
     
@@ -30,7 +30,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     u = [xpos;zpos]; %velocity vector field
     
     % Make folder
-    S = make_folder(Nx/2,Nx,mu,gam,F,tf);
+    S = make_folder(Nx/2,Nx,mu,gam,F,tf,av/bv);
     clf
     n_bdry = 0;     % Number of points in cicular boundary.
     markersize = 10;

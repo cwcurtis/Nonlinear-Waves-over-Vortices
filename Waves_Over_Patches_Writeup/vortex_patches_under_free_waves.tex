@@ -110,7 +110,7 @@ We use the circularly symmetric, compactly supported vorticity profile
 \[
 \omega(r) = \omega_{0}\left\{  \ba{rl} \left(1-\frac{r^{2}}{R_{v}^{2}}\right)^{3} & r\leq R_{v} \\ 0 & r>R_{v} \ea\right.
 \] 
-for the purposes of validation.  In the absence of any boundaries or free-surfaces, this profile should effectively remain constant in time, thereby allowing us to determine the accuracy of our point-vortex with regridding method.  
+for the purposes of validation.  In the absence of any boundaries or free-surfaces, this profile should effectively remain constant in time, thereby allowing us to determine the accuracy of our point-vortex with regridding method.  {\bf I'll put the obligatory figures here later, but it all works.}
 \section*{Numerical Experiments}
 We now turn to the study of the Kirchoff elliptical vortices \cite{mitchell,crosby} and how their dynamics is influenced by the impact of free surface waves.  In the shallow water scalings used above, a Kirchoff elliptical vortex is a vortex patch with constant vorticity $\omega$ and support within the elliptical disc
 \[
@@ -128,18 +128,30 @@ To generate numerical simulations then, we first note that the discontinuity in 
 \]
 where $\mbox{eps}$ denotes machine precision, which is approximately $2\times 10^{-16}$ on most 64-bit computers.  Note, this vorticity profile only has support on the original elliptical disc, has essentially constant vorticty $\omega_{0}$ throughout the elliptical disc, but smoothly vanishes at the boundary.  
 
-The vorticity function is sampled over a uniform mesh of step size $dx = dz = 2.5 \times 10^{-3}$, and the initial circulations $\Gamma_{j}$ are found by solving the linear system in Equation \eqref{discvort}.  We use a fourth order Runga-Kutta scheme with a time step of $dt = 10^{-1}$ and an integrating factor to address the dispersion introduced by the free-surface.  The regridding is done every ten time steps to address the shear-induced distortion of the relative separation of the point-vortices.  To cope with the increasing number of vortices this introduces, we use a FMM to make the evaluation of the velocities induced by the vortices scale like $\mathcal{O}(N\log(N))$.  We note that in order to improve performance, we remove the mollification over the well-separated vortices in the FMM scheme, saving mollification only between nearest-neighbors in the FMM scheme.  The impact of this choice on the physics is negligible.  Lastly, a pseudo-spectral in space scheme is used with $K_{T}=256$ modes over a domain size of $L=2$, so that the free surface is sampled at every $1/128$ steps.   
+The vorticity function is sampled over a uniform mesh of step size $dx = dz = 2.5 \times 10^{-3}$, and the initial circulations $\Gamma_{j}$ are found by solving the linear system in Equation \eqref{discvort}.  We use a fourth order Runga-Kutta scheme with a time step of $dt = 10^{-1}$ and an integrating factor to address the dispersion introduced by the free-surface.  The regridding is done every five time steps to address the shear-induced distortion of the relative separation of the point-vortices.  To cope with the increasing number of vortices this introduces, we use a FMM to make the evaluation of the velocities induced by the vortices scale like $\mathcal{O}(N\log(N))$.  We note that in order to improve performance, we remove the mollification over the well-separated vortices in the FMM scheme, saving mollification only between nearest-neighbors in the FMM scheme.  The impact of this choice on the physics is negligible.  Lastly, a pseudo-spectral in space scheme is used with $K_{T}=256$ modes over a domain size of $L=2$, so that the free surface is sampled at every $1/128$ steps.   
 
-We now present results for which $a=3$, $b=1$, $z_{c}=.35$, $\omega_{0}=5$  This puts us on the cusp of  instability for a patch, however, as we see in Figure \ref{fig:vortprofiles}
+We now present results for which $a=2$, $b=1$, $z_{c}=.35$, $\omega_{0}=5$.  This puts us well within the stability regime for a patch, which is well-reflected in the patch dynamics seen in Figure \ref{fig:vortprofilesstab}.  Note, if Figures \ref{fig:vortprofilesstab} (c) and (d), while the free surface is removed, the solid boundary along $z=0$ is still present, thereby allowing for a relatively direct examination of the impact of the free surface on the patch.  We see that the surface induces relatively significant deformations of the patch, though it does not seem to induce strong enough variations to manifest instabilities.  
 \begin{figure}[!h]
 \begin{tabular}{cc}
-\includegraphics[width=.5\textwidth]{rows_400_cols_800_K_128_mu_pt1_gam_pt31623_F_pt23843_tf_5.png}	& \includegraphics[width=.5\textwidth]{rows_400_cols_800_K_128_mu_pt1_gam_pt31623_F_pt23843_tf_10}\\
+\includegraphics[width=.5\textwidth]{rows_200_cols_400_K_128_mu_pt01_gam_pt031623_F_015895_tf_5_elp_2.png}	& \includegraphics[width=.5\textwidth]{rows_200_cols_400_K_128_mu_pt01_gam_pt031623_F_015895_tf_10_elp_2.png}\\
 (a) $t_{f}=5$ & (b) $t_{f}=10$\\
-\includegraphics[width=.5\textwidth]{rows_400_cols_800_mu_pt1_gam_pt31623_F_pt23843_tf_5.png}	& \includegraphics[width=.5\textwidth]{rows_400_cols_800_mu_pt1_gam_pt31623_F_pt23843_tf_10}\\
+\includegraphics[width=.5\textwidth]{rows_200_cols_400_mu_pt01_gam_pt031623_F_015895_tf_5_elp2.png}	& \includegraphics[width=.5\textwidth]{rows_200_cols_400_mu_pt01_gam_pt031623_F_015895_tf_10_elp2.png}\\
+(c) $t_{f}=5$& (d) $t_{f}=10$
+\end{tabular}	
+\caption{Plots of an elliptical vortex patch with $a=2$, $b=1$, $\omega_{0}=5$ with a free-surface present ((a) and (b)) and without one present ((c) and (d)).  }
+\label{fig:vortprofilesstab}
+\end{figure}  
+
+In contrast to the stable case above, we now let $a=3$, $b=1$, $z_{c}=.35$, $\omega_{0}=5$, which puts us on the cusp of  instability for a patch.  As we see in Figure \ref{fig:vortprofilesinstab}, this instability does not appear unless the free-surface is there to act as a pressure perturbation (compare Figures \ref{fig:vortprofilesinstab} (a) and (b) to Figures \ref{fig:vortprofilesinstab} (c) and (d)).  As can be seen, the impact of the free-surface is more significant than in the stable case seen above.  In particular, we see that filaments of vorticity are produced by the pressure fluctuations corresponding to the oscillations of the surface.  
+\begin{figure}[!h]
+\begin{tabular}{cc}
+\includegraphics[width=.5\textwidth]{rows_200_cols_400_K_128_mu_pt01_gam_pt031623_F_023843_tf_5.png}	& \includegraphics[width=.5\textwidth]{rows_200_cols_400_K_128_mu_pt01_gam_pt031623_F_023843_tf_10.png}\\
+(a) $t_{f}=5$ & (b) $t_{f}=10$\\
+\includegraphics[width=.5\textwidth]{rows_200_cols_400_mu_pt01_gam_pt031623_F_023843_tf_5.png}	& \includegraphics[width=.5\textwidth]{rows_200_cols_400_mu_pt01_gam_pt031623_F_023843_tf_10.png}\\
 (c) $t_{f}=5$& (d) $t_{f}=10$
 \end{tabular}	
 \caption{Plots of an elliptical vortex patch with $a=3$, $b=1$, $\omega_{0}=5$ with a free-surface present ((a) and (b)) and without one present ((c) and (d)).  }
-\label{fig:vortprofiles}
+\label{fig:vortprofilesinstab}
 \end{figure}  
 \bibliography{waves_over_vortices}
 \bibliographystyle{unsrt}

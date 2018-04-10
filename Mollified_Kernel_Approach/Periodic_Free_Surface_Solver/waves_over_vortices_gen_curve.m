@@ -2,8 +2,10 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
-    av = 3/25;
-    bv = 1/25;
+    a = 2;
+    b = 1;
+    av = a/25;
+    bv = b/25;
     zoffc = .35;
     F = pi*omega*av*bv/gam;
     [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,bv,omega,zoffc);
@@ -48,7 +50,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     ztrack = zpos;
     gtrack = gvals;
     
-    inter = 2;
+    inter = 5;
     plot_count = 1;
     no_of_evals = round(nmax/inter);
     eta_plot = zeros(KT,no_of_evals+1);
@@ -65,7 +67,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     u = [eta;Q;xpos;zpos]; %velocity vector field
     
     % Make folder
-    S = make_folder(Nx/2,Nx,K,mu,gam,F,tf);
+    S = make_folder(Nx/2,Nx,K,mu,gam,F,tf,a/b);
     clf
     
 % % % % % % % % % % % % % % % % % % % % % % % %
