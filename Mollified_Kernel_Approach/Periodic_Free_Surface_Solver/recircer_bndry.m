@@ -32,8 +32,8 @@ if isempty(zhigh)
     usect = 0;
 end
 
-jjl = floor((xl+1)/dx)-1;
-jju = ceil((xr+1)/dx)+1;
+jjl = max(floor((xl+1)/dx)-1,1);
+jju = min(ceil((xr+1)/dx)+1,Nx);
 
 kkl = max(floor(zb/dx)-1,2);
 kku = min(ceil(zt/dx)+1,ceil(.9/dx)-1);

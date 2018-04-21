@@ -75,12 +75,9 @@ for jj=1:length(Xmesh)
     zvec = 1/2*gvals.*( fphiz(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
     zveca = 1/2*gvals.*( fphiza(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
     
-    %phix(jj) = F*sum( xvec );
-    %phiz(jj) = F*sum( zvec );    
     phix(jj) = sum( xvec );
     phiz(jj) = sum( zvec );
     Pv(jj) = phiz(jj) - mu*gam*etax(jj).*phix(jj);
-    %Ev(jj) = F*sum((xdot.*xvec + gam*zdot.*zveca))-mu*(phix(jj)^2 + phiz(jj)^2)/2;
     Ev(jj) = sum((xdot.*xvec + gam*zdot.*zveca))-mu*(phix(jj)^2 + phiz(jj)^2)/2;
 end
 gm = mu*gam;
