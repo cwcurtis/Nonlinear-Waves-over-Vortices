@@ -1,13 +1,15 @@
-function nl = force_terms_on_molly_fourier(Xmesh,gam,mu,ep,u,gvals,L1,no_dno_term,Nvorts)
+function nl = force_terms_on_molly_fourier(Xmesh,gam,mu,ep,u,gvals,L1,no_dno_term,sig,Mx,Nvorts)
 
 KT = length(Xmesh);
 K = KT/2;
+%pM = pi/Mx;
+p2M = pi/(2*Mx);
 
 Kc = floor(2*K/3);
 Kuc = 2*K-Kc+1;
 Kc = Kc + 1;
 
-Kmesh = [0:K-1 0 -K+1:-1]';
+Kmesh = 1/Mx*[0:K-1 0 -K+1:-1]';
 Dx = pi*1i*Kmesh; 
 
 eta = u(1:KT);
@@ -29,29 +31,39 @@ Ev = zeros(length(Xmesh),1);
 phix = zeros(length(Xmesh),1);
 phiz = zeros(length(Xmesh),1);
 
-fphiz = @(x,z,zj) sin(pi*x).*sinh(pi*gam*z).*sinh(pi*gam*zj)./( ( cosh(pi*gam*(z-zj)) - cos(pi*x) ).*( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
-fphiza = @(x,z,zj) sin(pi*x).*(cosh(pi*gam*zj).*cosh(pi*gam*z) - cos(pi*x))./( ( cosh(pi*gam*(z-zj)) - cos(pi*x) ).*( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
-fphix = @(x,z,zj) sinh(pi*gam*zj).*(cosh(pi*gam*zj) - cosh(pi*gam*z).*cos(pi*x))./( (cosh(pi*gam*(z-zj)) - cos(pi*x)).*( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
+%fphiz = @(x,z,zj) sin(pM*x).*sinh(pM*gam*z).*sinh(pM*gam*zj)./( ( cosh(pM*gam*(z-zj)) - cos(pM*x) ).*( cosh(pM*gam*(z+zj)) - cos(pM*x) ) );
+%fphiza = @(x,z,zj) sin(pM*x).*(cosh(pM*gam*zj).*cosh(pM*gam*z) - cos(pM*x))./( ( cosh(pM*gam*(z-zj)) - cos(pM*x) ).*( cosh(pM*gam*(z+zj)) - cos(pM*x) ) );
+%fphix = @(x,z,zj) sinh(pM*gam*zj).*(cosh(pM*gam*zj) - cosh(pM*gam*z).*cos(pM*x))./( (cosh(pM*gam*(z-zj)) - cos(pM*x)).*( cosh(pM*gam*(z+zj)) - cos(pM*x) ) );
 
-fpsix = @(x,z,zj) -.25*sin(pi*x).*( 1./( cosh(pi*gam*(z-zj)) - cos(pi*x) ) + 1./( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
-fpsiz = @(x,z,zj) -.25*( sinh(pi*gam*(z-zj))./( cosh(pi*gam*(z-zj)) - cos(pi*x) ) + sinh(pi*gam*(z+zj))./( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
+%fpsix = @(x,z,zj) -.25*sin(pM*x).*( 1./( cosh(pi*gam*(z-zj)) - cos(pM*x) ) + 1./( cosh(pi*gam*(z+zj)) - cos(pM*x) ) );
+%fpsiz = @(x,z,zj) -.25*( sinh(pM*gam*(z-zj))./( cosh(pM*gam*(z-zj)) - cos(pM*x) ) + sinh(pM*gam*(z+zj))./( cosh(pM*gam*(z+zj)) - cos(pM*x) ) );
 
-ftpsix = @(x,z,zj) -.25*sin(pi*x).*( 1./( cosh(pi*gam*(z-zj)) - cos(pi*x) ) - 1./( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
-ftpsiz = @(x,z,zj) -.25*( sinh(pi*gam*(z-zj))./( cosh(pi*gam*(z-zj)) - cos(pi*x) ) - sinh(pi*gam*(z+zj))./( cosh(pi*gam*(z+zj)) - cos(pi*x) ) );
+%ftpsix = @(x,z,zj) -.25*sin(pM*x).*( 1./( cosh(pM*gam*(z-zj)) - cos(pM*x) ) - 1./( cosh(pM*gam*(z+zj)) - cos(pM*x) ) );
+%ftpsiz = @(x,z,zj) -.25*( sinh(pM*gam*(z-zj))./( cosh(pM*gam*(z-zj)) - cos(pM*x) ) - sinh(pM*gam*(z+zj))./( cosh(pM*gam*(z+zj)) - cos(pM*x) ) );
+
+pervel = @(x,z) 1/(4*Mx)*cot(p2M*(x+1i*gam*z));
+fphiz = @(x,z,zj) real(pervel(x,z-zj)-pervel(x,z+zj));
+fphiza = @(x,z,zj) real(pervel(x,z-zj)+pervel(x,z+zj));
+fphix = @(x,z,zj) imag(pervel(x,z-zj)-pervel(x,z+zj));
+
+fpsix = @(x,z,zj) -real(pervel(x,z-zj)+pervel(x,z+zj));
+fpsiz = @(x,z,zj) imag(pervel(x,z-zj)+pervel(x,z+zj));
+
+ftpsix = @(x,z,zj) -real(pervel(x,z-zj)-pervel(x,z+zj));
+ftpsiz = @(x,z,zj) imag(pervel(x,z-zj)-pervel(x,z+zj));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-if Nvorts < 2024
-    veloc = direct_solver(ep,xpos,gam*zpos,gvals);
-else
+%if Nvorts < 2024
+%    veloc = direct_solver_periodic(ep,xpos,gam*zpos,gvals,Mx);
+%else
     pval = 10;
-    tree_vals = multi_pole_kernel_build(xpos,gam*zpos,gvals,pval,Nvorts);
+    tree_vals = multi_pole_kernel_build(xpos,gam*zpos,gvals,pval,Mx,Nvorts);
     tree_vals = multi_pole_list_maker(tree_vals,pval,Nvorts);
-    veloc = multi_pole_kernel_quick(xpos,gam*zpos,gvals,ep,pval,tree_vals);
-    veloc = veloc/(2*pi);
-end
+    veloc = multi_pole_kernel_quick(xpos,gam*zpos,gvals,ep,pval,Mx,tree_vals);    
+%end
 
-xdot = veloc(:,1);
-zdot = veloc(:,2);
+xdot = 1/(4*Mx)*veloc(:,1);
+zdot = 1/(4*Mx)*veloc(:,2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 for jj=1:Nvorts   
@@ -62,23 +74,22 @@ for jj=1:Nvorts
     tpsix = ftpsix(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
     tpsiz = ftpsiz(Xmesh-xpos(jj),1+mu*eta,zpos(jj));
         
-    bp1 = 2*sum(gam*dno.*psix + Q.*psiz)/KT;
-    bp2 = 2*sum(gam*dno.*tpsiz - Q.*tpsix)/KT; 
+    bp1 = 2*Mx*sum(gam*dno.*psix + Q.*psiz)/KT;
+    bp2 = 2*Mx*sum(gam*dno.*tpsiz - Q.*tpsix)/KT; 
     
     xdot(jj) = real(mu*xdot(jj) - mu*bp1);
     zdot(jj) = real(mu/gam*zdot(jj) - mu/gam*bp2);    
-    
 end
 
 for jj=1:length(Xmesh)
-    xvec = 1/2*gvals.*( fphix(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
-    zvec = 1/2*gvals.*( fphiz(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
-    zveca = 1/2*gvals.*( fphiza(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
+    xvec = gvals.*( fphix(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
+    zvec = gvals.*( fphiz(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
+    zveca = gvals.*( fphiza(Xmesh(jj)-xpos,1 + mu*eta(jj),zpos) );
     
     phix(jj) = sum( xvec );
     phiz(jj) = sum( zvec );
     Pv(jj) = phiz(jj) - mu*gam*etax(jj).*phix(jj);
-    Ev(jj) = sum((xdot.*xvec + gam*zdot.*zveca))-mu*(phix(jj)^2 + phiz(jj)^2)/2;
+    Ev(jj) = sum((xdot.*xvec + gam*zdot.*zveca))-mu*(phix(jj)^2 + phiz(jj)^2)/2;    
 end
 gm = mu*gam;
 
@@ -102,10 +113,12 @@ term1 = fft(term1);
 term1(Kc:Kuc) = 0;
 term1 = real(ifft(term1));
 
-nl2 = (Ev - mu./(1+(gm*etax).^2).*( .5*Q.^2 - mu*gam*(gam*dno+Pv).*term1 +...
-                                     phix.*(Q - gam*gm*etax.*dno) - .5*gam*dno.*(2*Pv + gam*dno) + phiz.*(gm*term1+gam*dno) ));
+stterm = real(ifft(Dx.*fft(etax./sqrt(1+(gm*etax).^2))));
 
-nl1 = fft(dnonl) + fft(Pv)/gam;
+nl2 = (Ev - mu./(1+(gm*etax).^2).*( .5*Q.^2 - mu*gam*(gam*dno+Pv).*term1 +...
+                                     phix.*(Q - gam*gm*etax.*dno) - .5*gam*dno.*(2*Pv + gam*dno) + phiz.*(gm*term1+gam*dno) ) + sig*stterm);
+
+nl1 = fft(dnonl + Pv/gam);
 nl2 = Dx.*fft(nl2);
 
 % De-alias Bernoulli equation nonlinearity on our way out of this

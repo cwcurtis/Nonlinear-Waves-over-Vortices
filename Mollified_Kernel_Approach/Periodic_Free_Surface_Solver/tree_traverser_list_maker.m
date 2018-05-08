@@ -21,7 +21,7 @@ centers = zeros(fnum,2);
 indtst = cell(fnum,1);
 chldary = ones(fnum,1);
 cdcells = cell(fnum,4);
-kvsary = zeros(pval+1,fnum);
+kvsary = zeros(pval+2,fnum);
 indtmp = 0;
 
 for kk=2:nblcks

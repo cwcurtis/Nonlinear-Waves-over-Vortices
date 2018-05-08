@@ -1,4 +1,4 @@
-function nl = force_terms_on_molly_fourier(Xmesh,Mx,gam,mu,u,L1,no_dno_term)
+function nl = force_terms(Xmesh,Mx,gam,mu,u,L1,no_dno_term)
 
 KT = length(Xmesh);
 K = KT/2;

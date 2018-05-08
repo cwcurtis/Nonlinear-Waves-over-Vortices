@@ -4,5 +4,5 @@ function plot_energy(t,S,times,p1,p2,p3)
     h = set(gca,'FontSize',30);
     set(h,'Interpreter','LaTeX')
     xlabel('$t$','Interpreter','LaTeX','FontSize',30)
-    savefig(strcat(S, '/', 'fig3'))
+    savefig(strcat(S, '/', 'energy'))
 end

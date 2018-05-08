@@ -1,4 +1,4 @@
-function Kmaster = multi_pole_kernel_build(xpos,zpos,gvals,pval,Nvorts)
+function Kmaster = multi_pole_kernel_build(xpos,zpos,gvals,pval,Mx,Nvorts)
 
 % Build kd-tree structure from xpos,zpos
 xmin = min(xpos);
@@ -62,7 +62,7 @@ for jj=1:nblcks
     loc_data.kcursf = [];
     
     if npts>0
-        kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval);
+        kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval,Mx);
     else
         kvals = zeros(pval+1,1);
     end
@@ -81,7 +81,7 @@ for jj=1:nblcks
            xnr = xl + (ncol+1)*dnx;
            znt = zt - nrow*dnz;
            znb = zt - (nrow+1)*dnz;
-           Kchild = tree_builder(xpos,zpos,mlvl,gvals,xnl,xnr,znb,znt,pval,numinds,Nvorts);           
+           Kchild = tree_builder(xpos,zpos,mlvl,gvals,xnl,xnr,znb,znt,pval,Mx,numinds,Nvorts);           
            Kmaster{jj,ll+1} = Kchild;           
        end              
     else

@@ -11,8 +11,10 @@ xpos = [];
 zpos = [];
 ovals = [];
 
-cfun = @(x,z) (x/av).^2 + gam^2*((z-zoff)/bv).^2;
-ofun = @(x,z) omega*exp(log(eps)*(cfun(x,z)).^10);
+%cfun = @(x,z) (x/av).^2 + gam^2*((z-zoff)/bv).^2;
+%ofun = @(x,z) omega*exp(log(eps)*(cfun(x,z)).^10);
+cfun = @(x,z) 1-((x/av).^2 + gam^2*((z-zoff)/av).^2);
+ofun = @(x,z) omega*(cfun(x,z)).^3;
 chi = @(r) 1./pi.*(2.*exp(-(r.^2))-.5*exp(-(r/sqrt(2)).^2));
 %% In the off chance I want ghost particles later. 
 %{
@@ -34,7 +36,7 @@ end
 %}
 
 for jj=1:Nx    
-    ainds = cfun(xvals(jj),zvals) <= 1;
+    ainds = cfun(xvals(jj),zvals) >= 0;
     flvds = length(zvals(ainds));
     if flvds>=1
         xpos = [xpos xvals(jj)*ones(1,flvds)];
