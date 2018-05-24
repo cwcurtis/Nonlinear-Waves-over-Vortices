@@ -19,5 +19,6 @@ function gif_my_gif(Xmesh,Mx,eta_plot,etanv_plot,xtrack,ztrack,gtrack,Vcnt,t,S,m
         end
     end
     
-    imwrite(imind,cm,strcat(S,'.png'),'png');
+    %imwrite(imind,cm,strcat(S,'.fig'),'fig');
+    savefig(strcat(S, '/', 'wave_over_vortices'))
 end

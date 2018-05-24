@@ -7,9 +7,9 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     sig = 1e-5;
     zoffc = .35;
     av = .5*gam*min(1-zoffc,zoffc);
-    bv = b*mu*gam;
-    F = pi*omega*av^2/gam;
-    [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,bv,omega,zoffc);
+    %bv = b*mu*gam;
+    F = pi*omega*av^2/(4*gam);
+    [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,omega,zoffc);
     
     simul_plot = 0; % Plot during computation.       0 - off, 1 - on
     stop_crit = 1;  % Stopping criterion.            0 - off, 1 - on
@@ -39,13 +39,13 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
         
     uvals = kap*(Xmesh+.5*Mx);
     [~,cn,~] = ellipj(uvals,modu);
-    ceff = 1 + 2/3*mu*kap^2*(2*modu^2-1);
+    %ceff = 1 + 2/3*mu*kap^2*(2*modu^2-1);
     elipmesh = linspace(0,2*kap,KT+1);
     [~,cnm,~] = ellipj(elipmesh,modu);
     %q0 = -modu^2*kap*(2*kap/KT)*sum((cnm(1:KT)).^2);    
     q0 = 0;
-    Q = fft(q0 + 16*modu^2*kap^2*cn.^2)/6^(1/3);
-    eta = ceff*Q;    
+    Q = fft(q0 + 8*modu^2*kap^2*cn.^2);
+    eta = Q;    
     %plot(Xmesh,real(ifft(eta)),'k','LineWidth',2)
     %pause
     eta0 = log10(fftshift(abs(eta))/KT);

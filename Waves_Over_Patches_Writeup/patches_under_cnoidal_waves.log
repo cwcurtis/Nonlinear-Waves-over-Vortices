@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.10.8)  8 MAY 2018 16:30
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.10.8)  24 MAY 2018 15:22
 entering extended mode
 **D:/My*Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Pa
 tches_Writeup/patches_under_cnoidal_waves.tex
@@ -210,19 +210,34 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 64.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3]
+<profiles.pdf, id=26, 721.69624pt x 474.77374pt>
+File: profiles.pdf Graphic file (type pdf)
+ <use profiles.pdf>
+Package pdftex.def Info: profiles.pdf used on input line 197.
+(pdftex.def)             Requested size: 211.26027pt x 138.97762pt.
+
+<spectrum.pdf, id=27, 721.69624pt x 474.77374pt>
+File: spectrum.pdf Graphic file (type pdf)
+ <use spectrum.pdf>
+Package pdftex.def Info: spectrum.pdf used on input line 197.
+(pdftex.def)             Requested size: 211.26027pt x 138.97762pt.
+
 ("D:\My Documents\Desktop\Nonlinear-Waves-over-Vortices-Git-Clone\Waves_Over_Pa
-tches_Writeup\patches_under_cnoidal_waves.bbl") [3]
+tches_Writeup\patches_under_cnoidal_waves.bbl" [4]) [5 <D:/My Documents/Desktop
+/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profiles.pd
+f> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_
+Patches_Writeup/spectrum.pdf>]
 ("D:\My Documents\Desktop\Nonlinear-Waves-over-Vortices-Git-Clone\Waves_Over_Pa
 tches_Writeup\patches_under_cnoidal_waves.aux") ) 
 Here is how much of TeX's memory you used:
- 3226 strings out of 493921
- 46227 string characters out of 3147276
+ 3242 strings out of 493921
+ 46462 string characters out of 3147276
  110320 words of memory out of 3000000
- 6509 multiletter control sequences out of 15000+200000
+ 6522 multiletter control sequences out of 15000+200000
  12012 words of font info for 45 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 36i,10n,38p,691b,203s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,12n,38p,992b,329s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/f
 onts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
@@ -238,9 +253,9 @@ amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
 /cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti1
 0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.p
 fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on patches_under_cnoidal_waves.pdf (3 pages, 184407 bytes).
+Output written on patches_under_cnoidal_waves.pdf (5 pages, 234506 bytes).
 PDF statistics:
- 76 PDF objects out of 1000 (max. 8388607)
+ 90 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

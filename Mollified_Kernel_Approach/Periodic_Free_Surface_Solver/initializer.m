@@ -1,4 +1,4 @@
-function [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,bv,omega,zoff)
+function [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,omega,zoff)
 
 xvals = linspace(-1,1,Nx);
 zvals = 0:2/Nx:1-2/Nx;
