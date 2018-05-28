@@ -1,4 +1,4 @@
-function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
+function waves_over_vortices_gen_curve(Mx,Nx,K,mu,gam,omega,tf)
     
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
@@ -21,7 +21,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     Kuc = 2*K-Kc+1;
     Kc = Kc+1;
     
-    Xmesh = linspace(-1,1,KT+1);
+    Xmesh = linspace(-Mx,Mx,KT+1);
     Xmesh = Xmesh(1:KT)';
     
     Kmesh = [0:K-1 0 -K+1:-1]';
@@ -29,10 +29,10 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     dt = .05;
     nmax = round(tf/dt);
     
-    L1 = -1i*tanh(pi.*gam.*Kmesh)./gam;
-    L2 = -1i*pi*Kmesh;
+    L1 = -1i*tanh(pi.*gam.*Kmesh/Mx)./gam;
+    L2 = -1i*pi*Kmesh/Mx;
     
-    [Edt,Ehdt] = get_stuff(Kmesh,gam,K,KT,dt);
+    [Edt,Ehdt] = get_stuff(Kmesh/Mx,gam,K,KT,dt);
     
     % Here we put in a flat surface and zero background velocity potential
     % Build the quiescent initial velocity potential
@@ -121,7 +121,7 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
         
         % Now update the vortex positions                                   KTT must be 2*KT because of periodicity!!
               
-        [u,xpos,zpos] = vort_update_on_molly_fourier(Xmesh,gam,mu,ep,u,gvals,L1,no_dno_term,Nvorts,Ehdt,Edt,xpos,zpos,dt,2*KT);
+        [u,xpos,zpos] = vort_update_on_molly_fourier(Xmesh,gam,mu,ep,u,gvals,L1,no_dno_term,Nvorts,Ehdt,Edt,xpos,zpos,dt,Mx,2*KT);
        
         if(mod(jj,inter)==0)
             eta = u(1:KT);
@@ -129,12 +129,12 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
             
             eta = real(ifft(eta));
             G0 = real(ifft(L1.*Q));
-            q = real(ifft([0;-1i/pi*(1./[1:K -K+1:-1])'.*Q(2:KT)]));
+            q = real(ifft([0;-1i*Mx/pi*(1./[1:K -K+1:-1])'.*Q(2:KT)]));
             Q = real(ifft(Q));
             
-            dnonl = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh,no_dno_term);
-            k_energy_plot(plot_count) = 1/KT*sum( q.*(G0+dnonl) );
-            p_energy_plot(plot_count) = 1/KT*sum( eta.^2 );
+            dnonl = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh/Mx,no_dno_term);
+            k_energy_plot(plot_count) = Mx/KT*sum( q.*(G0+dnonl) );
+            p_energy_plot(plot_count) = Mx/KT*sum( eta.^2 );
             energy_plot(plot_count) = k_energy_plot(plot_count) + p_energy_plot(plot_count);
             tm_track(plot_count) = eta(1);
             times(plot_count) = (jj-1)*dt;
@@ -190,8 +190,8 @@ function waves_over_vortices_gen_curve(Nx,K,mu,gam,omega,tf)
     G0 = real(ifft(L1.*Q));
     Q = real(ifft(Q));
     
-    dnofin = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh,no_dno_term);
-    dnofinn1 = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh,no_dno_term-1);
+    dnofin = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh/Mx,no_dno_term);
+    dnofinn1 = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh/Mx,no_dno_term-1);
     disp(norm(dnofin-dnofinn1)/norm(Q))
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     

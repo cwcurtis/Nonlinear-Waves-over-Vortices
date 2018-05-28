@@ -1,4 +1,4 @@
-function Kret = tree_traverser_quick(xpos,zpos,gvals,ep,pval,inc_tree,Nvorts,pinds)
+function Kret = tree_traverser_quick(xpos,zpos,gvals,ep,pval,Mx,inc_tree,Nvorts,pinds)
 
 % xpos - Global Nvorts x 1 array of x-positions.
 
@@ -39,30 +39,39 @@ for ll=1:4
             no_toofar = size(xcfs,1);
             xlcmp = repmat(xloc+1i*zloc,1,no_toofar);
             xcfscmp = repmat((xcfs(:,1)+1i*xcfs(:,2)).',npts,1);
-            rloc = -1./(xlcmp - xcfscmp);        
-            rlocc = -1./(xlcmp - conj(xcfscmp));        
+            %rloc = -1./(xlcmp - xcfscmp);        
+            %rlocc = -1./(xlcmp - conj(xcfscmp));        
+            rloc = -cot(pi/(2*Mx)*(xlcmp - xcfscmp));
+            rlocc = -cot(pi/(2*Mx)*(xlcmp - conj(xcfscmp)));
             kmat = repmat(kcurs(pval+1,:),npts,1); 
+            kmatp1 = repmat(kcurs(pval+2,:),npts,1); 
             qf = kmat;
             qfc = conj(kmat);
+            qfp1 = kmatp1;
+            qfcp1 = conj(kmatp1);
             for mm=1:pval
                 kmat = repmat(kcurs(pval+1-mm,:),npts,1); 
+                kmatp1 = repmat(kcurs(pval+2-mm,:),npts,1); 
                 qf = kmat + qf.*rloc;                        
-                qfc = conj(kmat) + qfc.*rlocc;                        
+                qfc = conj(kmat) + qfc.*rlocc;
+                qfp1 = kmatp1 + qfp1.*rloc;
+                qfcp1 = conj(kmatp1) + qfcp1.*rlocc;
             end
-            qf = sum(-rloc.*qf+rlocc.*qfc,2);
+            qf = sum(-rloc.*qf-qfp1+rlocc.*qfc+qfcp1,2);
         else
             qf = zeros(npts,1);
         end
         
         if lnode.no_chldrn > 0
-            tvec = tree_traverser_quick(xpos,zpos,gvals,ep,pval,lleaf(2:5),Nvorts,linds);            
+            tvec = tree_traverser_quick(xpos,zpos,gvals,ep,pval,Mx,lleaf(2:5),Nvorts,linds);            
         else
             % Here we finally compute at a terminal node.  
             nninds = lnode.nodscndlst;
             xlist = xpos(nninds);
             zlist = zpos(nninds);
             glist = gvals(nninds);            
-            tvec = near_neighbor_comp(xloc,zloc,xlist,zlist,gloc,glist,ep);             
+            %tvec = near_neighbor_comp(xloc,zloc,xlist,zlist,gloc,glist,ep);             
+            tvec = near_neighbor_comp_periodic(xloc,zloc,xlist,zlist,gloc,glist,ep,Mx);             
         end      
         Kvec(linds,:) = [imag(qf) real(qf)] + tvec;              
     end     

@@ -7,8 +7,8 @@ Kc = floor(2*K/3);
 Kuc = 2*K-Kc+1;
 Kc = Kc + 1;
 
-Kmesh = [0:K-1 0 -K+1:-1]';
-Dx = pi*1i*Kmesh/Mx; 
+Kmesh = 1/Mx*[0:K-1 0 -K+1:-1]';
+Dx = pi*1i*Kmesh; 
 
 eta = u(1:KT);
 Q = u(KT+1:2*KT);

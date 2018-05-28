@@ -1,4 +1,4 @@
-function Kloc = tree_builder(xpos,zpos,mlvl,gvals,xl,xr,zb,zt,pval,pinds,Nvorts)
+function Kloc = tree_builder(xpos,zpos,mlvl,gvals,xl,xr,zb,zt,pval,Mx,pinds,Nvorts)
 
 dx = xr-xl;
 dz = zt-zb;
@@ -46,7 +46,7 @@ loc_data.kcursf = [];
 loc_data.xcfs = [];
     
 if npts>0
-   kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval);
+   kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval,Mx);
 else
    kvals = zeros(pval+1,1);
 end
@@ -66,7 +66,7 @@ if npts > mlvl
        xnr = xl + (ncol+1)*dnx;
        znt = zt - nrow*dnz;
        znb = zt - (nrow+1)*dnz;
-       Kchild = tree_builder(xpos,zpos,mlvl,gvals,xnl,xnr,znb,znt,pval,numinds,Nvorts);  
+       Kchild = tree_builder(xpos,zpos,mlvl,gvals,xnl,xnr,znb,znt,pval,Mx,numinds,Nvorts);  
        Kloc{ll+1} = Kchild;
    end
 else

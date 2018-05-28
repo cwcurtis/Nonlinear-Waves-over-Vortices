@@ -1,0 +1,28 @@
+\begin{thebibliography}{1}
+
+\bibitem{saffman}
+P.G. Saffman.
+\newblock {\em Vortex Dynamics}.
+\newblock Cambridge University Press, Cambridge, 1992.
+
+\bibitem{cottet}
+G.H. Cottet and P.D. Koumoutsakos.
+\newblock {\em Vortex Methods: Theory and Practice}.
+\newblock Cambridge University Press, Cambridge, 2000.
+
+\bibitem{beale}
+J.T. Beale and A.~Majda.
+\newblock High order accurate vortex methods with explicit velocity kernels.
+\newblock {\em J. Comp. Phys.}, 58:188--208, 1985.
+
+\bibitem{curtis}
+C.W. Curtis and H.~Kalisch.
+\newblock Vortex dynamics in free-surface flows.
+\newblock {\em Phys. Fluids}, 29:032101, 2017.
+
+\bibitem{craig}
+W.~Craig and C.~Sulem.
+\newblock Numerical simulation of gravity waves.
+\newblock {\em J. Comput. Phys.}, 108:73--83, 1993.
+
+\end{thebibliography}
