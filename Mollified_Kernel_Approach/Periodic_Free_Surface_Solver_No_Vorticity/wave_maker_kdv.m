@@ -20,7 +20,7 @@ function wave_maker_kdv(K,modu,kap,mu,gam,tf)
     
     Kmesh = [0:K-1 0 -K+1:-1]';
        
-    dt = .05;
+    dt = .01;
     nmax = round(tf/dt);
     
     L1 = -1i*tanh(pi.*gam.*Kmesh/Mx)./gam;
@@ -42,15 +42,15 @@ function wave_maker_kdv(K,modu,kap,mu,gam,tf)
     uvals = kap*Xmesh;
     [~,cn,~] = ellipj(uvals,modu);
     ceff = 1 + 2/3*mu*kap^2*(2*modu^2-1);
-    elipmesh = linspace(0,2*kap,KT+1);
-    [~,cnm,~] = ellipj(elipmesh,modu);
+    %elipmesh = linspace(0,2*kap,KT+1);
+    %[~,cnm,~] = ellipj(elipmesh,modu);
     %q0 = -modu^2*kap*(2*kap/KT)*sum((cnm(1:KT)).^2);    
     q0 = 0;
     Q = fft(q0 + 16*modu^2*kap^2*cn.^2)/6^(1/3);
     eta = ceff*Q;    
     eta0 = log10(fftshift(abs(eta))/KT);    
-    %plot(Xmesh,real(ifft(eta)),'k','LineWidth',2)
-    plot(-K+1:K,eta0,'k','LineWidth',2)
+    plot(Xmesh,real(ifft(eta)),'k','LineWidth',2)
+    %plot(-K+1:K,eta0,'k','LineWidth',2)
     pause
     %{
     amag = 1;
@@ -76,7 +76,7 @@ function wave_maker_kdv(K,modu,kap,mu,gam,tf)
     times = zeros(no_of_evals,1);
     tm_track = zeros(no_of_evals,1);
     
-    no_dno_term = 25;
+    no_dno_term = 15;
     
     u = [eta;Q]; %velocity vector field
     
@@ -113,8 +113,8 @@ function wave_maker_kdv(K,modu,kap,mu,gam,tf)
             Q = real(ifft(Q));
             
             dnonl = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh,no_dno_term);
-            k_energy_plot(plot_count) = 1/KT*sum( q.*(G0+dnonl) );
-            p_energy_plot(plot_count) = 1/KT*sum( eta.^2 );
+            k_energy_plot(plot_count) = Mx/KT*sum( q.*(G0+dnonl) );
+            p_energy_plot(plot_count) = Mx/KT*sum( eta.^2 );
             energy_plot(plot_count) = k_energy_plot(plot_count) + p_energy_plot(plot_count);
             tm_track(plot_count) = eta(1);
             times(plot_count) = (jj-1)*dt;
@@ -162,10 +162,10 @@ function wave_maker_kdv(K,modu,kap,mu,gam,tf)
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     
     % Animate waves over vortices
-    if ~simul_plot
-        figure(1)
-        gif_my_gif(Xmesh,Mx,eta_plot,plot_count,S);
-    end
+    % ~simul_plot
+    %    figure(1)
+    %    gif_my_gif(Xmesh,Mx,eta_plot,plot_count,S);
+    %end
 
     figure(2)
     plot(times,mu*(tm_track-mean(tm_track)),'k','LineWidth',2)
