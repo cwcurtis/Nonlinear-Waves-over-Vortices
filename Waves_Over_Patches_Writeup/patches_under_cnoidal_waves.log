@@ -1,25 +1,16 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.10.8)  24 MAY 2018 15:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.5.18)  28 MAY 2018 20:55
 entering extended mode
-**D:/My*Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Pa
-tches_Writeup/patches_under_cnoidal_waves.tex
+**C:/Users/Chris/Desktop/Nonlinear_Waves_over_Vortices_Git_Clone/Waves_Over_Pat
+ches_Writeup/patches_under_cnoidal_waves.tex
 
-("D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Pa
-tches_Writeup/patches_under_cnoidal_waves.tex"
-LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
-abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
-croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
-lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
-ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
- lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
-german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
-ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
-an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
-ishmax, welsh, loaded.
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
-Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\size11.clo"
-File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+(C:/Users/Chris/Desktop/Nonlinear_Waves_over_Vortices_Git_Clone/Waves_Over_Patc
+hes_Writeup/patches_under_cnoidal_waves.tex
+LaTeX2e <2015/10/01> patch level 2
+Babel <3.9n> and hyphenation patterns for 69 languages loaded.
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size11.clo"
+File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -33,24 +24,30 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsmath.st
+y"
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amstext.st
+y"
 Package: amstext 2000/06/29 v2.01
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty
+"
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks14
 \ex@=\dimen103
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty
+"
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen104
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty
+"
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count87
@@ -91,18 +88,20 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\amssymb.s
+ty"
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.
+sty"
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
-Package: amsthm 2004/08/06 v2.20
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
+Package: amsthm 2015/03/04 v2.20.2
 \thm@style=\toks19
 \thm@bodyfont=\toks20
 \thm@headfont=\toks21
@@ -113,31 +112,38 @@ Package: amsthm 2004/08/06 v2.20
 \thm@headsep=\skip48
 \dth@everypar=\toks24
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
-Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx.
+sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.st
+y"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks25
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
-Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphics.
+sty"
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\graphics.
+cfg"
 File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 94.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.
+def"
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\infware
+rr.sty"
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds
+.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count99
@@ -145,12 +151,14 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption.sty"
-Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption.st
+y"
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption3.sty"
-Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 57.
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption3.s
+ty"
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
 \captionmargin=\dimen114
 \captionmargin@=\dimen115
 \captionwidth=\dimen116
@@ -161,16 +169,17 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 )
 \c@ContinuedFloat=\count100
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\caption\subcaption.sty"
-Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\subcaption
+.sty"
+Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
 \c@subfigure=\count101
 \c@subtable=\count102
 )
 \c@thm=\count103
 \c@lem=\count104
+ (patches_under_cnoidal_waves.aux)
+\openout1 = `patches_under_cnoidal_waves.aux'.
 
-("D:\My Documents\Desktop\Nonlinear-Waves-over-Vortices-Git-Clone\Waves_Over_Pa
-tches_Writeup\patches_under_cnoidal_waves.aux")
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
 LaTeX Font Info:    ... okay on input line 63.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
@@ -184,7 +193,8 @@ LaTeX Font Info:    ... okay on input line 63.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 63.
 LaTeX Font Info:    ... okay on input line 63.
 
-("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mk
+ii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count105
 \scratchdimen=\dimen121
@@ -201,61 +211,92 @@ LaTeX Font Info:    ... okay on input line 63.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Try loading font information for U+msa on input line 64.
- ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+ ("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 64.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+ ("C:\Users\Chris\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3]
-<profiles.pdf, id=26, 721.69624pt x 474.77374pt>
-File: profiles.pdf Graphic file (type pdf)
- <use profiles.pdf>
-Package pdftex.def Info: profiles.pdf used on input line 197.
-(pdftex.def)             Requested size: 211.26027pt x 138.97762pt.
+{C:/Users/Chris/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+[2] [3] <wave_over_vortices_m_pt6_w0_1.pdf, id=26, 697.60625pt x 483.8075pt>
+File: wave_over_vortices_m_pt6_w0_1.pdf Graphic file (type pdf)
 
-<spectrum.pdf, id=27, 721.69624pt x 474.77374pt>
-File: spectrum.pdf Graphic file (type pdf)
- <use spectrum.pdf>
-Package pdftex.def Info: spectrum.pdf used on input line 197.
-(pdftex.def)             Requested size: 211.26027pt x 138.97762pt.
+<use wave_over_vortices_m_pt6_w0_1.pdf>
+Package pdftex.def Info: wave_over_vortices_m_pt6_w0_1.pdf used on input line 1
+97.
+(pdftex.def)             Requested size: 211.26027pt x 146.51648pt.
 
-("D:\My Documents\Desktop\Nonlinear-Waves-over-Vortices-Git-Clone\Waves_Over_Pa
-tches_Writeup\patches_under_cnoidal_waves.bbl" [4]) [5 <D:/My Documents/Desktop
-/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profiles.pd
-f> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_
-Patches_Writeup/spectrum.pdf>]
-("D:\My Documents\Desktop\Nonlinear-Waves-over-Vortices-Git-Clone\Waves_Over_Pa
-tches_Writeup\patches_under_cnoidal_waves.aux") ) 
+<profiles_m_pt6_w0_1.pdf, id=27, 697.60625pt x 483.8075pt>
+File: profiles_m_pt6_w0_1.pdf Graphic file (type pdf)
+
+<use profiles_m_pt6_w0_1.pdf>
+Package pdftex.def Info: profiles_m_pt6_w0_1.pdf used on input line 197.
+(pdftex.def)             Requested size: 211.26027pt x 146.51648pt.
+
+<wave_over_vortices_m_pt6.pdf, id=28, 697.60625pt x 483.8075pt>
+File: wave_over_vortices_m_pt6.pdf Graphic file (type pdf)
+
+<use wave_over_vortices_m_pt6.pdf>
+Package pdftex.def Info: wave_over_vortices_m_pt6.pdf used on input line 199.
+(pdftex.def)             Requested size: 211.26027pt x 146.51648pt.
+
+<profiles_m_pt6.pdf, id=29, 697.60625pt x 483.8075pt>
+File: profiles_m_pt6.pdf Graphic file (type pdf)
+ <use profiles_m_pt6.pdf>
+Package pdftex.def Info: profiles_m_pt6.pdf used on input line 199.
+(pdftex.def)             Requested size: 211.26027pt x 146.51648pt.
+
+<wave_over_vortices_m_pt6_w0_10.pdf, id=30, 697.60625pt x 483.8075pt>
+File: wave_over_vortices_m_pt6_w0_10.pdf Graphic file (type pdf)
+
+<use wave_over_vortices_m_pt6_w0_10.pdf>
+Package pdftex.def Info: wave_over_vortices_m_pt6_w0_10.pdf used on input line 
+201.
+(pdftex.def)             Requested size: 211.26027pt x 146.51648pt.
+
+<profiles_m_pt6_w0_10.pdf, id=31, 697.60625pt x 483.8075pt>
+File: profiles_m_pt6_w0_10.pdf Graphic file (type pdf)
+
+<use profiles_m_pt6_w0_10.pdf>
+Package pdftex.def Info: profiles_m_pt6_w0_10.pdf used on input line 201.
+(pdftex.def)             Requested size: 211.26027pt x 146.51648pt.
+ [4] (patches_under_cnoidal_waves.bbl) [5]
+[6 <./wave_over_vortices_m_pt6_w0_1.pdf> <./profiles_m_pt6_w0_1.pdf> <./wave_ov
+er_vortices_m_pt6.pdf> <./profiles_m_pt6.pdf> <./wave_over_vortices_m_pt6_w0_10
+.pdf> <./profiles_m_pt6_w0_10.pdf>] (patches_under_cnoidal_waves.aux) ) 
 Here is how much of TeX's memory you used:
- 3242 strings out of 493921
- 46462 string characters out of 3147276
- 110320 words of memory out of 3000000
- 6522 multiletter control sequences out of 15000+200000
+ 3280 strings out of 493634
+ 48195 string characters out of 3135239
+ 114580 words of memory out of 3000000
+ 6647 multiletter control sequences out of 15000+200000
  12012 words of font info for 45 fonts, out of 3000000 for 9000
- 841 hyphenation exceptions out of 8191
- 36i,12n,38p,992b,329s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-mi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
-C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti1
-0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on patches_under_cnoidal_waves.pdf (5 pages, 234506 bytes).
+ 1025 hyphenation exceptions out of 8191
+ 36i,12n,39p,1017b,329s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/User
+s/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10
+.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmbx12.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmex10.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Chris/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Chris/AppData
+/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/C
+hris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr12.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmr17.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Chris/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Chris/AppData/Local/Pr
+ograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Chris/App
+Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Use
+rs/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti1
+0.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsf
+onts/symbols/msam10.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX 2.9/fonts
+/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on patches_under_cnoidal_waves.pdf (6 pages, 398228 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
+ 151 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
