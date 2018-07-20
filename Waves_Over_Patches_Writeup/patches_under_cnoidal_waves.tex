@@ -70,7 +70,7 @@ Throughout, we are attempting to describe the simultaneous evolution of a free s
 \]
 where $\omega$ is the vorticity, and ${\bf K}$ is the standard Biot-Savart law kernel.  The harmonic function $\tilde{\phi}$ is used to address boundary conditions as explained in \cite{saffman}.  An attractive means for discretizing this equation as summarized in \cite{cottet} is to approximate the vorticity $\omega$ by a collection of $N$ point-vortices at positions ${\bf x}_{l}(t)$ via the expansion
 \begin{equation}
-\omega(\tilde{{\bf x}},t) = \sum_{j=1}^{N} \frac{\Gamma_{j}}{\delta^{2}}\chi\left(\frac{\tilde{{\bf x}}-{\bf x}_{l}(t)}{\delta}\right), ~ {\bf x}_{l}(t) = \left(x_{l}(t),y_{l}(t) \right),
+\omega(\tilde{{\bf x}},t) = \sum_{j=1}^{N} \frac{\Gamma_{j}}{\delta^{2}}\chi\left(\frac{\tilde{{\bf x}}-{\bf x}_{j}(t)}{\delta}\right), ~ {\bf x}_{j}(t) = \left(x_{j}(t),y_{j}(t) \right),
 \label{discvort} 
 \end{equation}
 where $\chi$ is some appropriately chosen mollifier, see \cite{beale}, and $\Gamma_{j}$ is the circulation associated with the point vortex at ${\bf x}_{l}(t)$.  Thus, we can reduce the problem of tracking the evolution of the vortex patch to describing the motion of the point vortices via the system of ODE's
@@ -185,26 +185,66 @@ where
 \[
 \tilde{c} = \frac{2}{3}\kappa^{2} (2\tilde{m}^{2}-1)+\frac{3}{2}q_{0},
 \]
-and where $0\leq \tilde{m}<1$ is the elliptic modulus of the cnoidal function $\mbox{cn}(\cdot;\tilde{m})$ and where $\mathcal{K}(\tilde{m})$ represents the complete elliptic integral of the first kind.  This then implies that the surface profile is to leading order given by $\eta \sim Q$.  We then choose initial conditions in our numerical simulations of free surface waves over vortex patches consistent with the traveling wave solutions of the KdV equation.
+and where $0\leq \tilde{m}<1$ is the elliptic modulus of the cnoidal function $\mbox{cn}(\cdot;\tilde{m})$ and where $\mathcal{K}(\tilde{m})$ represents the complete elliptic integral of the first kind.  This then implies that the surface profile is to leading order given by $\eta \sim Q$.  We then choose initial conditions in our numerical simulations of free surface waves over vortex patches consistent with the traveling wave solutions of the KdV equation.  Throughout the remainder of the paper, $q_{0}=0$.  
 
 \section*{Results}
 Throughout this section, we take $L = \lambda M$, where $M$ rougly counts the number of characteristic wavelengths included in the computational domain.   Correspondingly, we take $M=\mathcal{K}(\tilde{m})/\kappa$, so that the period of the numerical simulation is equal to the period of the cnoidal wave.   We note that this does place some limits on the overalll elliptic modulus we may pick since as $\tilde{m}\rightarrow 1^{-}$, the solitary wave limit moves the periodic copies of the of the vortices in the lateral direction off to infinity.  This creates a series of source terms in the free boundary equations which decay only quadratically, thereby radically limiting the efficacy of a spectral method for modeling the surface.  This is a fascinating complication beyond the scope of the present paper, but one that will be explored in future research.  
 
-With regards to the details of the simulation, $K_{T} = 256$ modes are used in the pseudospectral approximation to the surface equations.  A Runge-Kutta 4 method is used with a time-step of $\delta t = .05$.    The number of initial vortices is chosen, so that with the vortex update scheme, the vortex spacing is kept at or very near to $.007$.  Taking $\tilde{m}=.6$ and $\kappa = .35$, this corresponds to $M = 5.35$, so that $\delta x = 5.35/128 = .04$, thus making the vortex seperation length almost an order of magnitude less than the physical mesh width of the free surface.  As seen in Figure \ref{fig:midsolwave}, letting $\mu=.2$, $\gamma = \sqrt{\mu}$, which is consistent with the KdV approximation, and $t_{f}=2/\mu$, so that nonlinearity has enough time to have a significant impact, we see that the effect of a relatively strong vortex patch is quite striking.  
+With regards to the details of the simulations, we let $\mu=.2$, $\gamma = \sqrt{\mu}$, which is consistent with the KdV approximation, and $t_{f}=2/\mu$, so that nonlinearity has enough time to have a significant impact.  Twenty terms are taken in the recursive compuation of the DNO, and a total of $K_{T}=512$ modes are used for the pseudospectral approximation of the free surface.  A Runge-Kutta 4 method with integrating factors is used with a time-step of $\delta t = .05$.    The number of initial vortices is chosen, so that with the vortex update scheme, the vortex spacing is kept at or very near to $.007$ with the vortices reset to a uniform mesh every ten time steps.  The radius of the patch, $R_{v}$, is chosen so that
+\[
+R_{v} = \frac{\gamma}{2}\mbox{min}\{1-y_{c},y_{c}\}
+\]
+where $y_{c}$ is the vertical displacement of the patch.  We choose $y_{c}=.35$, so that $R_{v}\approx.1565$.  
+
+With these choices fixed, we note that the unscaled amplitude of the cnoidal wave initial conditions is given by $8(\tilde{m}\kappa)^{2}$.  Throughout our simulations we have chosen $\kappa$ for a given choice of elliptic modulus $\tilde{m}$ so as to make this unscaled amplitude as close to unity as possible while still maintaining convergent numerical simulations.  Note, this issue can of course be mollified by reducing the size of $\mu$, though this of course adds further choices in parameters, which are already numerous as is.  In each of the following plots, we look at both the evolution of the vortex patch, and a comparison of the evolution of the free surface from the same initial conditions.  Solid lines correspond to results in which $\omega_{0}\neq0$ while dashed lines correspond to the zero vorticity case.  
+
+\subsection*{Elliptic Modulus $\tilde{m}=.3$}
+Taking $\tilde{m}=.3$ and $\kappa = .5$, this corresponds to $M \approx 3.3$.  Taking $K_{T}=512$, this gives $\delta x = .013$, thus making the surface wave mesh width almost ten times smaller than the radius of the vortex patch, thereby ensuring we can accurately capture surface oscillations on the scale of the patch.  The unscaled amplitude of the cnoidal initial conditions is given by $8(\tilde{m}\kappa)^{2}\approx .18$.  As expected, stronger vorticity corresponds to greater deformation of the surface wave relative to the undisturbed case.  
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=.45\textwidth]{wave_over_vortices_m_pt6_w0_1} & \includegraphics[width=.45\textwidth]{profiles_m_pt6_w0_1}\\
+\includegraphics[width=.35\textwidth]{wave_over_vortices_m_pt3_w0_1} & \includegraphics[width=.35\textwidth]{profiles_m_pt3_w0_1}\\
 (a)  $F=.01$ & (b)  $F=.01$\\
-\includegraphics[width=.45\textwidth]{wave_over_vortices_m_pt6} & \includegraphics[width=.45\textwidth]{profiles_m_pt6}\\
+\includegraphics[width=.35\textwidth]{wave_over_vortices_m_pt3_w0_5} & \includegraphics[width=.35\textwidth]{profiles_m_pt3_w0_5}\\
 (c)  $F=.05$ & (d)  $F=.05$\\
-\includegraphics[width=.45\textwidth]{wave_over_vortices_m_pt6_w0_10} & \includegraphics[width=.45\textwidth]{profiles_m_pt6_w0_10}\\
+\includegraphics[width=.35\textwidth]{wave_over_vortices_m_pt3_w0_10} & \includegraphics[width=.35\textwidth]{profiles_m_pt3_w0_10}\\
 (e)  $F=.1$ & (f)  $F=.1$
 \end{tabular}
-\caption{Waves over the vortex patch are shown on the left for various values of Froude number $F$, while comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (--) are shown on the right.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.6$, $\kappa = .35$; vortex spacing is kept at or near $.007$.}
+\caption{Waves over the vortex patch are shown on the left for various values of Froude number $F$, while comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (--) are shown on the right.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.3$, $\kappa = .5$; vortex spacing is kept at or near $.007$.}
+\label{fig:lowsolwave}
+\end{figure}
+
+\subsection*{Elliptic Modulus $\tilde{m}=.6$}
+Taking $\tilde{m}=.6$, we find that $\kappa = .43$, this corresponds to $M \approx 4.4$.  Taking $K_{T}=512$, this gives $\delta x = .0172$.  The unscaled amplitude of the cnoidal initial conditions is given by $8(\tilde{m}\kappa)^{2}\approx .53$.  As seen in Figure \ref{fig:midsolwave}, we see that the larger elliptic modulus and larger amplitude makes the surface wave less responsive to the impact of vorticity.  Nevertheless, the patch consistently lowers maximum amplitudes, and when large enough, induces significant oscillations in the surface profile.  
+\begin{figure}
+\centering
+\begin{tabular}{cc}
+\includegraphics[width=.35\textwidth]{wave_over_vortices_m_pt6_w0_1} & \includegraphics[width=.35\textwidth]{profiles_m_pt6_w0_1}\\
+(a)  $F=.01$ & (b)  $F=.01$\\
+\includegraphics[width=.35\textwidth]{wave_over_vortices_m_pt6_w0_5} & \includegraphics[width=.35\textwidth]{profiles_m_pt6_w0_5}\\
+(c)  $F=.05$ & (d)  $F=.05$\\
+\includegraphics[width=.35\textwidth]{wave_over_vortices_m_pt6_w0_10} & \includegraphics[width=.35\textwidth]{profiles_m_pt6_w0_10}\\
+(e)  $F=.1$ & (f)  $F=.1$
+\end{tabular}
+\caption{Waves over the vortex patch are shown on the left for various values of Froude number $F$, while comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (--) are shown on the right.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.6$, $\kappa = .43$; vortex spacing is kept at or near $.007$.}
 \label{fig:midsolwave}
 \end{figure}
 
+\subsection*{Elliptic Modulus $\tilde{m}=.9$}
+Taking $\tilde{m}=.9$, we find that $\kappa = .35$, this corresponds to $M \approx 7.4$.  Taking $K_{T}=512$, this gives $\delta x = .029$.  The unscaled amplitude of the cnoidal initial conditions is given by $8(\tilde{m}\kappa)^{2}\approx .8$.  Thus, somewhat suprisingly, we could use the largest amplitude wave when the initial condition was closest to that of a solitary wave profile.  Likewise, aside from causing a slight broadening and thus decrease in maximum amplitude of the near solitary wave, vorticity has the least relative impact on the wave.  Thus, if we treat the $\tilde{m}=.9$ as the `most' nonlinear of the three cases examined, since this corresponds to the case closest to that of a nonlinear solitary wave, we see vorticity has the least overall impact on the most nonlinear of waves.  
+
+With that being said, we were not able to get reliable results for vorticity strength $\omega_{0}=10$.  In this case, a secondary vortex patch formed, which, on the face of it, is not possible in a smooth flow.  Whether this is an artificat of underresolution, instability, or some other mechanism is not clear at this time and is the subject of future research.  
+\begin{figure}
+\centering
+\begin{tabular}{cc}
+\includegraphics[width=.35\textwidth]{wave_over_vortices_m_pt9_w0_1} & \includegraphics[width=.35\textwidth]{profiles_m_pt9_w0_1}\\
+(a)  $F=.01$ & (b)  $F=.01$\\
+\includegraphics[width=.35\textwidth]{wave_over_vortices_m_pt9_w0_5} & \includegraphics[width=.35\textwidth]{profiles_m_pt9_w0_5}\\
+(c)  $F=.05$ & (d)  $F=.05$
+\end{tabular}
+\caption{Waves over the vortex patch are shown on the left for various values of Froude number $F$, while comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (--) are shown on the right.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.9$, $\kappa = .35$; vortex spacing is kept at or near $.007$.}
+\label{fig:highsolwave}
+\end{figure}
 \section*{Conclusion}
 \section*{Appendix}
 \bibliography{waves_over_vortices}

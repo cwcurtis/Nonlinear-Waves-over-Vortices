@@ -26,16 +26,17 @@ for jj=1:nblcks
             xlcmp = repmat(xloc+1i*zloc,1,no_toofar);
             xcfscmp = repmat((xcfs(:,1)+1i*xcfs(:,2)).',npts,1);
             rloc = -1./(xlcmp - xcfscmp);        
-            rlocc = -1./(xlcmp - conj(xcfscmp));        
+            %rlocc = -1./(xlcmp - conj(xcfscmp));        
             kmat = repmat(kcurs(pval+1,:),npts,1); 
             qf = kmat;
-            qfc = conj(kmat);
+            %qfc = conj(kmat);
             for mm=1:pval
                 kmat = repmat(kcurs(pval+1-mm,:),npts,1); 
                 qf = kmat + qf.*rloc;                        
-                qfc = conj(kmat) + qfc.*rlocc;                        
+                %qfc = conj(kmat) + qfc.*rlocc;                        
             end
-            qf = sum(-rloc.*qf+rlocc.*qfc,2);
+            %qf = sum(-rloc.*qf+rlocc.*qfc,2);
+            qf = sum(-rloc.*qf,2);
         else
             qf = zeros(npts,1);
         end
