@@ -5,7 +5,7 @@ zvals = 0:2/Nx:1-2/Nx;
 
 disp('Mesh-size is')
 disp(2/Nx)
-ep = 1.05*2/Nx;
+ep = 2*2/Nx;
 
 xpos = [];
 zpos = [];
