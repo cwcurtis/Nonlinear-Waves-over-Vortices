@@ -1,4 +1,4 @@
-function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf,npow)
+function [tvals,evec] = waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf,samp)
     close all
     
     % Choose time step and find inverse of linear part of semi-implicit
@@ -16,16 +16,16 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf,npow)
     sp = sin(pmesh);    
     %tdot = mu*omega*av*bv/(av + gam*bv)^2;
     
-    [xpos,zpos,gvals,rval,Nvorts] = initializer(Nx,omega,gam,av,bv,npow);
+    [xpos,zpos,gvals,rval,Nvorts] = initializer(Nx,omega,gam,av,bv,1);
     
     dt = .05;
     nmax = round(tf/dt);
     
     zpos = zoff + zpos/gam;
     
-    inter = 5;
+    %inter = 5;
     plot_count = 1;
-    no_of_evals = round(nmax/inter);
+    no_of_evals = round(nmax/samp);
     Vcnt = zeros(no_of_evals+1,1);
     Vcnt(1) = Nvorts;
     xtrack = xpos;
@@ -34,28 +34,11 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf,npow)
     
     u = [xpos;zpos]; %velocity vector field
     
-    % Make folder
-    S = make_folder(Nx/2,Nx,mu,gam,F,tf,av/bv);
-    clf
-    n_bdry = 0;     % Number of points in cicular boundary.
-    markersize = 10;
-    evec = zeros(nmax/inter,1);
-    tvals = zeros(nmax/inter,1);
+    evec = zeros(no_of_evals,1);
+    tvals = zeros(no_of_evals,1);
     cnt = 1;
     
     %Compute reference vorticity profile
-    Nvx = 200;
-    xvals = linspace(-.2,.2,Nvx)';
-    zvals = linspace(.1,.9,Nvx)';
-    rmat = zeros(length(zvals),length(xvals));
-    cfun = @(x,z) (x/av).^2 + gam^2*(z/bv).^2;
-    ofun = @(x,z) omega*(1-cfun(x,z)).^3;
-    for ll = 1:Nvx
-       inds = cfun(xvals(ll),zvals-zoff) <= 1;
-       if length(inds)>1
-           rmat(ll,inds) = ofun(xvals(ll),zvals(inds)-zoff); 
-       end
-    end
     %{
     chi = @(r) 1./pi.*(2.*exp(-(r.^2))-.5*exp(-(r/sqrt(2)).^2));
     
@@ -79,7 +62,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf,npow)
         % Now update the vortex positions         
         u = vort_update_multipole(mu,gam,rval,u,gvals,Nvorts,dt);           
             
-        if(mod(jj,inter)==0)
+        if(mod(jj,samp)==0)
             plot_count = plot_count + 1;
             
             xtrack = [xtrack;xpos];
@@ -95,16 +78,16 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf,npow)
             u(1:Nvorts) = xpos;
             u(Nvorts+1:2*Nvorts) = zpos;             
             
-            evec(cnt) = interp_error(xpos,zpos,gvals,rval,gam,omega,av,bv,zoff,rmat);
-            tvals(cnt) = dt*cnt*inter;
+            evec(cnt) = interp_error(xpos,zpos,gvals,rval,gam,omega,av,bv,zoff);
+            tvals(cnt) = dt*cnt*samp;
             cnt = cnt + 1;
         end
     end     
-     
-    figure(1)
-    gif_my_gif(xtrack,ztrack,gtrack,n_bdry,Vcnt,plot_count,S,markersize);    
-    
-    figure(2)
-    plot(tvals,evec,'k-','LineWidth',2)    
-    
+       
+    %figure(2)
+    %plot(tvals,evec,'k-','LineWidth',2)    
+    %h = set(gca,'FontSize',30);
+    %set(h,'Interpreter','LaTeX')
+    %xlabel('$t$','Interpreter','LaTeX','FontSize',30)
+    %ylabel('$\mathcal{E}(t)$','Interpreter','LaTeX','FontSize',30)
 end

@@ -25,4 +25,16 @@ W.~Craig and C.~Sulem.
 \newblock Numerical simulation of gravity waves.
 \newblock {\em J. Comput. Phys.}, 108:73--83, 1993.
 
+\bibitem{cottet2}
+G.H. Cottet.
+\newblock A new approach for the analysis of vortex methods in 2 and 3
+  dimensions.
+\newblock {\em Ann. Inst. Henri Poincar\'{e}}, 5:227--285, 1988.
+
+\bibitem{koumoutsakos}
+P.~Koumoutsakos and A.~Leonard.
+\newblock High-resolution simulations of the flow around an impulsively started
+  cylinder using vortex methods.
+\newblock {\em Jour. Fluid Mech.}, 296:1--38, 1995.
+
 \end{thebibliography}

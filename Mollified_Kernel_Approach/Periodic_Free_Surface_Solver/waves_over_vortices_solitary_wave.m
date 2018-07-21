@@ -4,7 +4,7 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     % time stepping scheme.
     a = 1;
     b = 1;
-    sig = 1e-5;
+    sig = 0;
     zoffc = .35;
     av = .5*gam*min(1-zoffc,zoffc);
     %bv = b*mu*gam;
@@ -46,18 +46,21 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     q0 = 0;
     Q = fft(q0 + 8*modu^2*kap^2*cn.^2);
     eta = Q;    
-    %plot(Xmesh,real(ifft(eta)),'k','LineWidth',2)
-    %pause
-    eta0 = log10(fftshift(abs(eta))/KT);
-    %plot(-K+1:K,eta0,'k','LineWidth',2)
-    %pause
-    %Q0 = Q;
-       
+    no_dno_term = 20;
+    G0 = real(ifft(L1.*Q));
+    q = real(ifft([0;-1i*Mx/pi*(1./[1:K -K+1:-1])'.*Q(2:KT)]));
+            
+    dnonl = dno_maker(real(ifft(eta)),real(ifft(Q)),G0,L1,gam,mu,Kmesh/Mx,no_dno_term);
+    k_energy_base = 2*Mx/KT*sum( q.*(G0+dnonl) );
+    p_energy_base = 2*Mx/KT*sum( real(ifft(eta)).^2 );
+    energy_base = k_energy_base + p_energy_base;
+                   
     xtrack = xpos;
     ztrack = zpos;
     gtrack = gvals;
     
     inter = 1;
+    samp = 6;
     plot_count = 1;
     no_of_evals = round(nmax/inter);
     eta_plot = zeros(KT,no_of_evals+1);
@@ -67,9 +70,7 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     times = zeros(no_of_evals,1);
     tm_track = zeros(no_of_evals,1);
     Vcnt = zeros(no_of_evals+1,1);
-    Vcnt(1) = Nvorts;
-    
-    no_dno_term = 20;
+    Vcnt(1) = Nvorts;    
     
     u = [eta;Q;xpos;zpos]; %velocity vector field
     
@@ -115,7 +116,7 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
             dnonl = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh/Mx,no_dno_term);
             k_energy_plot(plot_count) = 2*Mx/KT*sum( q.*(G0+dnonl) );
             p_energy_plot(plot_count) = 2*Mx/KT*sum( eta.^2 );
-            energy_plot(plot_count) = k_energy_plot(plot_count) + p_energy_plot(plot_count);
+            energy_plot(plot_count) = k_energy_plot(plot_count) + p_energy_plot(plot_count) - energy_base;
             tm_track(plot_count) = eta(1);
             times(plot_count) = (jj-1)*dt;
             
@@ -152,7 +153,7 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
             %}
         end
         
-        if(mod(jj,10*inter)==0)        
+        if(mod(jj,samp)==0)        
             [xpos,zpos,gvals] = recircer_bndry(gvals,xpos,zpos,Nx);
             Nvorts = length(xpos);
             disp('Current number of vortices is')
