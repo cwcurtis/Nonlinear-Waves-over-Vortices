@@ -116,7 +116,7 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
             dnonl = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh/Mx,no_dno_term);
             k_energy_plot(plot_count) = 2*Mx/KT*sum( q.*(G0+dnonl) );
             p_energy_plot(plot_count) = 2*Mx/KT*sum( eta.^2 );
-            energy_plot(plot_count) = k_energy_plot(plot_count) + p_energy_plot(plot_count) - energy_base;
+            energy_plot(plot_count) = (k_energy_plot(plot_count) + p_energy_plot(plot_count) - energy_base)/energy_base;
             tm_track(plot_count) = eta(1);
             times(plot_count) = (jj-1)*dt;
             
