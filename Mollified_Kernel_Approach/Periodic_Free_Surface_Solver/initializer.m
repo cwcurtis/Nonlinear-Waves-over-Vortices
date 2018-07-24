@@ -1,7 +1,7 @@
-function [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,omega,zoff)
+function [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,omega)
 
 xvals = linspace(-1,1,Nx);
-zvals = 0:2/Nx:1-2/Nx;
+zvals = linspace(-1/2,1/2,Nx/2);
 
 disp('Mesh-size is')
 disp(2/Nx)
@@ -11,9 +11,7 @@ xpos = [];
 zpos = [];
 ovals = [];
 
-%cfun = @(x,z) (x/av).^2 + gam^2*((z-zoff)/bv).^2;
-%ofun = @(x,z) omega*exp(log(eps)*(cfun(x,z)).^10);
-cfun = @(x,z) 1-((x/av).^2 + gam^2*((z-zoff)/av).^2);
+cfun = @(x,z) 1-(x.^2 + z.^2)/av^2;
 ofun = @(x,z) omega*(cfun(x,z)).^3;
 chi = @(r) 1./pi.*(2.*exp(-(r.^2))-.5*exp(-(r/sqrt(2)).^2));
 %% In the off chance I want ghost particles later. 

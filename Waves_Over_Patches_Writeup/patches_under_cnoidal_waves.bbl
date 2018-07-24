@@ -1,29 +1,192 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{saffman}
-P.G. Saffman.
-\newblock {\em Vortex Dynamics}.
-\newblock Cambridge University Press, Cambridge, 1992.
+\bibitem{constantin}
+A.~Constantin.
+\newblock {\em Nonlinear Water Waves with Applications to Wave-Current
+  Interactions and Tsunamis}.
+\newblock SIAM, Philadelphia, 2011.
+
+\bibitem{lamb}
+H.~Lamb.
+\newblock {\em Hydrodynamics}.
+\newblock Dover, New York, N.Y., 1945.
+
+\bibitem{kundu}
+P.K. Kundu, I.M. Cohen, and D.R. Dowling.
+\newblock {\em Fluid Mechanics}.
+\newblock Elsevier, New York, N.Y., 5 edition, 2012.
+
+\bibitem{holthuijsen}
+L.H. Holthuijsen.
+\newblock {\em Waves in Oceanic and Coastal Waters}.
+\newblock Cambridge University Press, Cambridge, 2007.
+
+\bibitem{pullin1}
+D.I. Pullin and R.~Grimshaw.
+\newblock Nonlinear interfacial progressive waves near a boundary in a
+  {B}oussinesq fluid.
+\newblock {\em Phys. Fluid.}, 26:897, 1983.
+
+\bibitem{simmen}
+J.A. Simmen and P.G. Saffman.
+\newblock Steady deep-water waves on a linear shear current.
+\newblock {\em Stud. Appl. Math.}, 75:35--57, 1985.
+
+\bibitem{dasilva}
+A.F.~Teles da~Silva and D.H. Peregrine.
+\newblock Steep, steady surface waves on wter of finite depth with constant
+  vorticity.
+\newblock {\em J. Fluid Mech.}, 195:281--302, 1988.
+
+\bibitem{craik2}
+A.D.D. Craik.
+\newblock The generalized {L}agrangian-mean equations and hydrodynamic
+  stability.
+\newblock {\em J. Fluid Mech.}, 125:27--35, 1982.
+
+\bibitem{craik3}
+A.D.D. Craik.
+\newblock Wave-induced longitudinal-vortex instability in shear flows.
+\newblock {\em J. Fluid Mech.}, 125:37--52, 1982.
+
+\bibitem{drazen}
+P.~Drazin and W.~Reid.
+\newblock {\em Hydrodynamic Stability}.
+\newblock Cambridge University Press, Cambridge, 1981.
+
+\bibitem{phillips1}
+W.R.C. Phillips.
+\newblock On the spacing of {L}angmuir circulation in strong shear.
+\newblock {\em J. Fluid Mech.}, 525:215--236, 2005.
+
+\bibitem{nwogu2}
+O.~Nwogu.
+\newblock Interaction of finite-amplitude waves with vertically sheared current
+  fields.
+\newblock {\em J. Fluid Mech.}, 627:179--213, 2009.
+
+\bibitem{liu1}
+K.A. Chang, T.J. Hsu, and P.L.F. Liu.
+\newblock Vortex generation and evolution in water waves propagating over a
+  submerged rectangular obstacle. {P}art {I}: Solitary waves.
+\newblock {\em Coast. Eng.}, 44:13--36, 2001.
+
+\bibitem{liu2}
+K.A. Chang, T.J. Hsu, and P.L.F. Liu.
+\newblock Vortex generation and evolution in water waves propagating over a
+  submerged rectangular obstacle. {P}art {II}: Cnoidal waves.
+\newblock {\em Coast. Eng.}, 52:257--283, 2005.
+
+\bibitem{lin}
+C.~Lin, T.C. Ho, S.C. Chang, S.C. Hsieh, and K.A. Chang.
+\newblock Vortex shedding induced by a solitary wave propagating over a
+  submerged vertical plate.
+\newblock {\em Int. J. Heat and Fluid Flow}, 26:894--904, 2005.
+
+\bibitem{nwogu1}
+O.~Nwogu.
+\newblock Alternative form of {B}oussinesq equations for nearshore wave
+  propagation.
+\newblock {\em J. Waterw. Port Coastal Eng.}, 119:618--638, 1993.
+
+\bibitem{chen}
+Q.~Chen, J.T. Kirby, R.A. Dalrymple, and F.~Shi and.
+\newblock Boussinesq modeling of longshore currents.
+\newblock {\em J. Geophys. Res.}, 108:26--43, 2003.
+
+\bibitem{zhang}
+Y.~Zhang, A.B. Kennedy, N.~Panda, C.~Dawson, and J.J. Westerink.
+\newblock Boussinesq-{G}reen-{N}aghdi rotational water wave theory.
+\newblock {\em Coastal Eng.}, 73:13--27, 2013.
+
+\bibitem{Lannes2014_1}
+A.~Castro and D.~Lannes.
+\newblock Well-posedness and shallow-water stability for a new {H}amiltonian
+  formulation of the water waves equations with vorticity.
+\newblock {\em Indiana Univ. Math. J.}, 64:1169--1270, 2014.
+
+\bibitem{Lannes2014_2}
+A.~Castro and D.~Lannes.
+\newblock Fully nonlinear long-wave models in the presence of vorticity.
+\newblock {\em J. Fluid Mech.}, 759:642--675, 2014.
+
+\bibitem{Lannes2016_1}
+D.~Lannes and F.~Marche.
+\newblock Nonlinear wave-current interactions in shallow water.
+\newblock {\em Stud. Appl. Math.}, 136:382--423, 2016.
 
 \bibitem{cottet}
 G.H. Cottet and P.D. Koumoutsakos.
 \newblock {\em Vortex Methods: Theory and Practice}.
 \newblock Cambridge University Press, Cambridge, 2000.
 
+\bibitem{koumoutsakos}
+P.~Koumoutsakos and A.~Leonard.
+\newblock High-resolution simulations of the flow around an impulsively started
+  cylinder using vortex methods.
+\newblock {\em J. Fluid Mech.}, 296:1--38, 1995.
+
+\bibitem{koumoutsakos2}
+P.~Koumoutsakos.
+\newblock Invisicd axisymmetrization of an elliptical vortex.
+\newblock {\em J. Comp. Phys.}, 138:821--857, 1997.
+
+\bibitem{krasny}
+R.~Krasny.
+\newblock Vortex sheet computations: Roll-up, waves, separation.
+\newblock {\em Lec. Appl. Math.}, 28:385--402, 1991.
+
 \bibitem{beale}
 J.T. Beale and A.~Majda.
 \newblock High order accurate vortex methods with explicit velocity kernels.
 \newblock {\em J. Comp. Phys.}, 58:188--208, 1985.
+
+\bibitem{majda}
+A.J. Majda and A.L. Bertozzi.
+\newblock {\em Vorticity and Incompressible Flow}.
+\newblock Cambridge University Press, Cambridge, 2002.
+
+\bibitem{koumoutsakos3}
+P.~Koumoutsakos.
+\newblock Multiscale flow simulations using particles.
+\newblock {\em Ann. Rev. Fluid Mech.}, 37:457--487, 2005.
+
+\bibitem{koumoutsakos4}
+W.M. van Rees, A.~Leonard, D.I. Pullin, and P.~Koumoutsakos.
+\newblock A comparison of vortex and pseudo-spectral methods for the simulation
+  of periodic vorical flows at high {R}eynolds numbers.
+\newblock {\em J. Comp. Phys.}, 230:2794--2805, 2011.
 
 \bibitem{curtis}
 C.W. Curtis and H.~Kalisch.
 \newblock Vortex dynamics in free-surface flows.
 \newblock {\em Phys. Fluids}, 29:032101, 2017.
 
+\bibitem{afm}
+M.J. Ablowitz, A.S. Fokas, and Z.H. Musslimani.
+\newblock On a new non-local formulation of water waves.
+\newblock {\em J. Fluid Mech.}, 562:313--343, 2006.
+
 \bibitem{craig}
 W.~Craig and C.~Sulem.
 \newblock Numerical simulation of gravity waves.
 \newblock {\em J. Comput. Phys.}, 108:73--83, 1993.
+
+\bibitem{guyenne}
+P.~Guyenne and D.P. Nicholls.
+\newblock A high-order spectral method for nonlinear water waves over moving
+  bottom topography.
+\newblock {\em SIAM J. Sci. Comput.}, 30:81--101, 2007.
+
+\bibitem{greengard}
+L.~Greengard and V.~Rokhlin.
+\newblock A fast algorithm for particle simulations.
+\newblock {\em J. Comp. Phys.}, 73:325--348, 1987.
+
+\bibitem{saffman}
+P.G. Saffman.
+\newblock {\em Vortex Dynamics}.
+\newblock Cambridge University Press, Cambridge, 1992.
 
 \bibitem{cottet2}
 G.H. Cottet.
@@ -31,10 +194,24 @@ G.H. Cottet.
   dimensions.
 \newblock {\em Ann. Inst. Henri Poincar\'{e}}, 5:227--285, 1988.
 
-\bibitem{koumoutsakos}
-P.~Koumoutsakos and A.~Leonard.
-\newblock High-resolution simulations of the flow around an impulsively started
-  cylinder using vortex methods.
-\newblock {\em Jour. Fluid Mech.}, 296:1--38, 1995.
+\bibitem{wilkening}
+J.~Wilkening and V.~Vasan.
+\newblock Comparison of five methods of computing the {D}irichlet--{N}eumann
+  operator for the water wave problem.
+\newblock In {\em Nonlinear Wave Equations: Analytic and Computational
+  Techniques}. AMS, 2015.
+
+\bibitem{nicholls}
+D.P. Nicholls and F.~Reitich.
+\newblock Stability of high-order perturbative methods for the computation of
+  {D}irichlet-{N}eumann operators.
+\newblock {\em J. Comp. Phys.}, 170:276--298, 2001.
+
+\bibitem{zakharov}
+V.E. Zakharov.
+\newblock Stability of periodic waves of finite amplitude on the surface of a
+  deep fluid.
+\newblock {\em Zhurnal Prikladnoi Mechaniki i Teckhnicheskoi Fiziki}, 8:86--94,
+  1968.
 
 \end{thebibliography}

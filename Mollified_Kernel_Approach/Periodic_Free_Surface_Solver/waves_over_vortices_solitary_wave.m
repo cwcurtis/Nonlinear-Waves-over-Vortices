@@ -9,7 +9,8 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     av = .5*gam*min(1-zoffc,zoffc);
     %bv = b*mu*gam;
     F = pi*omega*av^2/(4*gam);
-    [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,omega,zoffc);
+    [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,omega);
+    zpos = zoffc + zpos/gam;
     
     simul_plot = 0; % Plot during computation.       0 - off, 1 - on
     stop_crit = 1;  % Stopping criterion.            0 - off, 1 - on
@@ -177,6 +178,18 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     
     etanv = wave_maker_kdv(K,modu,kap,mu,gam,tf);
     pspecnv = log10(abs(fftshift(fft(etanv)))/KT);
+    
+    chi = @(r) 1./pi.*(2.*exp(-(r.^2))-.5*exp(-(r/sqrt(2)).^2));
+    diffmat = sqrt((xpos*ones(1,length(xpos))-ones(length(xpos),1)*xpos').^2 + gam^2*(zpos*ones(1,length(zpos))-ones(length(zpos),1)*zpos').^2);
+    ivec = gam*chi(diffmat/ep)*gvals/(ep^2);
+    Finterp = scatteredInterpolant(xpos,zpos,ivec);
+    xmin = min(xpos);
+    xmax = max(xpos);
+    ddx = (xmax-xmin)/100;
+    zmin = min(zpos);
+    zmax = max(zpos);
+    ddz = (zmax-zmin)/100;
+    [Xmm,Zmm] = meshgrid((xmin:ddx:xmax),(zmin:ddz:zmax));
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     
     % Animate waves over vortices
@@ -193,21 +206,24 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     ylabel('$\eta(x,t_{f})$','Interpreter','LaTeX','FontSize',30)
     savefig(strcat(S, '/', 'profiles'))
     
+    %{
     figure(3)
     plot(times,mu*(tm_track-mean(tm_track)),'k','LineWidth',2)
     h = set(gca,'FontSize',30);
     set(h,'Interpreter','LaTeX')
     xlabel('$t$','Interpreter','LaTeX','FontSize',30)
     ylabel('$\eta(0,t)$','Interpreter','LaTeX','FontSize',30)
-
+    %}
+    
     % Plot the power spectrum
-    figure(4)
+    figure(3)
     plot_pspec(K,S,fftshift(pspec),pspecnv);
     
     % Plot the surface energy
-    figure(5)
-    plot_energy(plot_count,S,times,energy_plot,p_energy_plot,k_energy_plot);
+    figure(4)
+    plot_energy(plot_count,S,times,energy_plot,p_energy_plot,k_energy_plot);    
     
+    %{
     tspec = 4*pi*dt*mu^2*(abs(fft(tm_track-mean(tm_track)))/sqrt(no_of_evals)).^2;
     if mod(no_of_evals,2)==0
         tsaxis = 0:no_of_evals/2-1;
@@ -220,5 +236,13 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     set(h,'Interpreter','LaTeX')
     xlabel('$f$','Interpreter','LaTeX','FontSize',30)
     ylabel('$E(f)$','Interpreter','LaTeX','FontSize',30)
-
+    %}
+    
+    figure(5)
+    surface(Xmm,Zmm,Finterp(Xmm,Zmm),'LineStyle','none')
+    h = set(gca,'FontSize',30);
+    set(h,'Interpreter','LaTeX')
+    xlabel('$x$','Interpreter','LaTeX','FontSize',30)
+    ylabel('$z$','Interpreter','LaTeX','FontSize',30)    
+    
 end
