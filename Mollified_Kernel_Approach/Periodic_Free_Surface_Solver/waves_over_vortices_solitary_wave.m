@@ -210,7 +210,7 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     
     % Plot the surface energy
     figure(4)
-    plot_energy(plot_count,S,times,energy_plot,p_energy_plot,k_energy_plot);    
+    plot_energy(plot_count,S,times,energy_plot);    
     
     %{
     tspec = 4*pi*dt*mu^2*(abs(fft(tm_track-mean(tm_track)))/sqrt(no_of_evals)).^2;
@@ -229,5 +229,8 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     
     figure(5)
     plot_vorticity(S,ep,gam,xpos,zpos,gvals)
+    
+    disp('Mean relative energy transfer')
+    disp(1/(2*(length(energy_plot(1:end-1))))*(energy_plot(1)+energy_plot(end-1)+2*sum(energy_plot(2:end-2))))
     
 end
