@@ -76,7 +76,7 @@ In contrast to the above work, a body of numerical methods has developed within 
 
 However, in \cite{curtis}, simulations with at most four vortices were studied, preventing the modeling of more complicated vortex patches underneath free surface waves.  Thus, in this paper we present simulations of vortex patches involving several thousands of vortices.  To do so, we incoporate into the formulation in \cite{curtis} many of the techniques for error control and computational efficiency that have been developed in the PVMs community.  In particular the use of a Fast-Multipole Method \cite{greengard} and Lagrangian-to Eularian regridding \cite{koumoutsakos} play critical roles in obtaining our results.  Using this machinery, by moving to shallow-water scalings, we are able to then study the impact of vortex patches on the evolution of free surfaces waves which are approximated by the cnoidal-solutions of the Korteweg--de Vries equation.  This is a canonical model for nonlinear, shallow-water free surface waves, and it thus serves as an excellent source for the generation of families of initial conditions for the free-surface state.  While requiring periodic boundary conditions, the approach in this paper allows for arbitrary depth and modeling accuracy, thus providing a distinct complement to the Boussinesq and Green-Naghdi models described above.
 
-As we show, vortex patches can induce nontrivial deformations of a free surface wave.  This deformation is more pronounced the more linear the surface wave is, or the better a small amplitude modal approximation is to the free surface.  This can best be understood by examing the relative input of energy into the free surface.  As shown, the less nonlinear the surface wave, the more energy it receives from the vortex patch, thereby creating high-frequency oscillations and thus significant distortions of the wave profile.  Likewise, we see that the transport of the patch itself is significantly enhanced when larger amplitude nonlinear surface waves move over the patch, which pulls energy from the surface to increase its speed of propagation.  An especially curious feature worth future study is that the mean energy transfer from wave to patch is more linear with increasing patch strength for more nonlinear waves.  Why this is the case is not clear, and thus it motivates further future work.  
+As we show, vortex patches can induce nontrivial deformations of a free surface wave.  This deformation is more pronounced the more linear the surface wave is, or the better a small amplitude modal approximation is to the free surface.  This can best be understood by examing the relative input of energy into the free surface.  As shown, the less nonlinear the surface wave, the more energy it receives from the vortex patch, thereby creating high-frequency oscillations and thus significant distortions of the wave profile.  Likewise, we see that the transport of the patch itself is significantly enhanced when larger amplitude, wider nonlinear-surface waves move over the patch, which pulls energy from the surface to increase its speed of propagation.  An especially curious feature worth future study is that the mean energy transfer from wave to patch is more linear with increasing patch strength for more nonlinear waves.  Why this is the case is not clear, and thus it motivates further future work.  
 
 An overview of the paper is as follows.  In Section 2, the model, numerical scheme, and implementation details are presented.  Section 3 presents our numerical results, while in Section 4 we summarize our results and speak to future directions.  An Appendix collects technical details about the DNO.  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -306,37 +306,29 @@ We likewise compute the mean relative-energy input $\delta E_{m}$ where
 \[
 \delta E_{m} = \frac{1}{t_{f}}\int_{0}^{t_{f}} \delta E(t;F) dt = \frac{1}{E(t;0)}\left(\frac{1}{t_{f}}\int_{0}^{t_{f}}E(t;F)dt - E(t;0) \right),
 \]
-where in the last equality we have used the fact that $E(t;0) = E(0;0)$ since it is a conserved quantity of the flow.  
+where in the last equality we have used the fact that $E(t;0) = E(0;0)$ since it is a conserved quantity of the flow.  Finally, we also track the horizontal center-of mass of the vortex patch, say $x_{c}(t)$, defined by the formula
+\[
+x_{c}(t) = \frac{\int_{\tilde{\Omega}(t)} x\tilde{\omega}(x,y,t) d\tilde{A}}{\int_{\tilde{\Omega}(t)} \tilde{\omega}(x,y,t) d\tilde{A}},
+\]
+thereby allowing us to better understand the impact of the traveling wave on the motion of the patch.  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Elliptic Modulus $\tilde{m}=.3$}
-Taking $\tilde{m}=.3$ and $\kappa = .5$, this corresponds to $M \approx 3.3$.  Taking $K_{T}=512$, this gives $\delta x = .013$.  The unscaled amplitude of the cnoidal initial conditions is given by $8(\tilde{m}\kappa)^{2}\approx .18$.  From both the pointwise comparisons in Figure \ref{fig:lowsolwave} and the relative energy inputs in Figure \ref{fig:lowsolenergy}, we see that stronger vorticity corresponds to greater deformation of the surface wave relative to the undisturbed case, and comparing across Figures \ref{fig:midsolwave} and \ref{fig:highsolwave}, we see that the vortex patch has the strongest impact on the least nonlinear waves.  
+Taking $\tilde{m}=.3$ and $\kappa = .5$, this corresponds to $M \approx 3.3$.  Taking $K_{T}=512$, this gives $\delta x = .013$.  The unscaled amplitude of the cnoidal initial conditions is given by $8(\tilde{m}\kappa)^{2}\approx .18$.  From both the pointwise comparisons in Figure \ref{fig:lowsolwave} and the relative energy inputs in Figure \ref{fig:lowsolwave}, we see that stronger vorticity corresponds to greater deformation of the surface wave relative to the undisturbed case, and comparing across Figures \ref{fig:midsolwave} and \ref{fig:highsolwave}, we see that the vortex patch has the strongest impact on the least nonlinear waves.  
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=.45\textwidth]{vorticity_wm_1_modu_pt3} & \includegraphics[width=.45\textwidth]{profiles_wm_1_modu_pt3}\\
+\includegraphics[width=.45\textwidth]{profiles_wm_1_modu_pt3} & \includegraphics[width=.4\textwidth]{energy_wm_1_modu_pt3}\\
 (a)  $F=.01$ & (b)  $F=.01$\\
-\includegraphics[width=.45\textwidth]{vorticity_wm_5_modu_pt3} & \includegraphics[width=.45\textwidth]{profiles_wm_5_modu_pt3}\\
+\includegraphics[width=.45\textwidth]{profiles_wm_5_modu_pt3} & \includegraphics[width=.4\textwidth]{energy_wm_5_modu_pt3}\\
 (c)  $F=.05$ & (d)  $F=.05$\\
-\includegraphics[width=.45\textwidth]{vorticity_wm_10_modu_pt3} & \includegraphics[width=.45\textwidth]{profiles_wm_10_modu_pt3}\\
+\includegraphics[width=.45\textwidth]{profiles_wm_10_modu_pt3} & \includegraphics[width=.4\textwidth]{energy_wm_10_modu_pt3}\\
 (e)  $F=.1$ & (f)  $F=.1$
 \end{tabular}
-\caption{The vortex patches are shown on the left for various values of the Froude number $F$, while comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (- -) are shown on the right.  Relative to the initial horizontal displacement of $x_{c}=0$, the center of the patch is now between $.2$ and $.3$.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.3$, $\kappa = .5$.}
+\caption{Comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (- -) are shown on the left for various values of the Froude number $F$, while the relative energy change $\delta E(t)$ is shown on the right.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.3$, $\kappa = .5$.}
 \label{fig:lowsolwave}
 \end{figure}
 
-\begin{figure}
-\centering
-\begin{tabular}{cc}
-\includegraphics[width=8cm,height=6cm]{energy_wm_1_modu_pt3} & \includegraphics[width=8cm,height=6cm]{energy_wm_5_modu_pt3} \\
-(a) $F=.01$ & (b) $F=.05$\\
- \includegraphics[width=8cm,height=6cm]{energy_wm_10_modu_pt3}\\
- (c) $F=.1$
-\end{tabular}
-\caption{The relative energy change $\delta E(t)$ for $F=.01$ (a), $F=.05$ (b), and $F=.1$ (c) for $\tilde{m}=.3$ and $\kappa = .5$.  In the relatively weak nonlinearity case, the increasing Froude number leads to greater asymmetry between the maximum and minimum values of the relative energy change, so that the relatively weak nonlinear wave clearly absorbs more energy than it loses when $F=.1$.}
-\label{fig:lowsolenergy}
-\end{figure}
-
-Moreover, we see in Figure \ref{fig:lowsolenergy} that the response of the relative energy input $\delta E(t;F)$ is nonlinear in $F$, with positive peaks being significantly enhanced over negative troughs.  This nonlinear response is also seen in the values of the mean relative-energy inputs, $\delta E_{m}$, listed in Table \ref{tab:lowsolmean}.  Moreover, the values of $\delta E_{m}$ are always negative, implying energy is on average taken from the wave, which in part explains the decrease in the amplitude of the waves seen in Figures \ref{fig:lowsolwave} (b), (d), and (f).  The increased mean energy transfer seen in Table \ref{tab:lowsolmean} also explains the strong deformations seen in comparing Figures \ref{fig:lowsolwave} (b), (d), and (f) and shows how for a relatively linear surface profile, the vortex patch becomes a source of nonlinear interaction and wave mixing.    
+Moreover, we see in Figure \ref{fig:lowsolwave} that the response of the relative energy input $\delta E(t;F)$ is nonlinear in $F$, with positive peaks being significantly enhanced over negative troughs.  This nonlinear response is also seen in the values of the mean relative-energy inputs, $\delta E_{m}$, listed in Table \ref{tab:lowsolmean}.  Moreover, the values of $\delta E_{m}$ are always negative, implying energy is on average taken from the wave, which in part explains the decrease in the amplitude of the waves seen in Figures \ref{fig:lowsolwave} (a), (c), and (e).  The increased mean energy transfer seen in Table \ref{tab:lowsolmean} also explains the strong deformations seen in comparing Figures \ref{fig:lowsolwave} (b), (d), and (f) and shows how for a relatively linear surface profile, the vortex patch becomes a source of nonlinear interaction and wave mixing.    
 \begin{table}
 \centering
 \begin{tabular}{c|c}
@@ -349,34 +341,37 @@ $.1$ & $-3.7\times 10^{-3}$
 \caption{Mean relative-energy input for $\tilde{m}=.3$ and $\kappa=.5$.}
 \label{tab:lowsolmean}
 \end{table}
-We also see that the center of the patch is only moderately displaced relative to its starting position, even accounting for the impact of the image vortices due to the solid boundary at $z=0$.  Were the solid boundary to have that much more of an effect, we should see a greater relative displacment across a ten-fold increase in $F$, which is not present by observing the left-hand side of Figure \ref{fig:lowsolwave}.  
+
+Examing Figure \ref{fig:lowsolvorticity}, we see that the center of mass of the patch has been displaced on average about $.25$ non-dimensional units relative to its starting position.  The periods of acceleration seen by examing the center-of-mass positions in Figures \ref{fig:lowsolvorticity} (b), (d), and (f) correspond to the wave crest moving over the patch.  The difference in final displacement of the patch increases with increasing Froude number, which is to be expected due to the influence of the solid boundary; see the left-hand side of Figure \ref{fig:lowsolvorticity}.  However, it is clear that the solid boundary as a means of patch transport has minimal influence.
+\begin{figure}
+\centering
+\begin{tabular}{cc}
+\includegraphics[width=.45\textwidth]{vorticity_wm_1_modu_pt3} &  \includegraphics[width=.45\textwidth]{com_wm_1_modu_pt3}\\
+(a) $F=.01$ & (b) $F=.01$\\
+\includegraphics[width=.45\textwidth]{vorticity_wm_5_modu_pt3} & \includegraphics[width=.45\textwidth]{com_wm_5_modu_pt3}\\
+(c) $F=.05$ & (d) $F=.05$\\
+ \includegraphics[width=.45\textwidth]{vorticity_wm_10_modu_pt3} & \includegraphics[width=.45\textwidth]{com_wm_10_modu_pt3}\\
+(e) $F=.1$ & (f) $F=.1$
+\end{tabular}
+\caption{The vortex patches at the final time $t_{f}$ for $F=.01$ (a), $F=.05$ (c), and $F=.1$ (e) and the motion of the horizontal center of mass $x_{c}(t)$ for$F=.01$ (b), $F=.05$ (d), and $F=.1$ (f) for $\tilde{m}=.3$ and $\kappa = .5$.}
+\label{fig:lowsolvorticity}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Elliptic Modulus $\tilde{m}=.6$}
 Taking $\tilde{m}=.6$, we find that $\kappa = .43$, this corresponds to $M \approx 4.4$.  Taking $K_{T}=512$, this gives $\delta x = .0172$.  The unscaled amplitude of the cnoidal initial conditions is given by $8(\tilde{m}\kappa)^{2}\approx .53$.  As seen in Figure \ref{fig:midsolwave}, we see that the larger elliptic modulus and larger amplitude makes the surface wave less responsive to the impact of vorticity.  Nevertheless, the patch consistently lowers maximum amplitudes, and when large enough, induces significant oscillations in the surface profile.  
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=.45\textwidth]{vorticity_wm_1_modu_pt6} & \includegraphics[width=.45\textwidth]{profiles_wm_1_modu_pt6}\\
+\includegraphics[width=.45\textwidth]{profiles_wm_1_modu_pt6} & \includegraphics[width=.4\textwidth]{energy_wm_1_modu_pt6}\\
 (a)  $F=.01$ & (b)  $F=.01$\\
-\includegraphics[width=.45\textwidth]{vorticity_wm_5_modu_pt6} & \includegraphics[width=.45\textwidth]{profiles_wm_5_modu_pt6}\\
+\includegraphics[width=.45\textwidth]{profiles_wm_5_modu_pt6} & \includegraphics[width=.4\textwidth]{energy_wm_5_modu_pt6}\\
 (c)  $F=.05$ & (d)  $F=.05$\\
-\includegraphics[width=.45\textwidth]{vorticity_wm_10_modu_pt6} & \includegraphics[width=.45\textwidth]{profiles_wm_10_modu_pt6}\\
+\includegraphics[width=.45\textwidth]{profiles_wm_10_modu_pt6} & \includegraphics[width=.4\textwidth]{energy_wm_10_modu_pt6}\\
 (e)  $F=.1$ & (f)  $F=.1$
 \end{tabular}
-\caption{The vortex patches are shown on the left for various values of the Froude number $F$, while comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (- -) are shown on the right.  Relative to the initial horizontal displacement of $x_{c}=0$, the center of the patch is now between $.5$ and $.6$.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.6$, $\kappa = .43$.}
+\caption{Comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (- -) are shown on the left for various values of the Froude number $F$, while the relative energy change $\delta E(t)$ is shown on the right.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.6$, $\kappa = .43$.}
 \label{fig:midsolwave}
-\end{figure}
-
-\begin{figure}
-\centering
-\begin{tabular}{cc}
-\includegraphics[width=8cm,height=6cm]{energy_wm_1_modu_pt6} & \includegraphics[width=8cm,height=6cm]{energy_wm_5_modu_pt6} \\
-(a) $F=.01$ & (b) $F=.05$\\
- \includegraphics[width=8cm,height=6cm]{energy_wm_10_modu_pt6}\\
- (c) $F=.1$
-\end{tabular}
-\caption{The relative energy change $\delta E(t)$ for $F=.01$ (a), $F=.05$ (b), and $F=.1$ (c) for $\tilde{m}=.6$ and $\kappa = .43$.  In the relatively moderate nonlinearity case, the increasing Froude number leads to a greater than ten-fold increase in the peak amplitude of the relative energy input.  However presence of greater nonlinearity in the surface wave reduces the overall impact of the patch at the surface as reflected in the overall lower energy difference magnitudes as compared to those in Figure \ref{fig:lowsolenergy}.}
-\label{fig:midsolenergy}
 \end{figure}
 
 However, in contrast to the $\tilde{m}=.3$ case above, we see that the response of the relative energy input $\delta E(t;F)$ is far more linear in nature, with peaks and troughs being enhanced about equally with rising values of $F$.  The mean relative-energy inputs $\delta E_{m}$ listed in Table \ref{tab:midsolmean} bear this more linear response out, though again the values are always negative implying again that energy is lost from the wave and put into the patch.  
@@ -392,36 +387,38 @@ $.1$ & $-1.1\times 10^{-3}$
 \caption{Mean relative-energy input for $\tilde{m}=.6$ and $\kappa=.43$.}
 \label{tab:midsolmean}
 \end{table}
-We also see that the center of the patch is displaced at a far greater distance relative to its starting position, showing the greater impact of the higher amplitude, faster moving surface wave.  
+
+In Figure \ref{fig:midsolvorticity}, we see that a relatively larger amplitude, wider surface wave is able to displace the patch significantly further, with mean displacement about $.525$ non-dimensional units.  Again, while the impact of the solid wall along the bottom allows for greater displacement due to larger Froude number, this is nowhere near as significant as the impact of th wave on the patch.  
+\begin{figure}
+\centering
+\begin{tabular}{cc}
+\includegraphics[width=.45\textwidth]{vorticity_wm_1_modu_pt6} &  \includegraphics[width=.45\textwidth]{com_wm_1_modu_pt6}\\
+(a) $F=.01$ & (b) $F=.01$\\
+\includegraphics[width=.45\textwidth]{vorticity_wm_5_modu_pt6} & \includegraphics[width=.45\textwidth]{com_wm_5_modu_pt6}\\
+(c) $F=.05$ & (d) $F=.05$\\
+ \includegraphics[width=.45\textwidth]{vorticity_wm_10_modu_pt6} & \includegraphics[width=.45\textwidth]{com_wm_10_modu_pt6}\\
+(e) $F=.1$ & (f) $F=.1$
+\end{tabular}
+\caption{The vortex patches at the final time $t_{f}$ for $F=.01$ (a), $F=.05$ (c), and $F=.1$ (e) and the motion of the horizontal center of mass $x_{c}(t)$ for$F=.01$ (b), $F=.05$ (d), and $F=.1$ (f) for $\tilde{m}=.6$ and $\kappa = .43$.}
+\label{fig:midsolvorticity}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Elliptic Modulus $\tilde{m}=.9$}
 Taking $\tilde{m}=.9$, we find that $\kappa = .35$, this corresponds to $M \approx 7.4$.  Taking $K_{T}=512$, this gives $\delta x = .029$.  The unscaled amplitude of the cnoidal initial conditions is given by $8(\tilde{m}\kappa)^{2}\approx .8$.  Thus, somewhat suprisingly, we could use the largest amplitude wave when the initial condition was closest to that of a solitary wave profile.  Likewise, aside from causing a slight broadening and thus decrease in maximum amplitude of the near solitary wave, vorticity has the least relative impact on the wave.  Thus, if we treat the $\tilde{m}=.9$ as the `most' nonlinear of the three cases examined, since this corresponds to the case closest to that of a nonlinear solitary wave, we see vorticity has the least overall impact on the most nonlinear of waves.  
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=.45\textwidth]{vorticity_wm_1_modu_pt9} & \includegraphics[width=.45\textwidth]{profiles_wm_1_modu_pt9}\\
+\includegraphics[width=.45\textwidth]{profiles_wm_1_modu_pt9} & \includegraphics[width=.4\textwidth]{energy_wm_1_modu_pt9}\\
 (a)  $F=.01$ & (b)  $F=.01$\\
-\includegraphics[width=.45\textwidth]{vorticity_wm_5_modu_pt9} & \includegraphics[width=.45\textwidth]{profiles_wm_5_modu_pt9}\\
+\includegraphics[width=.45\textwidth]{profiles_wm_5_modu_pt9} & \includegraphics[width=.4\textwidth]{energy_wm_5_modu_pt9}\\
 (c)  $F=.05$ & (d)  $F=.05$\\
-\includegraphics[width=.45\textwidth]{vorticity_wm_10_modu_pt9} & \includegraphics[width=.45\textwidth]{profiles_wm_10_modu_pt9}\\
+\includegraphics[width=.45\textwidth]{profiles_wm_10_modu_pt9} & \includegraphics[width=.4\textwidth]{energy_wm_10_modu_pt9}\\
 (e)  $F=.1$ & (f)  $F=.1$
 \end{tabular}
-\caption{The vortex patches are shown on the left for various values of the Froude number $F$, while comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (- -) are shown on the right.  Relative to the initial horizontal displacement of $x_{c}=0$, the center of the patch is now between $.8$ and $.9$.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.9$, $\kappa = .35$.}
+\caption{Comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (- -) are shown on the left for various values of the Froude number $F$, while the relative energy change $\delta E(t)$ is shown on the right.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.9$, $\kappa = .35$.}
 \label{fig:highsolwave}
 \end{figure}
-
-\begin{figure}
-\centering
-\begin{tabular}{cc}
-\includegraphics[width=8cm,height=6cm]{energy_wm_1_modu_pt9} & \includegraphics[width=8cm,height=6cm]{energy_wm_5_modu_pt9} \\
-(a) $F=.01$ & (b) $F=.05$\\
- \includegraphics[width=8cm,height=6cm]{energy_wm_10_modu_pt9}\\
- (c) $F=.1$
-\end{tabular}
-\caption{The relative energy change $\delta E(t)$ for $F=.01$ (a), $F=.05$ (b), and $F=.1$ (c) for $\tilde{m}=.9$ and $\kappa = .35$.  In the relatively strong nonlinearity case, the increasing Froude number leads to a greater than ten-fold loss of the relative energy change in the surface.  However the  presence of greater nonlinearity in the surface wave reduces the overall impact of the patch at the surface as reflected in the overall lower energy difference magnitudes as compared to those in Figure \ref{fig:lowsolenergy}.}
-\label{fig:highsolenergy}
-\end{figure}
-
 This is especially seen by the weak response of $\delta E(t;F)$ plotted in Figure \ref{fig:highsolwave}.  We also get the clearest correlation between the loss in amplitude seen in Figure \ref{fig:highsolwave} and the relative energy input, which is largely negative though stretched out over a longer time scale than in comparison to the energy dynamics seen above.  Looking at the relative energy-input means in Table \ref{tab:highsolmean}, we see the most linear response to increasing Froude number compared to the more linear waves examine above.  
 \begin{table}
 \centering
@@ -435,7 +432,23 @@ $.1$ & $-3.7\times 10^{-3}$
 \caption{Mean relative-energy input for $\tilde{m}=.9$ and $\kappa=.35$.}
 \label{tab:highsolmean}
 \end{table}
-We also see that the center of the patch is displaced at the greatest distance relative to its starting position, showing the strong effect that relatively large amplitude, fast moving nonlinear waves have on the patch.  We see from the energy dynamics that a likely explanation of this enhanced transport is that the patch is able to pull energy from the more nonlinear surface wave.  
+
+We also see in Figure \ref{fig:highsolvorticity} that the center of the patch is displaced at the greatest distance relative to its starting position, showing the strong effect that relatively large amplitude, wide nonlinear waves have on the patch.  Note, across the values of $\tilde{m}$ and $\kappa$ used throughout this section, the KdV cnoidal wave speed $\tilde{c}$ varies from $\tilde{c}=-.1367$ for $\tilde{m}=.3$, $\kappa =.5$, to $\tilde{c}=.0506$ for $\tilde{m}=.9$, $\kappa=.35$.  Thus, working in the fast coordinate and taking $\mu=.2$, we have a net wave speed of $.9727$ on the low side to $1.0101$ on the high side.  Therefore, there does not appear to be a significant enough variation in wave speed to explain the differences in the relative dispalcements of the vortex patches across all the cases studied in this paper.  Thus, it appears that wave amplitude and width are the better determining factors for patch displacement, though the full nature of how these parameters interact with the Froude number is a subject of future study.  
+\begin{figure}
+\centering
+\begin{tabular}{cc}
+\includegraphics[width=.45\textwidth]{vorticity_wm_1_modu_pt9} &  \includegraphics[width=.45\textwidth]{com_wm_1_modu_pt9}\\
+(a) $F=.01$ & (b) $F=.01$\\
+\includegraphics[width=.45\textwidth]{vorticity_wm_5_modu_pt9} & \includegraphics[width=.45\textwidth]{com_wm_5_modu_pt9}\\
+(c) $F=.05$ & (d) $F=.05$\\
+ \includegraphics[width=.45\textwidth]{vorticity_wm_10_modu_pt9} & \includegraphics[width=.45\textwidth]{com_wm_10_modu_pt9}\\
+(e) $F=.1$ & (f) $F=.1$
+\end{tabular}
+\caption{The vortex patches at the final time $t_{f}$ for $F=.01$ (a), $F=.05$ (c), and $F=.1$ (e) and the motion of the horizontal center of mass $x_{c}(t)$ for$F=.01$ (b), $F=.05$ (d), and $F=.1$ (f) for $\tilde{m}=.9$ and $\kappa = .35$.}
+\label{fig:highsolvorticity}
+\end{figure}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}

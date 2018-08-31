@@ -6,6 +6,7 @@ function plot_energy(t,S,times,p1)
     xlabel('$t$','Interpreter','LaTeX','FontSize',30)
     ylabel('$\delta E(t)$','Interpreter','LaTeX','FontSize',30)
     
+    %{
     % get ylim
     ym=min(abs(p1(1:t-1)));  
     
@@ -31,6 +32,7 @@ function plot_energy(t,S,times,p1)
     yl = ylim;
     text(xl(1),yl(2),sprintf('x 10^{%d}',e),...
     'fontsize',fs,'VerticalAlignment','bottom');
-
+    %}
+    
     savefig(strcat(S, '/', 'energy'))
 end

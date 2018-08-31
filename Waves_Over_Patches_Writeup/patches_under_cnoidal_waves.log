@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.10.8)  20 AUG 2018 11:50
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.10.8)  31 AUG 2018 13:58
 entering extended mode
 **D:/My*Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Pa
 tches_Writeup/patches_under_cnoidal_waves.tex
@@ -285,261 +285,424 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [7] [8 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_O
 ver_Patches_Writeup/full_error_comparison.pdf> <D:/My Documents/Desktop/Nonline
 ar-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/full_error_comparis
-on_wm_10.pdf>] [9]
-<vorticity_wm_1_modu_pt3.pdf, id=53, 716.6775pt x 435.6275pt>
-File: vorticity_wm_1_modu_pt3.pdf Graphic file (type pdf)
-
-<use vorticity_wm_1_modu_pt3.pdf>
-Package pdftex.def Info: vorticity_wm_1_modu_pt3.pdf used on input line 316.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<profiles_wm_1_modu_pt3.pdf, id=54, 718.685pt x 477.785pt>
+on_wm_10.pdf>] [9] <profiles_wm_1_modu_pt3.pdf, id=53, 718.685pt x 477.785pt>
 File: profiles_wm_1_modu_pt3.pdf Graphic file (type pdf)
 
 <use profiles_wm_1_modu_pt3.pdf>
-Package pdftex.def Info: profiles_wm_1_modu_pt3.pdf used on input line 316.
+Package pdftex.def Info: profiles_wm_1_modu_pt3.pdf used on input line 320.
 (pdftex.def)             Requested size: 211.26027pt x 140.4423pt.
 
-<vorticity_wm_5_modu_pt3.pdf, id=55, 716.6775pt x 435.6275pt>
-File: vorticity_wm_5_modu_pt3.pdf Graphic file (type pdf)
-
-<use vorticity_wm_5_modu_pt3.pdf>
-Package pdftex.def Info: vorticity_wm_5_modu_pt3.pdf used on input line 318.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<profiles_wm_5_modu_pt3.pdf, id=56, 716.6775pt x 435.6275pt>
-File: profiles_wm_5_modu_pt3.pdf Graphic file (type pdf)
-
-<use profiles_wm_5_modu_pt3.pdf>
-Package pdftex.def Info: profiles_wm_5_modu_pt3.pdf used on input line 318.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<vorticity_wm_10_modu_pt3.pdf, id=57, 716.6775pt x 435.6275pt>
-File: vorticity_wm_10_modu_pt3.pdf Graphic file (type pdf)
-
-<use vorticity_wm_10_modu_pt3.pdf>
-Package pdftex.def Info: vorticity_wm_10_modu_pt3.pdf used on input line 320.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<profiles_wm_10_modu_pt3.pdf, id=58, 716.6775pt x 435.6275pt>
-File: profiles_wm_10_modu_pt3.pdf Graphic file (type pdf)
-
-<use profiles_wm_10_modu_pt3.pdf>
-Package pdftex.def Info: profiles_wm_10_modu_pt3.pdf used on input line 320.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<energy_wm_1_modu_pt3.pdf, id=59, 421.575pt x 316.18124pt>
+<energy_wm_1_modu_pt3.pdf, id=54, 421.575pt x 316.18124pt>
 File: energy_wm_1_modu_pt3.pdf Graphic file (type pdf)
 
 <use energy_wm_1_modu_pt3.pdf>
-Package pdftex.def Info: energy_wm_1_modu_pt3.pdf used on input line 330.
-(pdftex.def)             Requested size: 227.6278pt x 170.72084pt.
+Package pdftex.def Info: energy_wm_1_modu_pt3.pdf used on input line 320.
+(pdftex.def)             Requested size: 187.78531pt x 140.84253pt.
 
-<energy_wm_5_modu_pt3.pdf, id=60, 421.575pt x 316.18124pt>
+<profiles_wm_5_modu_pt3.pdf, id=55, 716.6775pt x 435.6275pt>
+File: profiles_wm_5_modu_pt3.pdf Graphic file (type pdf)
+
+<use profiles_wm_5_modu_pt3.pdf>
+Package pdftex.def Info: profiles_wm_5_modu_pt3.pdf used on input line 322.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+
+<energy_wm_5_modu_pt3.pdf, id=56, 421.575pt x 316.18124pt>
 File: energy_wm_5_modu_pt3.pdf Graphic file (type pdf)
 
 <use energy_wm_5_modu_pt3.pdf>
-Package pdftex.def Info: energy_wm_5_modu_pt3.pdf used on input line 330.
-(pdftex.def)             Requested size: 227.6278pt x 170.72084pt.
+Package pdftex.def Info: energy_wm_5_modu_pt3.pdf used on input line 322.
+(pdftex.def)             Requested size: 187.78531pt x 140.84253pt.
 
-<energy_wm_10_modu_pt3.pdf, id=61, 421.575pt x 316.18124pt>
+<profiles_wm_10_modu_pt3.pdf, id=57, 716.6775pt x 435.6275pt>
+File: profiles_wm_10_modu_pt3.pdf Graphic file (type pdf)
+
+<use profiles_wm_10_modu_pt3.pdf>
+Package pdftex.def Info: profiles_wm_10_modu_pt3.pdf used on input line 324.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+
+<energy_wm_10_modu_pt3.pdf, id=58, 421.575pt x 316.18124pt>
 File: energy_wm_10_modu_pt3.pdf Graphic file (type pdf)
 
 <use energy_wm_10_modu_pt3.pdf>
-Package pdftex.def Info: energy_wm_10_modu_pt3.pdf used on input line 332.
-(pdftex.def)             Requested size: 227.6278pt x 170.72084pt.
+Package pdftex.def Info: energy_wm_10_modu_pt3.pdf used on input line 324.
+(pdftex.def)             Requested size: 187.78531pt x 140.84253pt.
 
-Overfull \hbox (9.78516pt too wide) in paragraph at lines 329--335
- [][] 
- []
+<vorticity_wm_1_modu_pt3.pdf, id=59, 716.6775pt x 435.6275pt>
+File: vorticity_wm_1_modu_pt3.pdf Graphic file (type pdf)
 
-<vorticity_wm_1_modu_pt6.pdf, id=62, 716.6775pt x 435.6275pt>
-File: vorticity_wm_1_modu_pt6.pdf Graphic file (type pdf)
-
-<use vorticity_wm_1_modu_pt6.pdf>
-Package pdftex.def Info: vorticity_wm_1_modu_pt6.pdf used on input line 359.
+<use vorticity_wm_1_modu_pt3.pdf>
+Package pdftex.def Info: vorticity_wm_1_modu_pt3.pdf used on input line 349.
 (pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+Package epstopdf Info: Source file: <com_wm_1_modu_pt3.eps>
+(epstopdf)                    date: 2018-08-31 11:50:03
+(epstopdf)                    size: 21444 bytes
+(epstopdf)             Output file: <com_wm_1_modu_pt3-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-08-31 12:02:33
+(epstopdf)                    size: 7377 bytes
+(epstopdf)             Command: <epstopdf --outfile=com_wm_1_modu_pt3-eps-conve
+rted-to.pdf com_wm_1_modu_pt3.eps>
+(epstopdf)             \includegraphics on input line 349.
+Package epstopdf Info: Output file is already uptodate.
 
-<profiles_wm_1_modu_pt6.pdf, id=63, 716.6775pt x 435.6275pt>
+<com_wm_1_modu_pt3-eps-converted-to.pdf, id=60, 714.67pt x 432.61626pt>
+File: com_wm_1_modu_pt3-eps-converted-to.pdf Graphic file (type pdf)
+
+<use com_wm_1_modu_pt3-eps-converted-to.pdf>
+Package pdftex.def Info: com_wm_1_modu_pt3-eps-converted-to.pdf used on input l
+ine 349.
+(pdftex.def)             Requested size: 211.26027pt x 127.88474pt.
+
+<vorticity_wm_5_modu_pt3.pdf, id=61, 716.6775pt x 435.6275pt>
+File: vorticity_wm_5_modu_pt3.pdf Graphic file (type pdf)
+
+<use vorticity_wm_5_modu_pt3.pdf>
+Package pdftex.def Info: vorticity_wm_5_modu_pt3.pdf used on input line 351.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+Package epstopdf Info: Source file: <com_wm_5_modu_pt3.eps>
+(epstopdf)                    date: 2018-08-31 11:57:58
+(epstopdf)                    size: 21406 bytes
+(epstopdf)             Output file: <com_wm_5_modu_pt3-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-08-31 12:02:34
+(epstopdf)                    size: 7368 bytes
+(epstopdf)             Command: <epstopdf --outfile=com_wm_5_modu_pt3-eps-conve
+rted-to.pdf com_wm_5_modu_pt3.eps>
+(epstopdf)             \includegraphics on input line 351.
+Package epstopdf Info: Output file is already uptodate.
+
+<com_wm_5_modu_pt3-eps-converted-to.pdf, id=62, 714.67pt x 432.61626pt>
+File: com_wm_5_modu_pt3-eps-converted-to.pdf Graphic file (type pdf)
+
+<use com_wm_5_modu_pt3-eps-converted-to.pdf>
+Package pdftex.def Info: com_wm_5_modu_pt3-eps-converted-to.pdf used on input l
+ine 351.
+(pdftex.def)             Requested size: 211.26027pt x 127.88474pt.
+
+<vorticity_wm_10_modu_pt3.pdf, id=63, 716.6775pt x 435.6275pt>
+File: vorticity_wm_10_modu_pt3.pdf Graphic file (type pdf)
+
+<use vorticity_wm_10_modu_pt3.pdf>
+Package pdftex.def Info: vorticity_wm_10_modu_pt3.pdf used on input line 353.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+Package epstopdf Info: Source file: <com_wm_10_modu_pt3.eps>
+(epstopdf)                    date: 2018-08-31 11:58:39
+(epstopdf)                    size: 20732 bytes
+(epstopdf)             Output file: <com_wm_10_modu_pt3-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-08-31 12:02:34
+(epstopdf)                    size: 7357 bytes
+(epstopdf)             Command: <epstopdf --outfile=com_wm_10_modu_pt3-eps-conv
+erted-to.pdf com_wm_10_modu_pt3.eps>
+(epstopdf)             \includegraphics on input line 353.
+Package epstopdf Info: Output file is already uptodate.
+
+<com_wm_10_modu_pt3-eps-converted-to.pdf, id=64, 714.67pt x 432.61626pt>
+File: com_wm_10_modu_pt3-eps-converted-to.pdf Graphic file (type pdf)
+
+<use com_wm_10_modu_pt3-eps-converted-to.pdf>
+Package pdftex.def Info: com_wm_10_modu_pt3-eps-converted-to.pdf used on input 
+line 353.
+(pdftex.def)             Requested size: 211.26027pt x 127.88474pt.
+
+<profiles_wm_1_modu_pt6.pdf, id=65, 716.6775pt x 435.6275pt>
 File: profiles_wm_1_modu_pt6.pdf Graphic file (type pdf)
 
 <use profiles_wm_1_modu_pt6.pdf>
-Package pdftex.def Info: profiles_wm_1_modu_pt6.pdf used on input line 359.
+Package pdftex.def Info: profiles_wm_1_modu_pt6.pdf used on input line 366.
 (pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
 
-<vorticity_wm_5_modu_pt6.pdf, id=64, 716.6775pt x 435.6275pt>
-File: vorticity_wm_5_modu_pt6.pdf Graphic file (type pdf)
-
-<use vorticity_wm_5_modu_pt6.pdf>
-Package pdftex.def Info: vorticity_wm_5_modu_pt6.pdf used on input line 361.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<profiles_wm_5_modu_pt6.pdf, id=65, 716.6775pt x 435.6275pt>
-File: profiles_wm_5_modu_pt6.pdf Graphic file (type pdf)
-
-<use profiles_wm_5_modu_pt6.pdf>
-Package pdftex.def Info: profiles_wm_5_modu_pt6.pdf used on input line 361.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<vorticity_wm_10_modu_pt6.pdf, id=66, 716.6775pt x 435.6275pt>
-File: vorticity_wm_10_modu_pt6.pdf Graphic file (type pdf)
-
-<use vorticity_wm_10_modu_pt6.pdf>
-Package pdftex.def Info: vorticity_wm_10_modu_pt6.pdf used on input line 363.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<profiles_wm_10_modu_pt6.pdf, id=67, 716.6775pt x 435.6275pt>
-File: profiles_wm_10_modu_pt6.pdf Graphic file (type pdf)
-
-<use profiles_wm_10_modu_pt6.pdf>
-Package pdftex.def Info: profiles_wm_10_modu_pt6.pdf used on input line 363.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<energy_wm_1_modu_pt6.pdf, id=68, 421.575pt x 316.18124pt>
+<energy_wm_1_modu_pt6.pdf, id=66, 421.575pt x 316.18124pt>
 File: energy_wm_1_modu_pt6.pdf Graphic file (type pdf)
 
 <use energy_wm_1_modu_pt6.pdf>
-Package pdftex.def Info: energy_wm_1_modu_pt6.pdf used on input line 373.
-(pdftex.def)             Requested size: 227.6278pt x 170.72084pt.
+Package pdftex.def Info: energy_wm_1_modu_pt6.pdf used on input line 366.
+(pdftex.def)             Requested size: 187.78531pt x 140.84253pt.
 
-<energy_wm_5_modu_pt6.pdf, id=69, 421.575pt x 316.18124pt>
+<profiles_wm_5_modu_pt6.pdf, id=67, 716.6775pt x 435.6275pt>
+File: profiles_wm_5_modu_pt6.pdf Graphic file (type pdf)
+
+<use profiles_wm_5_modu_pt6.pdf>
+Package pdftex.def Info: profiles_wm_5_modu_pt6.pdf used on input line 368.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+
+<energy_wm_5_modu_pt6.pdf, id=68, 421.575pt x 316.18124pt>
 File: energy_wm_5_modu_pt6.pdf Graphic file (type pdf)
 
 <use energy_wm_5_modu_pt6.pdf>
-Package pdftex.def Info: energy_wm_5_modu_pt6.pdf used on input line 373.
-(pdftex.def)             Requested size: 227.6278pt x 170.72084pt.
+Package pdftex.def Info: energy_wm_5_modu_pt6.pdf used on input line 368.
+(pdftex.def)             Requested size: 187.78531pt x 140.84253pt.
+
+<profiles_wm_10_modu_pt6.pdf, id=69, 716.6775pt x 435.6275pt>
+File: profiles_wm_10_modu_pt6.pdf Graphic file (type pdf)
+
+<use profiles_wm_10_modu_pt6.pdf>
+Package pdftex.def Info: profiles_wm_10_modu_pt6.pdf used on input line 370.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
 
 <energy_wm_10_modu_pt6.pdf, id=70, 421.575pt x 316.18124pt>
 File: energy_wm_10_modu_pt6.pdf Graphic file (type pdf)
 
 <use energy_wm_10_modu_pt6.pdf>
-Package pdftex.def Info: energy_wm_10_modu_pt6.pdf used on input line 375.
-(pdftex.def)             Requested size: 227.6278pt x 170.72084pt.
+Package pdftex.def Info: energy_wm_10_modu_pt6.pdf used on input line 370.
+(pdftex.def)             Requested size: 187.78531pt x 140.84253pt.
+ [10] [11 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Wave
+s_Over_Patches_Writeup/profiles_wm_1_modu_pt3.pdf> <D:/My Documents/Desktop/Non
+linear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_1_mod
+u_pt3.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Wav
+es_Over_Patches_Writeup/profiles_wm_5_modu_pt3.pdf> <D:/My Documents/Desktop/No
+nlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_5_mo
+du_pt3.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Wa
+ves_Over_Patches_Writeup/profiles_wm_10_modu_pt3.pdf> <D:/My Documents/Desktop/
+Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_10
+_modu_pt3.pdf>] [12 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-
+Clone/Waves_Over_Patches_Writeup/vorticity_wm_1_modu_pt3.pdf> <D:/My Documents/
+Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/com_
+wm_1_modu_pt3-eps-converted-to.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-ov
+er-Vortices-Git-Clone/Waves_Over_Patches_Writeup/vorticity_wm_5_modu_pt3.pdf> <
+D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patc
+hes_Writeup/com_wm_5_modu_pt3-eps-converted-to.pdf> <D:/My Documents/Desktop/No
+nlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/vorticity_wm_1
+0_modu_pt3.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clon
+e/Waves_Over_Patches_Writeup/com_wm_10_modu_pt3-eps-converted-to.pdf>]
+<vorticity_wm_1_modu_pt6.pdf, id=120, 716.6775pt x 435.6275pt>
+File: vorticity_wm_1_modu_pt6.pdf Graphic file (type pdf)
 
-Overfull \hbox (9.78516pt too wide) in paragraph at lines 372--378
- [][] 
- []
-
-<vorticity_wm_1_modu_pt9.pdf, id=71, 716.6775pt x 435.6275pt>
-File: vorticity_wm_1_modu_pt9.pdf Graphic file (type pdf)
-
-<use vorticity_wm_1_modu_pt9.pdf>
-Package pdftex.def Info: vorticity_wm_1_modu_pt9.pdf used on input line 402.
+<use vorticity_wm_1_modu_pt6.pdf>
+Package pdftex.def Info: vorticity_wm_1_modu_pt6.pdf used on input line 395.
 (pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+Package epstopdf Info: Source file: <com_wm_1_modu_pt6.eps>
+(epstopdf)                    date: 2018-08-31 11:59:04
+(epstopdf)                    size: 21387 bytes
+(epstopdf)             Output file: <com_wm_1_modu_pt6-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-08-31 12:02:35
+(epstopdf)                    size: 7372 bytes
+(epstopdf)             Command: <epstopdf --outfile=com_wm_1_modu_pt6-eps-conve
+rted-to.pdf com_wm_1_modu_pt6.eps>
+(epstopdf)             \includegraphics on input line 395.
+Package epstopdf Info: Output file is already uptodate.
 
-<profiles_wm_1_modu_pt9.pdf, id=72, 716.6775pt x 435.6275pt>
+<com_wm_1_modu_pt6-eps-converted-to.pdf, id=121, 714.67pt x 432.61626pt>
+File: com_wm_1_modu_pt6-eps-converted-to.pdf Graphic file (type pdf)
+
+<use com_wm_1_modu_pt6-eps-converted-to.pdf>
+Package pdftex.def Info: com_wm_1_modu_pt6-eps-converted-to.pdf used on input l
+ine 395.
+(pdftex.def)             Requested size: 211.26027pt x 127.88474pt.
+
+<vorticity_wm_5_modu_pt6.pdf, id=122, 716.6775pt x 435.6275pt>
+File: vorticity_wm_5_modu_pt6.pdf Graphic file (type pdf)
+
+<use vorticity_wm_5_modu_pt6.pdf>
+Package pdftex.def Info: vorticity_wm_5_modu_pt6.pdf used on input line 397.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+Package epstopdf Info: Source file: <com_wm_5_modu_pt6.eps>
+(epstopdf)                    date: 2018-08-31 11:57:44
+(epstopdf)                    size: 20714 bytes
+(epstopdf)             Output file: <com_wm_5_modu_pt6-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-08-31 12:02:35
+(epstopdf)                    size: 7345 bytes
+(epstopdf)             Command: <epstopdf --outfile=com_wm_5_modu_pt6-eps-conve
+rted-to.pdf com_wm_5_modu_pt6.eps>
+(epstopdf)             \includegraphics on input line 397.
+Package epstopdf Info: Output file is already uptodate.
+
+<com_wm_5_modu_pt6-eps-converted-to.pdf, id=123, 714.67pt x 432.61626pt>
+File: com_wm_5_modu_pt6-eps-converted-to.pdf Graphic file (type pdf)
+
+<use com_wm_5_modu_pt6-eps-converted-to.pdf>
+Package pdftex.def Info: com_wm_5_modu_pt6-eps-converted-to.pdf used on input l
+ine 397.
+(pdftex.def)             Requested size: 211.26027pt x 127.88474pt.
+
+<vorticity_wm_10_modu_pt6.pdf, id=124, 716.6775pt x 435.6275pt>
+File: vorticity_wm_10_modu_pt6.pdf Graphic file (type pdf)
+
+<use vorticity_wm_10_modu_pt6.pdf>
+Package pdftex.def Info: vorticity_wm_10_modu_pt6.pdf used on input line 399.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+Package epstopdf Info: Source file: <com_wm_10_modu_pt6.eps>
+(epstopdf)                    date: 2018-08-31 11:58:25
+(epstopdf)                    size: 20714 bytes
+(epstopdf)             Output file: <com_wm_10_modu_pt6-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-08-31 12:02:36
+(epstopdf)                    size: 7343 bytes
+(epstopdf)             Command: <epstopdf --outfile=com_wm_10_modu_pt6-eps-conv
+erted-to.pdf com_wm_10_modu_pt6.eps>
+(epstopdf)             \includegraphics on input line 399.
+Package epstopdf Info: Output file is already uptodate.
+
+<com_wm_10_modu_pt6-eps-converted-to.pdf, id=125, 714.67pt x 432.61626pt>
+File: com_wm_10_modu_pt6-eps-converted-to.pdf Graphic file (type pdf)
+
+<use com_wm_10_modu_pt6-eps-converted-to.pdf>
+Package pdftex.def Info: com_wm_10_modu_pt6-eps-converted-to.pdf used on input 
+line 399.
+(pdftex.def)             Requested size: 211.26027pt x 127.88474pt.
+
+<profiles_wm_1_modu_pt9.pdf, id=126, 716.6775pt x 435.6275pt>
 File: profiles_wm_1_modu_pt9.pdf Graphic file (type pdf)
 
 <use profiles_wm_1_modu_pt9.pdf>
-Package pdftex.def Info: profiles_wm_1_modu_pt9.pdf used on input line 402.
+Package pdftex.def Info: profiles_wm_1_modu_pt9.pdf used on input line 412.
 (pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
 
-<vorticity_wm_5_modu_pt9.pdf, id=73, 716.6775pt x 435.6275pt>
-File: vorticity_wm_5_modu_pt9.pdf Graphic file (type pdf)
-
-<use vorticity_wm_5_modu_pt9.pdf>
-Package pdftex.def Info: vorticity_wm_5_modu_pt9.pdf used on input line 404.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<profiles_wm_5_modu_pt9.pdf, id=74, 716.6775pt x 435.6275pt>
-File: profiles_wm_5_modu_pt9.pdf Graphic file (type pdf)
-
-<use profiles_wm_5_modu_pt9.pdf>
-Package pdftex.def Info: profiles_wm_5_modu_pt9.pdf used on input line 404.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<vorticity_wm_10_modu_pt9.pdf, id=75, 716.6775pt x 435.6275pt>
-File: vorticity_wm_10_modu_pt9.pdf Graphic file (type pdf)
-
-<use vorticity_wm_10_modu_pt9.pdf>
-Package pdftex.def Info: vorticity_wm_10_modu_pt9.pdf used on input line 406.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
-
-<profiles_wm_10_modu_pt9.pdf, id=76, 716.6775pt x 435.6275pt>
-File: profiles_wm_10_modu_pt9.pdf Graphic file (type pdf)
-
-<use profiles_wm_10_modu_pt9.pdf>
-Package pdftex.def Info: profiles_wm_10_modu_pt9.pdf used on input line 406.
-(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
- [10] [11 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Wave
-s_Over_Patches_Writeup/vorticity_wm_1_modu_pt3.pdf> <D:/My Documents/Desktop/No
-nlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profiles_wm_1_
-modu_pt3.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/
-Waves_Over_Patches_Writeup/vorticity_wm_5_modu_pt3.pdf> <D:/My Documents/Deskto
-p/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profiles_w
-m_5_modu_pt3.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Cl
-one/Waves_Over_Patches_Writeup/vorticity_wm_10_modu_pt3.pdf> <D:/My Documents/D
-esktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profi
-les_wm_10_modu_pt3.pdf>] [12 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vort
-ices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_1_modu_pt3.pdf> <D:/My Docu
-ments/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeu
-p/energy_wm_5_modu_pt3.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vorti
-ces-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_10_modu_pt3.pdf>] [13 <D:/My
- Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_W
-riteup/vorticity_wm_1_modu_pt6.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-ov
-er-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profiles_wm_1_modu_pt6.pdf> <D
-:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patch
-es_Writeup/vorticity_wm_5_modu_pt6.pdf> <D:/My Documents/Desktop/Nonlinear-Wave
-s-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profiles_wm_5_modu_pt6.pdf
-> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_P
-atches_Writeup/vorticity_wm_10_modu_pt6.pdf> <D:/My Documents/Desktop/Nonlinear
--Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profiles_wm_10_modu_p
-t6.pdf>] [14 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/W
-aves_Over_Patches_Writeup/energy_wm_1_modu_pt6.pdf> <D:/My Documents/Desktop/No
-nlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_5_mo
-du_pt6.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Wa
-ves_Over_Patches_Writeup/energy_wm_10_modu_pt6.pdf>] <energy_wm_1_modu_pt9.pdf,
- id=154, 421.575pt x 316.18124pt>
+<energy_wm_1_modu_pt9.pdf, id=127, 421.575pt x 316.18124pt>
 File: energy_wm_1_modu_pt9.pdf Graphic file (type pdf)
 
 <use energy_wm_1_modu_pt9.pdf>
-Package pdftex.def Info: energy_wm_1_modu_pt9.pdf used on input line 416.
-(pdftex.def)             Requested size: 227.6278pt x 170.72084pt.
+Package pdftex.def Info: energy_wm_1_modu_pt9.pdf used on input line 412.
+(pdftex.def)             Requested size: 187.78531pt x 140.84253pt.
 
-<energy_wm_5_modu_pt9.pdf, id=155, 421.575pt x 316.18124pt>
+<profiles_wm_5_modu_pt9.pdf, id=128, 716.6775pt x 435.6275pt>
+File: profiles_wm_5_modu_pt9.pdf Graphic file (type pdf)
+
+<use profiles_wm_5_modu_pt9.pdf>
+Package pdftex.def Info: profiles_wm_5_modu_pt9.pdf used on input line 414.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+
+<energy_wm_5_modu_pt9.pdf, id=129, 421.575pt x 316.18124pt>
 File: energy_wm_5_modu_pt9.pdf Graphic file (type pdf)
 
 <use energy_wm_5_modu_pt9.pdf>
-Package pdftex.def Info: energy_wm_5_modu_pt9.pdf used on input line 416.
-(pdftex.def)             Requested size: 227.6278pt x 170.72084pt.
+Package pdftex.def Info: energy_wm_5_modu_pt9.pdf used on input line 414.
+(pdftex.def)             Requested size: 187.78531pt x 140.84253pt.
 
-<energy_wm_10_modu_pt9.pdf, id=156, 421.575pt x 316.18124pt>
+<profiles_wm_10_modu_pt9.pdf, id=130, 716.6775pt x 435.6275pt>
+File: profiles_wm_10_modu_pt9.pdf Graphic file (type pdf)
+
+<use profiles_wm_10_modu_pt9.pdf>
+Package pdftex.def Info: profiles_wm_10_modu_pt9.pdf used on input line 416.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+
+<energy_wm_10_modu_pt9.pdf, id=131, 421.575pt x 316.18124pt>
 File: energy_wm_10_modu_pt9.pdf Graphic file (type pdf)
 
 <use energy_wm_10_modu_pt9.pdf>
-Package pdftex.def Info: energy_wm_10_modu_pt9.pdf used on input line 418.
-(pdftex.def)             Requested size: 227.6278pt x 170.72084pt.
+Package pdftex.def Info: energy_wm_10_modu_pt9.pdf used on input line 416.
+(pdftex.def)             Requested size: 187.78531pt x 140.84253pt.
 
-Overfull \hbox (9.78516pt too wide) in paragraph at lines 415--421
- [][] 
- []
+<vorticity_wm_1_modu_pt9.pdf, id=132, 716.6775pt x 435.6275pt>
+File: vorticity_wm_1_modu_pt9.pdf Graphic file (type pdf)
 
-[15] [16 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves
-_Over_Patches_Writeup/vorticity_wm_1_modu_pt9.pdf> <D:/My Documents/Desktop/Non
-linear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profiles_wm_1_m
-odu_pt9.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/W
-aves_Over_Patches_Writeup/vorticity_wm_5_modu_pt9.pdf> <D:/My Documents/Desktop
-/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profiles_wm
-_5_modu_pt9.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clo
-ne/Waves_Over_Patches_Writeup/vorticity_wm_10_modu_pt9.pdf> <D:/My Documents/De
-sktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/profil
-es_wm_10_modu_pt9.pdf>] [17 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vorti
-ces-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_1_modu_pt9.pdf> <D:/My Docum
-ents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup
-/energy_wm_5_modu_pt9.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortic
-es-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_10_modu_pt9.pdf>] [18]
+<use vorticity_wm_1_modu_pt9.pdf>
+Package pdftex.def Info: vorticity_wm_1_modu_pt9.pdf used on input line 440.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+Package epstopdf Info: Source file: <com_wm_1_modu_pt9.eps>
+(epstopdf)                    date: 2018-08-31 11:58:50
+(epstopdf)                    size: 21417 bytes
+(epstopdf)             Output file: <com_wm_1_modu_pt9-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-08-31 12:02:36
+(epstopdf)                    size: 7400 bytes
+(epstopdf)             Command: <epstopdf --outfile=com_wm_1_modu_pt9-eps-conve
+rted-to.pdf com_wm_1_modu_pt9.eps>
+(epstopdf)             \includegraphics on input line 440.
+Package epstopdf Info: Output file is already uptodate.
+
+<com_wm_1_modu_pt9-eps-converted-to.pdf, id=133, 714.67pt x 432.61626pt>
+File: com_wm_1_modu_pt9-eps-converted-to.pdf Graphic file (type pdf)
+
+<use com_wm_1_modu_pt9-eps-converted-to.pdf>
+Package pdftex.def Info: com_wm_1_modu_pt9-eps-converted-to.pdf used on input l
+ine 440.
+(pdftex.def)             Requested size: 211.26027pt x 127.88474pt.
+
+<vorticity_wm_5_modu_pt9.pdf, id=134, 716.6775pt x 435.6275pt>
+File: vorticity_wm_5_modu_pt9.pdf Graphic file (type pdf)
+
+<use vorticity_wm_5_modu_pt9.pdf>
+Package pdftex.def Info: vorticity_wm_5_modu_pt9.pdf used on input line 442.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+Package epstopdf Info: Source file: <com_wm_5_modu_pt9.eps>
+(epstopdf)                    date: 2018-08-31 11:57:20
+(epstopdf)                    size: 21416 bytes
+(epstopdf)             Output file: <com_wm_5_modu_pt9-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-08-31 12:02:37
+(epstopdf)                    size: 7391 bytes
+(epstopdf)             Command: <epstopdf --outfile=com_wm_5_modu_pt9-eps-conve
+rted-to.pdf com_wm_5_modu_pt9.eps>
+(epstopdf)             \includegraphics on input line 442.
+Package epstopdf Info: Output file is already uptodate.
+
+<com_wm_5_modu_pt9-eps-converted-to.pdf, id=135, 714.67pt x 432.61626pt>
+File: com_wm_5_modu_pt9-eps-converted-to.pdf Graphic file (type pdf)
+
+<use com_wm_5_modu_pt9-eps-converted-to.pdf>
+Package pdftex.def Info: com_wm_5_modu_pt9-eps-converted-to.pdf used on input l
+ine 442.
+(pdftex.def)             Requested size: 211.26027pt x 127.88474pt.
+
+<vorticity_wm_10_modu_pt9.pdf, id=136, 716.6775pt x 435.6275pt>
+File: vorticity_wm_10_modu_pt9.pdf Graphic file (type pdf)
+
+<use vorticity_wm_10_modu_pt9.pdf>
+Package pdftex.def Info: vorticity_wm_10_modu_pt9.pdf used on input line 444.
+(pdftex.def)             Requested size: 211.26027pt x 128.40929pt.
+Package epstopdf Info: Source file: <com_wm_10_modu_pt9.eps>
+(epstopdf)                    date: 2018-08-31 11:58:13
+(epstopdf)                    size: 21418 bytes
+(epstopdf)             Output file: <com_wm_10_modu_pt9-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-08-31 12:02:37
+(epstopdf)                    size: 7388 bytes
+(epstopdf)             Command: <epstopdf --outfile=com_wm_10_modu_pt9-eps-conv
+erted-to.pdf com_wm_10_modu_pt9.eps>
+(epstopdf)             \includegraphics on input line 444.
+Package epstopdf Info: Output file is already uptodate.
+
+<com_wm_10_modu_pt9-eps-converted-to.pdf, id=137, 714.67pt x 432.61626pt>
+File: com_wm_10_modu_pt9-eps-converted-to.pdf Graphic file (type pdf)
+
+<use com_wm_10_modu_pt9-eps-converted-to.pdf>
+Package pdftex.def Info: com_wm_10_modu_pt9-eps-converted-to.pdf used on input 
+line 444.
+(pdftex.def)             Requested size: 211.26027pt x 127.88474pt.
+ [13] [14 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Wave
+s_Over_Patches_Writeup/profiles_wm_1_modu_pt6.pdf> <D:/My Documents/Desktop/Non
+linear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_1_mod
+u_pt6.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Wav
+es_Over_Patches_Writeup/profiles_wm_5_modu_pt6.pdf> <D:/My Documents/Desktop/No
+nlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_5_mo
+du_pt6.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Wa
+ves_Over_Patches_Writeup/profiles_wm_10_modu_pt6.pdf> <D:/My Documents/Desktop/
+Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_10
+_modu_pt6.pdf>] [15 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-
+Clone/Waves_Over_Patches_Writeup/vorticity_wm_1_modu_pt6.pdf> <D:/My Documents/
+Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/com_
+wm_1_modu_pt6-eps-converted-to.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-ov
+er-Vortices-Git-Clone/Waves_Over_Patches_Writeup/vorticity_wm_5_modu_pt6.pdf> <
+D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patc
+hes_Writeup/com_wm_5_modu_pt6-eps-converted-to.pdf> <D:/My Documents/Desktop/No
+nlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/vorticity_wm_1
+0_modu_pt6.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clon
+e/Waves_Over_Patches_Writeup/com_wm_10_modu_pt6-eps-converted-to.pdf>] [16 <D:/
+My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches
+_Writeup/profiles_wm_1_modu_pt9.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-o
+ver-Vortices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_1_modu_pt9.pdf> <D:
+/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patche
+s_Writeup/profiles_wm_5_modu_pt9.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-
+over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_5_modu_pt9.pdf> <D
+:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patch
+es_Writeup/profiles_wm_10_modu_pt9.pdf> <D:/My Documents/Desktop/Nonlinear-Wave
+s-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/energy_wm_10_modu_pt9.pdf>
+] [17] [18 <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Wav
+es_Over_Patches_Writeup/vorticity_wm_1_modu_pt9.pdf> <D:/My Documents/Desktop/N
+onlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/com_wm_1_modu
+_pt9-eps-converted-to.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortic
+es-Git-Clone/Waves_Over_Patches_Writeup/vorticity_wm_5_modu_pt9.pdf> <D:/My Doc
+uments/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_Over_Patches_Write
+up/com_wm_5_modu_pt9-eps-converted-to.pdf> <D:/My Documents/Desktop/Nonlinear-W
+aves-over-Vortices-Git-Clone/Waves_Over_Patches_Writeup/vorticity_wm_10_modu_pt
+9.pdf> <D:/My Documents/Desktop/Nonlinear-Waves-over-Vortices-Git-Clone/Waves_O
+ver_Patches_Writeup/com_wm_10_modu_pt9-eps-converted-to.pdf>]
 ("D:\My Documents\Desktop\Nonlinear-Waves-over-Vortices-Git-Clone\Waves_Over_Pa
-tches_Writeup\patches_under_cnoidal_waves.bbl" [19] [20]) [21]
+tches_Writeup\patches_under_cnoidal_waves.bbl" [19] [20] [21]) [22]
 ("D:\My Documents\Desktop\Nonlinear-Waves-over-Vortices-Git-Clone\Waves_Over_Pa
 tches_Writeup\patches_under_cnoidal_waves.aux") ) 
 Here is how much of TeX's memory you used:
- 3818 strings out of 493921
- 58076 string characters out of 3147276
- 128426 words of memory out of 3000000
- 7036 multiletter control sequences out of 15000+200000
+ 3875 strings out of 493921
+ 59882 string characters out of 3147276
+ 125426 words of memory out of 3000000
+ 7072 multiletter control sequences out of 15000+200000
  12319 words of font info for 46 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 42i,12n,38p,1422b,330s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,12n,38p,1422b,329s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/f
 onts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
@@ -556,9 +719,9 @@ c/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
 8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C
 :/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on patches_under_cnoidal_waves.pdf (21 pages, 659332 bytes).
+Output written on patches_under_cnoidal_waves.pdf (22 pages, 709180 bytes).
 PDF statistics:
- 263 PDF objects out of 1000 (max. 8388607)
+ 302 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 146 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 191 words of extra memory for PDF output out of 10000 (max. 10000000)
 

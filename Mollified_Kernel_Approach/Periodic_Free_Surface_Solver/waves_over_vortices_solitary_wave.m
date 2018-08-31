@@ -22,8 +22,12 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     Kuc = 2*K-Kc+1;
     Kc = Kc+1;
     
-    Kofk = ellipke(modu);
-    Mx = Kofk/kap;     
+    if modu ~= 0
+        Kofk = ellipke(modu);
+        Mx = Kofk/kap;     
+    else
+        Mx = 8;
+    end
     disp(Mx)
     Xmesh = linspace(-Mx,Mx,KT+1);
     Xmesh = Xmesh(1:KT)';
@@ -37,7 +41,8 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     L2 = -1i*pi*Kmesh/Mx;
     
     [Edt,Ehdt] = get_stuff(Kmesh/Mx,gam,K,KT,dt);
-        
+
+    %{    
     uvals = kap*(Xmesh+.5*Mx);
     [~,cn,~] = ellipj(uvals,modu);
     %ceff = 1 + 2/3*mu*kap^2*(2*modu^2-1);
@@ -47,10 +52,17 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     q0 = 0;
     Q = fft(q0 + 8*modu^2*kap^2*cn.^2);
     eta = Q;    
+    %}
+        
+    eta = zeros(KT,1);
+    phix = init_cond(Xmesh,gam,xpos,zpos,gvals);
+    Q = -F*fft(phix);
+    Q(Kc:Kuc) = 0;
+    
     no_dno_term = 20;
     G0 = real(ifft(L1.*Q));
     q = real(ifft([0;-1i*Mx/pi*(1./[1:K -K+1:-1])'.*Q(2:KT)]));
-            
+    
     dnonl = dno_maker(real(ifft(eta)),real(ifft(Q)),G0,L1,gam,mu,Kmesh/Mx,no_dno_term);
     k_energy_base = 2*Mx/KT*sum( q.*(G0+dnonl) );
     p_energy_base = 2*Mx/KT*sum( real(ifft(eta)).^2 );
@@ -61,7 +73,6 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     gtrack = gvals;
     
     inter = 1;
-    samp = 6;
     plot_count = 1;
     no_of_evals = round(nmax/inter);
     eta_plot = zeros(KT,no_of_evals+1);
@@ -72,6 +83,11 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     tm_track = zeros(no_of_evals,1);
     Vcnt = zeros(no_of_evals+1,1);
     Vcnt(1) = Nvorts;    
+    
+    samp = 6;
+    scnt = 1;
+    comx = zeros(floor(nmax/samp),1);
+    comt = zeros(floor(nmax/samp),1);
     
     u = [eta;Q;xpos;zpos]; %velocity vector field
     
@@ -161,6 +177,10 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
             disp(Nvorts)
             u(2*KT+1:2*KT+Nvorts) = xpos;
             u(2*KT+Nvorts+1:2*KT+2*Nvorts) = zpos;
+            
+            comx(scnt) = com_comp(ep,gam,xpos,zpos,gvals);
+            comt(scnt) = jj*dt;
+            scnt = scnt + 1;
         end
         
     end
@@ -229,6 +249,10 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     
     figure(5)
     plot_vorticity(S,ep,gam,xpos,zpos,gvals)
+    
+    
+    figure(6)
+    plot_com(S,comt,comx)
     
     disp('Mean relative energy transfer')
     disp(1/(2*(length(energy_plot(1:end-1))))*(energy_plot(1)+energy_plot(end-1)+2*sum(energy_plot(2:end-2))))
