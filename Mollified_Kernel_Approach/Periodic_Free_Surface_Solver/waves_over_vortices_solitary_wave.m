@@ -194,10 +194,12 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     
     dnofin = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh/Mx,no_dno_term);
     dnofinn1 = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh/Mx,no_dno_term-1);
+    disp('DNO Resolution')
     disp(norm(dnofin-dnofinn1)/norm(Q))
-    
-    etanv = wave_maker_kdv(K,modu,kap,mu,gam,tf);
-    pspecnv = log10(abs(fftshift(fft(etanv)))/KT);    
+    if mu ~= 0
+        etanv = wave_maker_kdv(K,modu,kap,mu,gam,tf);
+        pspecnv = log10(abs(fftshift(fft(etanv)))/KT);    
+    end
     
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     

@@ -14,7 +14,7 @@ function eta = wave_maker_kdv(K,modu,kap,mu,gam,tf)
     
     Kofk = ellipke(modu);
     Mx = Kofk/kap;     
-    disp(Mx)
+    %disp(Mx)
     Xmesh = linspace(-Mx,Mx,KT+1);
     Xmesh = Xmesh(1:KT)';
     
