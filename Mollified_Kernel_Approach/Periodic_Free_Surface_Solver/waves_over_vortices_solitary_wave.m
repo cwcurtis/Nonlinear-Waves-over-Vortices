@@ -26,7 +26,7 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
         Kofk = ellipke(modu);
         Mx = Kofk/kap;     
     else
-        Mx = 8;
+        Mx = 4;
     end
     disp(Mx)
     Xmesh = linspace(-Mx,Mx,KT+1);
@@ -133,7 +133,11 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
             dnonl = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh/Mx,no_dno_term);
             k_energy_plot(plot_count) = 2*Mx/KT*sum( q.*(G0+dnonl) );
             p_energy_plot(plot_count) = 2*Mx/KT*sum( eta.^2 );
-            energy_plot(plot_count) = (k_energy_plot(plot_count) + p_energy_plot(plot_count) - energy_base)/energy_base;
+            if modu ~=0
+                energy_plot(plot_count) = (k_energy_plot(plot_count) + p_energy_plot(plot_count) - energy_base)/energy_base;
+            else
+                energy_plot(plot_count) = (k_energy_plot(plot_count) + p_energy_plot(plot_count));
+            end
             tm_track(plot_count) = eta(1);
             times(plot_count) = (jj-1)*dt;
             
@@ -196,24 +200,33 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     dnofinn1 = dno_maker(eta,Q,G0,L1,gam,mu,Kmesh/Mx,no_dno_term-1);
     disp(norm(dnofin-dnofinn1)/norm(Q))
     
-    etanv = wave_maker_kdv(K,modu,kap,mu,gam,tf);
-    pspecnv = log10(abs(fftshift(fft(etanv)))/KT);    
-    
+    if modu ~= 0 && ~simul_plot
+        etanv = wave_maker_kdv(K,modu,kap,mu,gam,tf);
+        pspecnv = log10(abs(fftshift(fft(etanv)))/KT);    
+        figure(1)
+        gif_my_gif(Xmesh,Mx,eta_plot,mu*etanv,xtrack,ztrack,gtrack,Vcnt,plot_count,S,markersize);
+        
+        figure(2)
+        plot(Xmesh,eta,'k-',Xmesh,etanv,'k--','LineWidth',2)
+        h = set(gca,'FontSize',30);
+        set(h,'Interpreter','LaTeX')
+        xlabel('$x$','Interpreter','LaTeX','FontSize',30)
+        ylabel('$\eta(x,t_{f})$','Interpreter','LaTeX','FontSize',30)
+        savefig(strcat(S, '/', 'profiles'))    
+    end 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     
     % Animate waves over vortices
-    if ~simul_plot
-        figure(1)
-        gif_my_gif(Xmesh,Mx,eta_plot,mu*etanv,xtrack,ztrack,gtrack,Vcnt,plot_count,S,markersize);
-    end
-    
     figure(2)
-    plot(Xmesh,eta,'k-',Xmesh,etanv,'k--','LineWidth',2)
+    if modu ~= 0
+       plot(Xmesh,eta,'k-',Xmesh,etanv,'k--','LineWidth',2)
+    else
+       plot(Xmesh,eta,'k-','LineWidth',2)
+    end
     h = set(gca,'FontSize',30);
     set(h,'Interpreter','LaTeX')
     xlabel('$x$','Interpreter','LaTeX','FontSize',30)
     ylabel('$\eta(x,t_{f})$','Interpreter','LaTeX','FontSize',30)
-    savefig(strcat(S, '/', 'profiles'))
     
     %{
     figure(3)
@@ -226,7 +239,8 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     
     % Plot the power spectrum
     figure(3)
-    plot_pspec(K,S,fftshift(pspec),pspecnv);
+    %plot_pspec(K,S,fftshift(pspec),pspecnv);
+    plot(-K+1:K,fftshift(pspec),'k-','LineWidth',2)
     
     % Plot the surface energy
     figure(4)
