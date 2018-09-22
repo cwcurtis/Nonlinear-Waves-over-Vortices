@@ -1,8 +1,8 @@
-function [xpud,zpud,gvud] = recircer_bndry(gvals,xpos,zpos,Nx)
+function [xpud,zpud,gvud] = recircer_bndry(gvals,xpos,zpos,Nx,Mx)
 
 dx = 2/Nx;
 
-xmesh = -1:dx:1-dx;
+xmesh = -Mx:dx:Mx-dx;
 zmesh = dx:dx:1-dx;
 zul = ceil(.9/dx)*dx;
 zlbnds = zpos < 1.5*dx;
@@ -32,8 +32,8 @@ if isempty(zhigh)
     usect = 0;
 end
 
-jjl = max(floor((xl+1)/dx)-1,1);
-jju = min(ceil((xr+1)/dx)+1,Nx);
+jjl = max(floor((xl+Mx)/dx),1);
+jju = min(ceil((xr+Mx)/dx),length(xmesh));
 
 kkl = max(floor(zb/dx)-1,2);
 kku = min(ceil(zt/dx)+1,ceil(.9/dx)-1);

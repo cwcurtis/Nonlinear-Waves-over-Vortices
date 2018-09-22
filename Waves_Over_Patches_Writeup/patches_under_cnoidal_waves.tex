@@ -5,6 +5,7 @@
 \usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage{epstopdf, epsfig}
+\epstopdfsetup{update}
 \usepackage{caption}
 \usepackage{subcaption}
 
@@ -311,18 +312,36 @@ where in the last equality we have used the fact that $E(t;0) = E(0;0)$ since it
 x_{c}(t) = \frac{\int_{\tilde{\Omega}(t)} x\tilde{\omega}(x,y,t) d\tilde{A}}{\int_{\tilde{\Omega}(t)} \tilde{\omega}(x,y,t) d\tilde{A}},
 \]
 thereby allowing us to better understand the impact of the traveling wave on the motion of the patch.  
+
+\subsection*{Initially Quiescent Surface}
+To develop intuition and establish base line metrics with which to compare later results, we study an initially quiesecent surface so that $\eta(x,0)=0$, and $\tilde{\phi}(x,0)$ is chosen so as to make the initial surface velocity identically zero.  We take the domain to be $-4\leq x \leq 4$, which is comparable to the later domain sizes.  Taking $F=.1$, representing the high end of the cases we examine later in the paper, we then generate Figure \ref{fig:still}.
+\begin{figure}
+\centering
+\begin{tabular}{cc}
+\includegraphics[width=.45\textwidth]{profile_mu_0} & \includegraphics[width=.45\textwidth]{energy_mu_0}\\
+(a)  $F=.1$ & (b)  $F=.1$\\
+\includegraphics[width=.45\textwidth]{vorticity_mu_0} & \includegraphics[width=.45\textwidth]{com_mu_0}\\
+(c)  $F=.1$ & (d)  $F=.1$
+\end{tabular}
+\caption{Profile (a), energy input (b), final vortex patch position and shape (c), and motion of the patch's horizontal center-of mass (d) for an initially still surface.  Here $F=.1$, $\mu=.2$, $\gamma = \sqrt{\mu}$, and $t_{f}=2/\mu$.}
+\label{fig:still}
+\end{figure}
+
+As seen, the patch induces significant deformations of the surface, though they are relatively small.  Interestingly, the energy input rapidly saturates and then decreases while the patch slowly moves from left to right.  That the displacement of the horizontal center-of mass of the patch only gets to about $x=.07$ for $t_{f}=2/\mu = 10$ shows the impact of the solid boundary at $y=0$ is relatively weak.  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Elliptic Modulus $\tilde{m}=.3$}
 Taking $\tilde{m}=.3$ and $\kappa = .5$, this corresponds to $M \approx 3.3$.  Taking $K_{T}=512$, this gives $\delta x = .013$.  The unscaled amplitude of the cnoidal initial conditions is given by $8(\tilde{m}\kappa)^{2}\approx .18$.  From both the pointwise comparisons in Figure \ref{fig:lowsolwave} and the relative energy inputs in Figure \ref{fig:lowsolwave}, we see that stronger vorticity corresponds to greater deformation of the surface wave relative to the undisturbed case, and comparing across Figures \ref{fig:midsolwave} and \ref{fig:highsolwave}, we see that the vortex patch has the strongest impact on the least nonlinear waves.  
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=.45\textwidth]{profiles_wm_1_modu_pt3} & \includegraphics[width=.4\textwidth]{energy_wm_1_modu_pt3}\\
+\includegraphics[width=.35\textwidth]{profiles_wm_1_modu_pt3} & \includegraphics[width=.35\textwidth]{vorticity_wm_1_modu_pt3}\\
 (a)  $F=.01$ & (b)  $F=.01$\\
-\includegraphics[width=.45\textwidth]{profiles_wm_5_modu_pt3} & \includegraphics[width=.4\textwidth]{energy_wm_5_modu_pt3}\\
+\includegraphics[width=.35\textwidth]{profiles_wm_5_modu_pt3} & \includegraphics[width=.35\textwidth]{vorticity_wm_5_modu_pt3}\\
 (c)  $F=.05$ & (d)  $F=.05$\\
-\includegraphics[width=.45\textwidth]{profiles_wm_10_modu_pt3} & \includegraphics[width=.4\textwidth]{energy_wm_10_modu_pt3}\\
-(e)  $F=.1$ & (f)  $F=.1$
+\includegraphics[width=.35\textwidth]{profiles_wm_10_modu_pt3} & \includegraphics[width=.35\textwidth]{vorticity_wm_10_modu_pt3}\\
+(e)  $F=.1$ & (f)  $F=.1$\\
+\includegraphics[width=.35\textwidth]{profiles_wm_50_modu_pt3} & \includegraphics[width=.35\textwidth]{vorticity_wm_50_modu_pt3}\\
+(g)  $F=.5$ & (h)  $F=.5$
 \end{tabular}
 \caption{Comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (- -) are shown on the left for various values of the Froude number $F$, while the relative energy change $\delta E(t)$ is shown on the right.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.3$, $\kappa = .5$.}
 \label{fig:lowsolwave}
@@ -336,22 +355,25 @@ $F$ & $\delta E_{m}$ \\
 \hline
 $.01$ & $-1\times 10^{-3}$\\
 $.05$ & $-3.6\times 10^{-3}$\\
-$.1$ & $-3.7\times 10^{-3}$
+$.1$ & $-3.7\times 10^{-3}$\\
+$.5$ & $1.3\times 10^{-1}$
 \end{tabular}
 \caption{Mean relative-energy input for $\tilde{m}=.3$ and $\kappa=.5$.}
 \label{tab:lowsolmean}
 \end{table}
 
-Examing Figure \ref{fig:lowsolvorticity}, we see that the center of mass of the patch has been displaced on average about $.25$ non-dimensional units relative to its starting position.  The periods of acceleration seen by examing the center-of-mass positions in Figures \ref{fig:lowsolvorticity} (b), (d), and (f) correspond to the wave crest moving over the patch.  The difference in final displacement of the patch increases with increasing Froude number, which is to be expected due to the influence of the solid boundary; see the left-hand side of Figure \ref{fig:lowsolvorticity}.  However, it is clear that the solid boundary as a means of patch transport has minimal influence.
+Examing Figure \ref{fig:lowsolvorticity}, we see that the center of mass of the patch has been displaced on average about $.25$ non-dimensional units relative to its starting position, which is significantly further than in the quiescent surface case examined above.  The periods of acceleration seen by examing the center-of-mass positions in Figures \ref{fig:lowsolvorticity} (b), (d), and (f) correspond to the wave crest moving over the patch.  The difference in final displacement of the patch increases with increasing Froude number, which is to be expected due to the influence of the solid boundary; see the left-hand side of Figure \ref{fig:lowsolvorticity}.  However, it is clear that the solid boundary as a means of patch transport has minimal influence.
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=.45\textwidth]{vorticity_wm_1_modu_pt3} &  \includegraphics[width=.45\textwidth]{com_wm_1_modu_pt3}\\
+\includegraphics[width=.35\textwidth]{energy_wm_1_modu_pt3} &  \includegraphics[width=.35\textwidth]{com_wm_1_modu_pt3}\\
 (a) $F=.01$ & (b) $F=.01$\\
-\includegraphics[width=.45\textwidth]{vorticity_wm_5_modu_pt3} & \includegraphics[width=.45\textwidth]{com_wm_5_modu_pt3}\\
+\includegraphics[width=.35\textwidth]{energy_wm_5_modu_pt3} & \includegraphics[width=.35\textwidth]{com_wm_5_modu_pt3}\\
 (c) $F=.05$ & (d) $F=.05$\\
- \includegraphics[width=.45\textwidth]{vorticity_wm_10_modu_pt3} & \includegraphics[width=.45\textwidth]{com_wm_10_modu_pt3}\\
-(e) $F=.1$ & (f) $F=.1$
+ \includegraphics[width=.35\textwidth]{energy_wm_10_modu_pt3} & \includegraphics[width=.35\textwidth]{com_wm_10_modu_pt3}\\
+(e) $F=.1$ & (f) $F=.1$\\
+ \includegraphics[width=.35\textwidth]{energy_wm_50_modu_pt3} & \includegraphics[width=.35\textwidth]{com_wm_50_modu_pt3}\\
+(g) $F=.5$ & (h) $F=.5$
 \end{tabular}
 \caption{The vortex patches at the final time $t_{f}$ for $F=.01$ (a), $F=.05$ (c), and $F=.1$ (e) and the motion of the horizontal center of mass $x_{c}(t)$ for$F=.01$ (b), $F=.05$ (d), and $F=.1$ (f) for $\tilde{m}=.3$ and $\kappa = .5$.}
 \label{fig:lowsolvorticity}
@@ -363,12 +385,14 @@ Taking $\tilde{m}=.6$, we find that $\kappa = .43$, this corresponds to $M \appr
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=.45\textwidth]{profiles_wm_1_modu_pt6} & \includegraphics[width=.4\textwidth]{energy_wm_1_modu_pt6}\\
+\includegraphics[width=.35\textwidth]{profiles_wm_1_modu_pt6} & \includegraphics[width=.35\textwidth]{vorticity_wm_1_modu_pt6}\\
 (a)  $F=.01$ & (b)  $F=.01$\\
-\includegraphics[width=.45\textwidth]{profiles_wm_5_modu_pt6} & \includegraphics[width=.4\textwidth]{energy_wm_5_modu_pt6}\\
+\includegraphics[width=.35\textwidth]{profiles_wm_5_modu_pt6} & \includegraphics[width=.35\textwidth]{vorticity_wm_5_modu_pt6}\\
 (c)  $F=.05$ & (d)  $F=.05$\\
-\includegraphics[width=.45\textwidth]{profiles_wm_10_modu_pt6} & \includegraphics[width=.4\textwidth]{energy_wm_10_modu_pt6}\\
-(e)  $F=.1$ & (f)  $F=.1$
+\includegraphics[width=.35\textwidth]{profiles_wm_10_modu_pt6} & \includegraphics[width=.35\textwidth]{vorticity_wm_10_modu_pt6}\\
+(e)  $F=.1$ & (f)  $F=.1$\\
+\includegraphics[width=.35\textwidth]{profiles_wm_50_modu_pt6} & \includegraphics[width=.35\textwidth]{vorticity_wm_50_modu_pt6}\\
+(g)  $F=.5$ & (h)  $F=.5$
 \end{tabular}
 \caption{Comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (- -) are shown on the left for various values of the Froude number $F$, while the relative energy change $\delta E(t)$ is shown on the right.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.6$, $\kappa = .43$.}
 \label{fig:midsolwave}
@@ -382,7 +406,8 @@ $F$ & $\delta E_{m}$ \\
 \hline
 $.01$ & $-1.7\times 10^{-4}$\\
 $.05$ & $-7\times 10^{-4}$\\
-$.1$ & $-1.1\times 10^{-3}$
+$.1$ & $-1.1\times 10^{-3}$\\
+$.5$ & $8.8\times 10^{-3}$
 \end{tabular}
 \caption{Mean relative-energy input for $\tilde{m}=.6$ and $\kappa=.43$.}
 \label{tab:midsolmean}
@@ -392,12 +417,14 @@ In Figure \ref{fig:midsolvorticity}, we see that a relatively larger amplitude, 
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=.45\textwidth]{vorticity_wm_1_modu_pt6} &  \includegraphics[width=.45\textwidth]{com_wm_1_modu_pt6}\\
+\includegraphics[width=.35\textwidth]{energy_wm_1_modu_pt6} &  \includegraphics[width=.35\textwidth]{com_wm_1_modu_pt6}\\
 (a) $F=.01$ & (b) $F=.01$\\
-\includegraphics[width=.45\textwidth]{vorticity_wm_5_modu_pt6} & \includegraphics[width=.45\textwidth]{com_wm_5_modu_pt6}\\
+\includegraphics[width=.35\textwidth]{energy_wm_5_modu_pt6} & \includegraphics[width=.35\textwidth]{com_wm_5_modu_pt6}\\
 (c) $F=.05$ & (d) $F=.05$\\
- \includegraphics[width=.45\textwidth]{vorticity_wm_10_modu_pt6} & \includegraphics[width=.45\textwidth]{com_wm_10_modu_pt6}\\
-(e) $F=.1$ & (f) $F=.1$
+ \includegraphics[width=.35\textwidth]{energy_wm_10_modu_pt6} & \includegraphics[width=.35\textwidth]{com_wm_10_modu_pt6}\\
+(e) $F=.1$ & (f) $F=.1$\\
+ \includegraphics[width=.35\textwidth]{energy_wm_50_modu_pt6} & \includegraphics[width=.35\textwidth]{com_wm_50_modu_pt6}\\
+(g) $F=.5$ & (h) $F=.5$
 \end{tabular}
 \caption{The vortex patches at the final time $t_{f}$ for $F=.01$ (a), $F=.05$ (c), and $F=.1$ (e) and the motion of the horizontal center of mass $x_{c}(t)$ for$F=.01$ (b), $F=.05$ (d), and $F=.1$ (f) for $\tilde{m}=.6$ and $\kappa = .43$.}
 \label{fig:midsolvorticity}
@@ -409,25 +436,29 @@ Taking $\tilde{m}=.9$, we find that $\kappa = .35$, this corresponds to $M \appr
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=.45\textwidth]{profiles_wm_1_modu_pt9} & \includegraphics[width=.4\textwidth]{energy_wm_1_modu_pt9}\\
+\includegraphics[width=.35\textwidth]{profiles_wm_1_modu_pt9} & \includegraphics[width=.35\textwidth]{vorticity_wm_1_modu_pt9}\\
 (a)  $F=.01$ & (b)  $F=.01$\\
-\includegraphics[width=.45\textwidth]{profiles_wm_5_modu_pt9} & \includegraphics[width=.4\textwidth]{energy_wm_5_modu_pt9}\\
+\includegraphics[width=.35\textwidth]{profiles_wm_5_modu_pt9} & \includegraphics[width=.35\textwidth]{vorticity_wm_5_modu_pt9}\\
 (c)  $F=.05$ & (d)  $F=.05$\\
-\includegraphics[width=.45\textwidth]{profiles_wm_10_modu_pt9} & \includegraphics[width=.4\textwidth]{energy_wm_10_modu_pt9}\\
-(e)  $F=.1$ & (f)  $F=.1$
+\includegraphics[width=.35\textwidth]{profiles_wm_10_modu_pt9} & \includegraphics[width=.35\textwidth]{vorticity_wm_10_modu_pt9}\\
+(e)  $F=.1$ & (f)  $F=.1$\\
+\includegraphics[width=.35\textwidth]{profiles_wm_50_modu_pt9} & \includegraphics[width=.35\textwidth]{vorticity_wm_50_modu_pt9}\\
+(g)  $F=.5$ & (h)  $F=.5$
 \end{tabular}
 \caption{Comparisons of a cnoidal wave over a vortex patch(-) to a cnoidal wave over an irrotational fluid (- -) are shown on the left for various values of the Froude number $F$, while the relative energy change $\delta E(t)$ is shown on the right.  Here $\mu=.2$, $\gamma=\sqrt{\mu}$, $t_{f}=2/\mu$, $\tilde{m}=.9$, $\kappa = .35$.}
 \label{fig:highsolwave}
 \end{figure}
+
 This is especially seen by the weak response of $\delta E(t;F)$ plotted in Figure \ref{fig:highsolwave}.  We also get the clearest correlation between the loss in amplitude seen in Figure \ref{fig:highsolwave} and the relative energy input, which is largely negative though stretched out over a longer time scale than in comparison to the energy dynamics seen above.  Looking at the relative energy-input means in Table \ref{tab:highsolmean}, we see the most linear response to increasing Froude number compared to the more linear waves examine above.  
 \begin{table}
 \centering
 \begin{tabular}{c|c}
 $F$ & $\delta E_{m}$ \\
 \hline
-$.01$ & $-3.87\times 10^{-4}$\\
-$.05$ & $-1.9\times 10^{-3}$\\
-$.1$ & $-3.7\times 10^{-3}$
+$.01$ & $-3.87 \times 10^{-4}$\\
+$.05$ & $-1.9 \times 10^{-3}$\\
+$.1$ & $-3.7 \times 10^{-3}$\\
+$.5$ & $-1.5 \times 10^{-2}$
 \end{tabular}
 \caption{Mean relative-energy input for $\tilde{m}=.9$ and $\kappa=.35$.}
 \label{tab:highsolmean}
@@ -437,14 +468,16 @@ We also see in Figure \ref{fig:highsolvorticity} that the center of the patch is
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width=.45\textwidth]{vorticity_wm_1_modu_pt9} &  \includegraphics[width=.45\textwidth]{com_wm_1_modu_pt9}\\
+\includegraphics[width=.35\textwidth]{energy_wm_1_modu_pt9} &  \includegraphics[width=.35\textwidth]{com_wm_1_modu_pt9}\\
 (a) $F=.01$ & (b) $F=.01$\\
-\includegraphics[width=.45\textwidth]{vorticity_wm_5_modu_pt9} & \includegraphics[width=.45\textwidth]{com_wm_5_modu_pt9}\\
+\includegraphics[width=.35\textwidth]{energy_wm_5_modu_pt9} & \includegraphics[width=.35\textwidth]{com_wm_5_modu_pt9}\\
 (c) $F=.05$ & (d) $F=.05$\\
- \includegraphics[width=.45\textwidth]{vorticity_wm_10_modu_pt9} & \includegraphics[width=.45\textwidth]{com_wm_10_modu_pt9}\\
-(e) $F=.1$ & (f) $F=.1$
+ \includegraphics[width=.35\textwidth]{energy_wm_10_modu_pt9} & \includegraphics[width=.35\textwidth]{com_wm_10_modu_pt9}\\
+(e) $F=.1$ & (f) $F=.1$\\
+ \includegraphics[width=.35\textwidth]{energy_wm_50_modu_pt9} & \includegraphics[width=.35\textwidth]{com_wm_50_modu_pt9}\\
+(g) $F=.5$ & (h) $F=.5$
 \end{tabular}
-\caption{The vortex patches at the final time $t_{f}$ for $F=.01$ (a), $F=.05$ (c), and $F=.1$ (e) and the motion of the horizontal center of mass $x_{c}(t)$ for$F=.01$ (b), $F=.05$ (d), and $F=.1$ (f) for $\tilde{m}=.9$ and $\kappa = .35$.}
+\caption{The vortex patches at the final time $t_{f}$ for $F=.01$ (a), $F=.05$ (c), $F=.1$ (e), and $F=.5$ (g) and the motion of the horizontal center of mass $x_{c}(t)$ for$F=.01$ (b), $F=.05$ (d), $F=.1$ (f), and $F=.5$ (h) for $\tilde{m}=.9$ and $\kappa = .35$.}
 \label{fig:highsolvorticity}
 \end{figure}
 
