@@ -58,6 +58,7 @@ for jj=1:nblcks
     loc_data.farlst = [];
     loc_data.nearlst = [];
     loc_data.nodscnlst = [];
+    
     loc_data.xcfs = [];
     loc_data.kcursf = [];
     

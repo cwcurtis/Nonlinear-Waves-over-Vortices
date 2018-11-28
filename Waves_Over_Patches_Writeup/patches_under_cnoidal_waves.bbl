@@ -194,6 +194,11 @@ G.H. Cottet.
   dimensions.
 \newblock {\em Ann. Inst. Henri Poincar\'{e}}, 5:227--285, 1988.
 
+\bibitem{trefethen}
+L.~N. Trefethen.
+\newblock {\em Spectral Methods in Matlab}.
+\newblock SIAM, Philadelphia, PA, 2000.
+
 \bibitem{wilkening}
 J.~Wilkening and V.~Vasan.
 \newblock Comparison of five methods of computing the {D}irichlet--{N}eumann

@@ -12,7 +12,6 @@ function Kret = tree_traverser_quick(xpos,zpos,gvals,ep,pval,Mx,inc_tree,Nvorts,
 
 % Nvorts - global number of vortices.  Provided in each function call so as
 % to avoid unnecessary 'length' calls.  
-
 % pinds - parent indices.
 
 Kvec = zeros(Nvorts,2);

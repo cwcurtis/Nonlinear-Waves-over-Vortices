@@ -9,4 +9,4 @@ h = set(gca,'FontSize',30);
 set(h,'Interpreter','LaTeX')
 xlabel('$t$','Interpreter','LaTeX','FontSize',30)
 ylabel('$\mathcal{E}(t)$','Interpreter','LaTeX','FontSize',30)
-legend({'$h=.01$','$h=.067$','$h=.05$'},'Interpreter','LaTeX')
+legend({'$h=.01$','$h=.0067$','$h=.005$'},'Interpreter','LaTeX')
