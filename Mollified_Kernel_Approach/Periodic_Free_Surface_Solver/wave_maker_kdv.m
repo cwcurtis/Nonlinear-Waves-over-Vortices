@@ -30,13 +30,15 @@ function eta = wave_maker_kdv(K,modu,kap,mu,gam,tf)
     
     uvals = kap*(Xmesh+.5*Mx);
     [~,cn,~] = ellipj(uvals,modu);
-    ceff = 1 + 2/3*mu*kap^2*(2*modu^2-1);
+    %ceff = 1 + 2/3*mu*kap^2*(2*modu^2-1);
     elipmesh = linspace(0,2*kap,KT+1);
     [~,cnm,~] = ellipj(elipmesh,modu);
     %q0 = -modu^2*kap*(2*kap/KT)*sum((cnm(1:KT)).^2);    
     q0 = 0;
-    Q = fft(q0 + 16*modu^2*kap^2*cn.^2)/6^(1/3);
-    eta = ceff*Q;    
+    %Q = fft(q0 + 16*modu^2*kap^2*cn.^2)/6^(1/3);
+    %eta = ceff*Q;    
+    Q = fft(q0 + 8*modu^2*kap^2*cn.^2);
+    eta = Q;    
     
     no_dno_term = 20;
     

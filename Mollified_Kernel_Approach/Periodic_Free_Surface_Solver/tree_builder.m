@@ -46,7 +46,7 @@ loc_data.kcursf = [];
 loc_data.xcfs = [];
     
 if npts>0
-   kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval,Mx);sel
+   kvals = far_panel_comp(xloc,zloc,gloc,xc,zc,pval,Mx);
 else
    kvals = zeros(pval+1,1);
 end

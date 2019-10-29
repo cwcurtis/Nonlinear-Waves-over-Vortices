@@ -12,10 +12,16 @@ function plot_vorticity(S,ep,gam,xpos,zpos,gvals)
     ddz = (zmax-zmin)/100;
     [Xmm,Zmm] = meshgrid((xmin:ddx:xmax),(zmin:ddz:zmax));
     
-    surface(Xmm,Zmm,Finterp(Xmm,Zmm),'LineStyle','none')
+    mval = max(Finterp(Xmm,Zmm));    
+    v = [mval/10 mval/2 mval];
+    [M,c] = contour(Xmm,Zmm,Finterp(Xmm,Zmm),10);
+    c.LineWidth=2;
     h = set(gca,'FontSize',30);
     set(h,'Interpreter','LaTeX')
     xlabel('$x$','Interpreter','LaTeX','FontSize',30)
     ylabel('$z$','Interpreter','LaTeX','FontSize',30)    
     
     savefig(strcat(S, '/', 'vorticity'))
+    
+    %surface(Xmm,Zmm,Finterp(Xmm,Zmm),'LineStyle','none')
+    

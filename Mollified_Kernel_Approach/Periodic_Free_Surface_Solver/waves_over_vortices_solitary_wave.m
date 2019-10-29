@@ -10,13 +10,12 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
-    a = 1;
-    b = 1;
     sig = 0;
     zoffc = .35;
     av = .5*gam*min(1-zoffc,zoffc);
-    %bv = b*mu*gam;
     F = pi*omega*av^2/(4*gam);
+    disp('Froude number is')
+    disp(F)
     [xpos,zpos,gvals,ep,Nvorts] = initializer(Nx,gam,av,omega);
     zpos = zoffc + zpos/gam;
     
@@ -60,7 +59,7 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     Q = -F*fft(phix);
     Q(Kc:Kuc) = 0;
     %}
-    no_dno_term = 40;
+    no_dno_term = 20;
     G0 = real(ifft(L1.*Q));
     q = real(ifft([0;-1i*Mx/pi*(1./[1:K -K+1:-1])'.*Q(2:KT)]));
     
@@ -93,7 +92,7 @@ function waves_over_vortices_solitary_wave(Nx,K,modu,kap,mu,gam,omega,tf)
     u = [eta;Q;xpos;zpos]; %velocity vector field
     
     % Make folder
-    S = make_folder(Nx/2,Nx,K,mu,gam,F,tf,modu,kap);
+    S = make_folder(Nx/2,Nx,K,mu,gam,F,tf,modu,kap,zoffc);
     clf
     
 % % % % % % % % % % % % % % % % % % % % % % % %
