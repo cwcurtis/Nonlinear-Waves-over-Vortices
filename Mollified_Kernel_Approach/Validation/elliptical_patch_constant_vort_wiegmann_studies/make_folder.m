@@ -1,8 +1,8 @@
-function S = make_folder(rows,cols,mu,gam,F,tf,Gamma)
+function S = make_folder(rows,cols,tf,Gamma)
 
 kk = 1;
 
-S = ['rows=' num2str(rows) ', cols=' num2str(cols) ', mu=' num2str(mu) ', gam=' num2str(gam) ', F=' num2str(F) ',tf=' num2str(tf) ',GAMMA=' num2str(Gamma)];
+S = ['rows=' num2str(rows) ', cols=' num2str(cols) ',tf=' num2str(tf) ',GAMMA=' num2str(Gamma)];
 
 temp = S;
 while isequal(exist(temp,'dir'),7)

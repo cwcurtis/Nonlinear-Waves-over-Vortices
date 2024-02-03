@@ -1,22 +1,13 @@
-function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
+function waves_over_vortices_gen_curve(Nx,omega,tf)
     close all
     
     % Choose time step and find inverse of linear part of semi-implicit
     % time stepping scheme.
-    Rv = 1/25;
-    zoff = .25;
-    axs = 2;
-    av = Rv*axs;
-    bv = Rv;
-    
-    F = pi*omega*av*bv/gam;
+    Rv = 1.;
+    F = pi*omega*Rv^2.;
     Gamma = F;
-    pmesh = linspace(0,2*pi,2*Nx);
-     
-    cp = cos(pmesh);
-    sp = sin(pmesh);    
     
-    [xpos,zpos,gvals,rval,Nvorts] = initializer(Nx,omega,gam,av,bv);
+    [xpos,zpos,gvals,rval,Nvorts] = initializer(Nx,omega);
     simul_plot = 0; % Plot during computation.       0 - off, 1 - on
     n_bdry = 0;     % Number of points in cicular boundary.
     markersize = 10;
@@ -25,10 +16,10 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     nmax = round(tf/dt);
     
     xtrack = xpos;
-    ztrack = zoff + zpos/gam;
+    ztrack = zpos;
     gtrack = gvals;
     
-    inter = 2;
+    inter = 10;
     plot_count = 1;
     no_of_evals = round(nmax/inter);
     times = zeros(no_of_evals,1);
@@ -47,9 +38,9 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
     clf
     if simul_plot
         figure(1)
-        Bendixson(xpos,zoff + zpos/gam,gvals,n_bdry,Nvorts,markersize);
-        xellip = av*cp;
-        yellip = bv*sp/gam+zoff;
+        Bendixson(xpos,zpos,gvals,n_bdry,Nvorts,markersize);
+        xellip = cp;
+        yellip = sp;
         hold on
             scatter(xellip,yellip,.1)
         axis equal
@@ -76,19 +67,8 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
         if(mod(jj,inter)==0)
             times(plot_count) = (jj-1)*dt;
             xpos = u(1:Nvorts);
-            zpos = zoff + u(Nvorts+1:2*Nvorts)/gam;
-            
-            %tv = mu/gam*omega*av*bv/(av+bv)^2*(jj-1)*dt;
-            %ca = cos(tv);
-            %sa = sin(tv);
-            %xxs = cp*av;
-            %yxs = sp*bv;
-            %xellip = xxs*ca - yxs*sa;
-            %yellip = (xxs*sa + yxs*ca)/gam + zoff;
-            
-            %error = interp_error(xpos,zpos,gvals,rval,gam,omega,av,bv,tv,zoff);
-            %errors(plot_count) = error;
-                        
+            zpos = u(Nvorts+1:2*Nvorts);
+                                     
             xtrack = [xtrack;xpos];
             ztrack = [ztrack;zpos];
             gtrack = [gtrack;gvals];
@@ -112,7 +92,7 @@ function waves_over_vortices_gen_curve(Nx,mu,gam,omega,tf)
         end 
                 
         if(mod(jj,2*inter)==0)
-            [xpud,zpud,gvud] = recircer(gvals,xpos,gam*(zpos-zoff),Nx);
+            [xpud,zpud,gvud] = recircer(gvals,xpos,zpos,Nx);
             Nvorts = length(gvud);
             disp(Nvorts)
             gvals = gvud;

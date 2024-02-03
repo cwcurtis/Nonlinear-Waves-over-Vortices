@@ -13,10 +13,10 @@ function waves_over_vortices_gen_curve(Nvorts,omega,gval,tf)
     n_bdry = 0;     % Number of points in cicular boundary.
     markersize = 10;
     
-    dt = .1;
+    dt = .01;
     nmax = round(tf/dt);
     
-    inter = 10;
+    inter = ;
     plot_count = 1;
     no_of_evals = round(nmax/inter);
     times = zeros(no_of_evals,1);
